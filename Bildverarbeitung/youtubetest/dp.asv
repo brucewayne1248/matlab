@@ -1,0 +1,16 @@
+%% Reading video
+v = VideoReader('dp.mp4');
+while hasFrame(v)
+    video = readFrame(v);
+end
+whos video
+%%
+vidWidth = v.Width;
+vidHeight = v.Height;
+%%
+mov = struct
+
+%%
+vv  = VideoWriter('dp.mp4');
+%%
+test = vv.FrameCount;
