@@ -17,5 +17,5 @@ figure(3), imagesc(c), colormap(gray);
 %% using inbuild commands
 x = imread('cameraman.tif');
 y = imresize(x,1/2);
-figure(4), imagesc(y);
+figure(4), imshow(y);
 figure(5), imagesc(y),colormap(gray);

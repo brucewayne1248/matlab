@@ -1,12 +1,12 @@
 %% Reading video
 reader = vision.VideoFileReader('dp.mp4');
 display = vision.VideoPlayer;
-    writerObj = VideoWriter('newdp.avi');
-    open(writerObj);
+writerObj = VideoWriter('newdp.avi');
+open(writerObj);
 while ~isDone(reader)
     image = step(reader);
     % Now to track red objects in real time
-    % we have to subtract the red component 
+    % we have to subtract the red component
     % from the grayscale image to extract the red components in the image.
     diff_im = imsubtract(image(:,:,1), rgb2gray(image));
     % Use median filter to filter out noise
@@ -15,18 +15,18 @@ while ~isDone(reader)
     diff_im = im2bw(diff_im,0.18);
     % Remove all those pixels less than 300px
     diff_im = bwareaopen(diff_im,200);
-        % Label all the connected components in the image.
+    % Label all the connected components in the image.
     bw = bwlabel(diff_im, 8);
-        % Here we do the image blob analysis.
+    % Here we do the image blob analysis.
     % We get a set of properties for each labeled region.
     stats = regionprops(bw, 'BoundingBox', 'Centroid');
-        % Display the image
-        figure(2)
-%     imshow(image)
+    % Display the image
+    figure(2)
+    %     imshow(image)
     
     % create video of images
-
-       
+    
+    
     hold on
     
     %This is a loop to bound the red objects in a rectangular box.
@@ -41,7 +41,7 @@ while ~isDone(reader)
     F = getframe;
     hold off
     
-%     step(display,image);
+    %     step(display,image);
     writeVideo(writerObj,F);
 end
 close(writerObj);
