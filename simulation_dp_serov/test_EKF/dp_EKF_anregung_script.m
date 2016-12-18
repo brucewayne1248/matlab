@@ -26,6 +26,7 @@ phase = pi/2;
 %% EKF
 Pk_0 = eye(4);
 Rk = 1;
+Qk_min = diag([0.0001 1 0.1 10]);
 %% Optimierung für Q11 = Q22; Q33 = Q44
 % pot_min = -5; pot_max = 3; steps = pot_max - pot_min + 1;
 % q12 = logspace(pot_min,pot_max,steps); q34 = q12;
@@ -62,6 +63,7 @@ paramNameValStruct.SaveOutput     = 'on';
 paramNameValStruct.OutputSaveName = 'yout';
 paramNameValStruct.SaveFormat = 'Dataset';
 %% Anregungsparameter
+x_initial = 0;
 simOut = sim('dp_EKF_anregung',paramNameValStruct);
 outputs = simOut.get('yout');
 x_initial = (max(outputs.get('x').Values.data)-min(outputs.get('x').Values.data))/2;
