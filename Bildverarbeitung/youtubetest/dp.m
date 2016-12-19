@@ -1,8 +1,11 @@
 %% Reading video
 reader = vision.VideoFileReader('dp.mp4');
 display = vision.VideoPlayer;
+
+% for saving into new video
 writerObj = VideoWriter('newdp.avi');
 open(writerObj);
+
 while ~isDone(reader)
     image = step(reader);
     % Now to track red objects in real time
@@ -24,12 +27,10 @@ while ~isDone(reader)
     figure(2)
     %     imshow(image)
     
-    % create video of images
-    
-    
+    % create video of images    
     hold on
     
-    %This is a loop to bound the red objects in a rectangular box.
+    % This is a loop to bound the red objects in a rectangular box.
     for object = 1:length(stats)
         bb = stats(object).BoundingBox;
         bc = stats(object).Centroid;
