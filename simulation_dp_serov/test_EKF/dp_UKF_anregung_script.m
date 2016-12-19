@@ -20,15 +20,25 @@ x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
 x0_ukf = x0;
 
 %% EKF Parameter
+<<<<<<< HEAD
 alpha = 0.0001;
+=======
+alpha = 0.01;
+>>>>>>> 3003dd7af9d65cf83e5f85ff7eb245b367eb16a2
 beta = 2;
 kappa = 0;
 Pk_0 = eye(4);
 Rk = 1;
+<<<<<<< HEAD
 pot_min = -3; pot_max = 3; steps = pot_max - pot_min + 1;
 q12 = logspace(pot_min,pot_max,steps); q34 = q12;
 Qk = zeros(4,4,steps,steps);
 % Qk = zeros(4,4);
+=======
+pot_min = -5; pot_max = 3; steps = pot_max-pot_min +1;
+q12 = logspace(pot_min, pot_max, steps); q34 = q12;
+Qk = zeros(4,4,steps,steps);
+>>>>>>> 3003dd7af9d65cf83e5f85ff7eb245b367eb16a2
 
 for k = 1:length(q12)
     for kk = 1:length(q12);
@@ -47,6 +57,7 @@ paramNameValStruct.SaveOutput     = 'on';
 paramNameValStruct.OutputSaveName = 'yout';
 paramNameValStruct.SaveFormat = 'Dataset';
 diff_min = Inf;
+<<<<<<< HEAD
 t_sim_max = 0;
 err = {length(q12),length(q34)};
     
@@ -56,6 +67,14 @@ for ii = 1:length(q12)
         set_param('dp_UKF_anregung/UKF/Qk', 'Gain', 'Qk(:,:,ii,iii)');
         simOut = sim('dp_UKF_anregung',paramNameValStruct);
 %         simOut = sim('dp_UKF_anregung', 'CaptureErrors', 'on');
+=======
+
+for ii = 1:length(q12)
+    for iii = 1:length(q34)
+        set_param('dp_UKF_anregung/UKF/Qk', 'Gain', 'Qk(:,:,ii,iii)');
+%         simOut = sim('dp_UKF_anregung',paramNameValStruct);
+        simOut = sim('dp_UKF_anregung','CaptureErrors','on');
+>>>>>>> 3003dd7af9d65cf83e5f85ff7eb245b367eb16a2
         outputs = simOut.get('yout');
         phi2_time = (outputs.get('phi2').Values);
         phi2 = phi2_time.Data;
@@ -66,6 +85,7 @@ for ii = 1:length(q12)
         dphi2_est_time = (outputs.get('dphi2_est').Values);
         dphi2_est = dphi2_est_time.Data;
         % criterion for choosing best fit
+<<<<<<< HEAD
         t_sim = length(tout);
 %         diff = sum(sqrt((phi2-phi2_est).^2));   %sse(A-B) % sum((A-B).^2), norm(A-B) % sqrt(sse(A-B))
 %         diff = max(abs(phi2-phi2_est)); %norm(A-B,inf) % max(abs(A-B))
@@ -88,6 +108,22 @@ end
 
  %% Set params according to best fit and plot phi2 
 % set_param('dp_UKF_anregung/EKF/Qk', 'Gain', 'Qk(:,:,ii_min,iii_min)');
+=======
+        diff = 
+%         diff = sum(sqrt((phi2-phi2_est).^2));   %sse(A-B) % sum((A-B).^2), norm(A-B) % sqrt(sse(A-B))
+%         diff = max(abs(phi2-phi2_est)); %norm(A-B,inf) % max(abs(A-B))
+        %updating variables to best fit
+        if (diff<diff_min)
+            diff_min = diff;
+            Qk_min = Qk(:,:,ii,iii);
+            ii_min = ii; iii_min = iii;
+        end
+    end
+end
+
+%% Set params according to best fit and plot phi2 
+set_param('dp_UKF_anregung/UKF/Qk', 'Gain', 'Qk(:,:,ii_min,iii_min)');
+>>>>>>> 3003dd7af9d65cf83e5f85ff7eb245b367eb16a2
 % simOut = sim('dp_UKF_anregung',paramNameValStruct);
 % outputs = simOut.get('yout');
 % phi2_time = (outputs.get('phi2').Values);

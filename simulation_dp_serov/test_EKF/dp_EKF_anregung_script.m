@@ -20,12 +20,13 @@ x_0=0; dx_0=0; phi1_0=180*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
 x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
 x0_ekf = [210*d2r; 1; 150*d2r; -3];%x0;
 % Anregungsparameter Wagen
-A = 10;
-f = 6;
+A = 1;
+f = pi;
 phase = pi/2;
 %% EKF
 Pk_0 = eye(4);
 Rk = 1;
+Qk_min = diag([0.0001 1 0.1 10]);
 %% Optimierung für Q11 = Q22; Q33 = Q44
 % pot_min = -5; pot_max = 3; steps = pot_max - pot_min + 1;
 % q12 = logspace(pot_min,pot_max,steps); q34 = q12;
@@ -53,16 +54,26 @@ Rk = 1;
 %     end
 % end
 %% Find optimal weights for Qk and Rk
-% open_system('dp_EKF_anregung');
-% paramNameValStruct.SimulationMode = 'normal';
-% paramNameValStruct.AbsTol         = '1e-5';
-% paramNameValStruct.SaveState      = 'on';
-% paramNameValStruct.StateSaveName  = 'xout';
-% paramNameValStruct.SaveOutput     = 'on';
-% paramNameValStruct.OutputSaveName = 'yout';
-% paramNameValStruct.SaveFormat = 'Dataset';
-% diff_min = Inf;
+open_system('dp_EKF_anregung');
+paramNameValStruct.SimulationMode = 'normal';
+paramNameValStruct.AbsTol         = '1e-5';
+paramNameValStruct.SaveState      = 'on';
+paramNameValStruct.StateSaveName  = 'xout';
+paramNameValStruct.SaveOutput     = 'on';
+paramNameValStruct.OutputSaveName = 'yout';
+paramNameValStruct.SaveFormat = 'Dataset';
+%% Anregungsparameter
+x_initial = 0;
+simOut = sim('dp_EKF_anregung',paramNameValStruct);
+outputs = simOut.get('yout');
+x_initial = (max(outputs.get('x').Values.data)-min(outputs.get('x').Values.data))/2;
+dphi2_max = max(abs(outputs.get('dphi2').Values.data));
+f_gopro = 240;
+f_ndi = 60;
+dphi2_max_d = dphi2_max*r2d;
+d_per_frame = dphi2_max_d/f_gopro;
 %% Q11 = Q22, Q33 = Q44;
+% diff_min = Inf;
 % for i = 1:length(q12)
 %     for ii = 1:length(q34)
 %         set_param('dp_EKF_anregung/EKF/Qk', 'Gain', 'Qk(:,:,ii,iii)');
