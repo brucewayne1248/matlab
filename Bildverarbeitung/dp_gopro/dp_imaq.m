@@ -11,8 +11,9 @@ writerObj.FrameRate = 1;
 open(writerObj);
 % open(writerObj_bin);
 
-k = 1;
+k = 0;
 while hasFrame(v)
+    k = k+1;
     image = readFrame(v);
     
     binRed = filterRed(image, 0.14);
@@ -64,7 +65,8 @@ try
 catch ME
     phi2(k) = phi2(k-1);
 end
-% %% debugging
+
+ %% debugging
 % binTotal = binRedSize + binGreenSize + binBlueSize;
 % 
 % %     red
@@ -115,15 +117,10 @@ end
 %     F = getframe;
 %     writeVideo(writerObj,F);
 %     hold off
-  %%
-    % get frame of the figure
-%     F = getframe;
-       
-    % write each frame of figure into new video
-%     writeVideo(writerObj,F);
-
 %     pause(0.05)
-    k = k+1;
+
+  %%
+  
 end
 close(writerObj);
 % close(writerObj_bin);
