@@ -1,5 +1,5 @@
 %% Reading video
-v = VideoReader('20170104_720p_240fps_ausschwing1.mp4');
+v = VideoReader('X:\group\20170104_720p_240fps_ausschwing1.mp4');
 % v.CurrentTime = 6.95;
 frameRate = v.FrameRate;
 % v = VideoReader(v);
