@@ -2,10 +2,8 @@ clear all, close all
 load('harm_erregung1.5_alu_05.01.mat')
 load('video_angles_1.5_alu.mat')
 %% plot für jour fixe
-% figure, 
-% subplot(2,1,1), plot(t,Daten(:,1)), xlabel('t in Sek.'), ylabel('Winkel in Grad'), legend('phi 1'), title('Messung mittels Resolver')
-% tplot = (0:length(phi1)-1)*1/frameRate;
-% subplot(2,1,2), plot(tplot,phi1), xlabel('t in Sek.'), ylabel('Winkel in Grad'), legend('phi 1'), title('Bildbasierte Ermittlung')
+figure, 
+subplot(2,1,1), plot(t,Daten(:,1)), xlabel('t in Sek.'), ylabel('Winkel in Grad'), legend('
 
 %%
 T_s = 1e-3;
