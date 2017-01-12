@@ -60,3 +60,5 @@ a = text(0.1,110,strcat('Korrelationskoeffizient: ', num2str(corrCoef)));
 set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 8, 'Color', 'black');
 xlabel('t in Sek.'), ylabel('Winkel in Grad');
 
+%%
+save('input_ekf_1.0.mat','tMeas','phi1Meas','xMeas','ddxMeas')

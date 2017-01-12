@@ -42,6 +42,9 @@ title('Video')
 [P,Q] = rat((1/T_s)/frameRate);     
 phi1Resample = resample(phi1,P,Q);    % resample the slower measurement
 phi1Resample = phi1Resample(35:end-35);
+phi2Resample = resample(phi1,P,Q);    % resample the slower measurement
+phi2Resample = phi2Resample(35:end-35);
+
 [C, lag] = xcorr(phi1Resample,phi1Meas);
 [~,I] = max(C);
 lagDiff = lag(I);
@@ -56,6 +59,7 @@ plot(lag,C)
 
 %%
 phi1VideoAlign = phi1Resample(lagDiffManual:lagDiffManual+seconds*10^3);
+phi2VideoAlign = phi2Resample(lagDiffManual:lagDiffManual+seconds*10^3);
 tVideoAlign = (0:length(phi1VideoAlign)-1)*T_s;
 
 corrCoef = corrcoef(phi1Meas,phi1VideoAlign);
@@ -69,4 +73,5 @@ a = text(0.1,90,strcat('Korrelationskoeffizient: ', num2str(corrCoef)));
 set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 8, 'Color', 'black');
 xlabel('t in Sek.'), ylabel('Winkel in Grad');
 
-
+%%
+save('input_ekf_1.5.mat','tMeas','phi1Meas','xMeas','ddxMeas','phi2VideoAlign')
