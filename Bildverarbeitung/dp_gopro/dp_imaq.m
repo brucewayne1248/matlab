@@ -11,9 +11,11 @@ frameRate = v.FrameRate;
 % open(writerObj);
 % open(writerObj_bin);
 
+%counter
 k = 0;
 while hasFrame(v)
     k = k+1;
+    % save each frame in image
     image = readFrame(v);
     
     binRed = filterRed(image, 0.17);
@@ -26,7 +28,6 @@ while hasFrame(v)
 %     figure(3), imshowpair(image ,binBlue, 'montage'), impixelinfo
 
 % manual adjustment 
-% red
 binRed = manualPreFilter(binRed, 635, 720, 1091, 1280);
 binBlue = manualPreFilter(binBlue, 460, 720, 1, 1280);
     
@@ -62,7 +63,7 @@ catch ME
     phi2(k) = phi2(k-1);
 end
 
-%% debugging display, calculated angles
+%% debugging: display calculated angles, blobs, centroids
 
 binTotal = binRedSize + binGreenSize + binBlueSize;
 

@@ -1,5 +1,5 @@
 function [ phi ] = winkel( c1, c2 )
-%WINKEL_BERECHNUNG Calculates the angle from centroid 1 to centroid 2 
+%WINKELBERECHNUNG Calculates the angle from centroid 1 to centroid 2 
 %   Der Winkel wird von der y-Achse aus in positiver Zählrichtung berechnet
 %   von 0 bis 360 Grad
 
