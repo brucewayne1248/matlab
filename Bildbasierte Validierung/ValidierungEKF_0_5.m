@@ -1,6 +1,5 @@
 clear all; close all;
-load('input_ekf_1.5_v2.mat');
-
+load('input_ekf_0.5_v2.mat');
 %% Konstanten
 g = 9.81;
 l_1 = 0.194;
@@ -11,6 +10,8 @@ m_3 = 0.0308;
 d_p1= 5.3239e-4;
 d_p2= 5.3239e-4;
 T_s = 0.001;
+Fs = 1/T_s;
+dt = T_s;
 d2r = pi/180;
 r2d = 180/pi;
 x_0=0; dx_0=0; phi1_0=180*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
@@ -22,22 +23,24 @@ para_sys = [g l_1 l_2 m_1 m_2 m_3 d_p1 d_p2];
 %% EKF Parameter
 Pk_0 = eye(4);
 Rk = 0.01;
-% Qk_min = 0.01*diag([0.0001 1 0.1 10]); % aus Simulation
-Qk =  1e-6*eye(4);
+% Qk_min = 0.001*diag([0.0001 1 0.1 10]); % aus Simulation
+% Qk = Qk_min;
+Qk = 1e-5*eye(4);
 %% calculating phi2 with loops for Qk weightings
-q = logspace(-9,-7,3);
-Fs = 1/T_s;
-dt = T_s;
-errMin = Inf;
+q = logspace(-5,-3,3);
 
+errMin = Inf;
+% errMin = Inf;
+% 
 % for j = 1:length(q)
 %     for jj = 1:length(q)
 %         for jjj = 1:length(q)
 %             for jjjj = 1:length(q)
 %                 Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
+                
                 phi1EstRad = []; dphi1EstRad = []; phi2EstRad = []; dphi2EstRad = []; K = [];
                 
-                for k = 1:length(phi1MeasRad)   % calculating states
+                for k = 1:length(phi1MeasRad)
                     [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0, para_sys, T_s, ddxDes(k), phi1MeasRad(k));
                     phi1EstRad(k) = states(1);
                     dphi1EstRad(k) = states(2);
@@ -50,44 +53,33 @@ errMin = Inf;
                 dphi1EstDeg = r2d*dphi1EstRad;
                 phi2EstDeg = r2d*phi2EstRad;
                 dphi2EstDeg = r2d*dphi2EstRad;
-                
                 % Fehler zwischen Messung und EKF
                 err = sqrt(sum((phi2EstDeg-phi2VideoDeg).^2));
-%                 if (err < errMin)
+%                 if (err <= errMin)
 %                     errMin = err;
 %                     QkMin = Qk;
 %                 end
-%                 
 %             end
 %         end
 %     end
 % end
 %% differentiating and filtering phi2Video
 dphi2VideoDeg = diff(phi2VideoDeg)/dt;  % diff 
-dphi2VideoDegMag = abs(fft(dphi2VideoDeg)); % magnitude
+dphi2VideoDegMag = abs(fft(dphi2VideoDeg));
 
 figure(1),
 plot(dphi2VideoDeg), title('dphi2 ungefiltert')
 
 nfft = length(dphi2VideoDegMag);
-<<<<<<< HEAD
-figure(4),
-plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2))
-=======
->>>>>>> b7617ab454f45445fa2aa9491070a3fa44722648
 
 figure(2)
 plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
 
-[b, a] = butter(2, 0.02, 'low'); % Tiefpassfilter
+[b, a] = butter(2, 0.02, 'low');
 
 H = freqz(b,a, floor(nfft/2));
 figure(3),
-<<<<<<< HEAD
-plot([0:1/(nfft/2 -1):1], abs(H),'r')
-=======
 plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
->>>>>>> b7617ab454f45445fa2aa9491070a3fa44722648
 dphi2VideoDegFiltLP = filter(b,a,dphi2VideoDeg);
 dphi2VideoDegFiltLP = [0  dphi2VideoDegFiltLP ];
 
@@ -118,7 +110,6 @@ plot(tMeas,dphi2EstDeg),hold on
 % fnplt(dphi2VideoDegFunc)
 plot(tMeas,dphi2VideoDegFiltLP), legend('dphi2\_est', 'dphi2\_video')
 hold off
-
 
 %% 
 % dphi2VideoFFT = fft(dphi2VideoDeg);

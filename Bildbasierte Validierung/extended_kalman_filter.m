@@ -20,7 +20,6 @@ d_p2 = para_sys(8);
 
 if isempty(x_p)
    x_p = x0;
-%    x_p = [0*0.0175; 0; 0.0175;0];
    P_p = P;
    x = x_p;
    K = zeros(4,1);
