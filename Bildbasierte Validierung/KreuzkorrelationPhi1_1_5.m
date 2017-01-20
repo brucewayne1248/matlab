@@ -54,9 +54,13 @@ lagDiffManual= 3190;
 timeDiffManual = lagDiffManual*T_s;
 
 figure(2)
-plot(lag,C)
+subplot(2,1,1)
+plot(tMeas, phi1MeasDeg)
+title('Messung')
 
-
+subplot(2,1,2)
+plot(tVideo, phi1)
+title('Video')
 
 %%
 phi1VideoDeg = phi1Resample(lagDiffManual:lagDiffManual+seconds*10^3);

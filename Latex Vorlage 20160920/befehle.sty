@@ -1,0 +1,184 @@
+% ------------------------------------------------------------------------------------------
+% eigene Befehle
+% ------------------------------------------------------------------------------------------
+
+\newcommand{\yel}[1]{\colorbox{yellow}{#1}}
+\newcommand{\abb}[1]{Bild~\ref{#1}}
+\newcommand{\eq}[1]{Gleichung~\eqref{#1}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\abschnitt}[1]{Abschnitt~\ref{#1}}
+\newcommand{\kapitel}[1]{Kapitel~\ref{#1}}
+\newcommand{\anhang}[1]{Anhang~\ref{#1}}
+\newcommand{\seite}[1]{Seite~\pageref{#1}}
+
+% Mathematik
+\renewcommand{\vec}[1]{\mbox{\boldmath{$#1$}}}
+\newcommand{\transpose}{{\mathrm{T}}}
+\newcommand{\ind}[1]{{\mathrm{#1}}}
+\newcommand{\ks}[1]{\ind{(KS)}_\ind{#1}}
+\newcommand{\tmat}[2]{{^{\mathrm{#1}}\vec{T}_{\mathrm{#2}}}}
+\newcommand{\rmat}[2]{{^{\mathrm{#1}}\vec{R}_{\mathrm{#2}}}}
+\newcommand{\invmat}[1]{  \left( #1 \right)^{-1}  }
+\newcommand{\ve}[2]{ {_{\ind{(#1)}}}\vec{#2} }
+\newcommand{\komp}[2]{ {_{\ind{(#1)}}}{#2} }
+\newcommand{\kreis}[1]{\unitlength1ex\begin{picture}(2.5,2.5)%
+\put(0.75,0.75){\circle{2.5}}\put(0.75,0.75){\makebox(0,0){#1}}\end{picture}}
+
+% ------------------------------------------------------------------------------------------
+% eine Randnote fuer fehlende Teile
+% ------------------------------------------------------------------------------------------
+\newcommand{\fehlt}[1]{(\marginpar[\hfill!$\longrightarrow$]{$\longleftarrow$!}Hier fehlt \emph{#1})}
+\newcommand{\ToDo}[1]{(\marginpar[\hfill!$\longrightarrow$]{\textcolor[rgb]{1,0,0}{\textbf{$\longleftarrow$!}}}\textcolor[rgb]{1,0,0}{\textbf{ToDo:}} \emph{#1})}
+\newcommand{\sprache}[1]{\marginpar[\hfill!$\longrightarrow$]{\textcolor[rgb]{0,0.58,0}{\textbf{$\longleftarrow$!}}} \emph{\color[rgb]{1,1,0}{#1}}}
+% ------------------------------------------------------------------------------------------
+% Formelverzeichnis: Anfang (wenn nicht nomenclature benutzt wird)
+% ------------------------------------------------------------------------------------------
+      \newenvironment{formel-list}[1]{
+        \begin{list}{}{
+        \renewcommand{\makelabel}[1]{##1\hfill}%
+        \settowidth{\labelwidth}{#1}
+        \setlength{\rightmargin}{0.5cm}
+        \setlength{\labelsep}{2ex}
+        \settowidth{\leftmargin}{\hspace{2ex} \textsl{#1}}}
+        \setlength{\itemsep}{-1mm plus0.2ex minus0.2ex}
+        \setlength{\parsep}{0ex plus0.2ex minus0.2ex}}{
+        \end{list}}
+% ------------------------------------------------------------------------------------------
+% Formelverzeichnis: Ende
+% ------------------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------------------
+% ANFANG: Neue Befehle zur besseren Nutzbarkeit
+% ------------------------------------------------------------------------------------------
+\newcommand{\newsection}[1]{\section{#1}
+      \setcounter{equation}{0} %Zaehler in neuer Section auf 0!
+      \setcounter{figure}{0}
+      \setcounter{table}{0}
+      \setcounter{footnote}{0}}
+
+
+% ------------------------------------------------------------------------------------------
+% --- Verweise auf Abbildungen, Gleichungen, Tabellen ---
+% ------------------------------------------------------------------------------------------
+\newcommand{\bild}[1]{Bild~\ref{fig.#1}}    % Zitieren von Bildern
+\newcommand{\gl}[1]{(\ref{#1})}             % Zitieren von Gleichungen
+\newcommand{\tab}[1]{Tabelle~\ref{tab.#1}}  % Zitieren von Tabellen
+\newcommand{\src}[1]{Listing~\ref{source.#1}}  % Zitieren von Quelltext
+\newcommand{\Kap}[1]{Kapitel~\ref{chap.#1}} 
+\newcommand{\Sec}[1]{Abschnitt~\ref{sec.#1}} 
+
+
+
+% ------------------------------------------------------------------------------------------
+% Einbindung von Abbildungen und Tabellen auf einen Befehl reduzieren
+% ------------------------------------------------------------------------------------------
+% 1. Parameter: optionale width=... oder scale=... Befehle
+% 2. Parameter: Position (htb oder so)
+% 3. Parameter: Dateiname (ohne Endung), wird mit fig. davor automatisch zum label
+% 4. Parameter: Bildunterschrift
+%\newcommand{\befehl}[2][default-para-1]{nr 1:-#1- nr 2: -#2-}
+\newcommand{\abbildung}[4][]{
+\begin{figure}[#2]
+    \centering % \begin{center} fügt noch vert. Abstand ein
+    \includegraphics[#1]{#3}
+    \caption{#4} \label{fig.#3}
+    %\vspace*{-3mm}
+\end{figure}}
+
+\newenvironment{tabelle}[3]{
+    \begin{table}[#1]
+        \caption{#3} \label{tab.#2}
+        \centering % \begin{center} fügt noch vert. Abstand ein
+        } {
+    \end{table}}
+% ------------------------------------------------------------------------------------------
+% ENDE: Neue Befehle zur besseren Nutzbarkeit
+% ------------------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------------------
+% Versionshinweis während des Schreibens direkt ins PostScript/PDF oben links
+% auf die Seite pappen ( Funktioniert auch bei PDF-Latex
+% ------------------------------------------------------------------------------------------
+\newcommand{\entwurf}[0]{
+\AddToShipoutPicture{%
+   \AtTextUpperLeft{%
+     \makebox(0,0)[l]{\vspace{4cm}\textsf{Entwurf vom \today ~um~\thistime}}}} }
+
+
+% Ein paar Vereinfachungen für Abkürzungen und so weiter
+\newcommand{\zB}{z.\,B. } % sieht mit kleinem Abstand einfach besser aus
+\newcommand{\ua}{u.\,a.} % Anwendung dann mit \zB\ etc.
+\newcommand{\uU}{u.\,U.}
+\newcommand{\su}{s.\,u.}
+\newcommand{\dH}{d.\,h.} % \dh gibts leider schon, deshalb \dH\
+\newcommand{\iA}{i.\,Allg.}
+
+% ------------------------------------------------------------------------------------------
+% Eigennamen
+% ------------------------------------------------------------------------------------------
+
+\newcommand{\Maple}{\textsc{Maple}}
+\newcommand{\NE}{\textsc{Newton-Euler}}
+\newcommand{\Jacobi}{\textsc{Jacobi}}
+\newcommand{\Lagr}{\textsc{Lagrange}}
+\newcommand{\Jourd}{\textsc{Jourdain}}
+\newcommand{\manutec}{\textit{manutec-r15}}
+\newcommand{\acr}{\textit{ACR-20}}
+\newcommand{\kuka}{\textit{KUKA\,KR15}}
+\newcommand{\krc}{\textit{KUKA\,KRC1}}
+\newcommand{\palida}{{PaLiDA}}
+\newcommand{\dspace}{dSPACE}
+\newcommand{\simulink}{\textsc{Simulink}}
+\newcommand{\stewgough}{\textsc{Stewart-Gough}}
+\newcommand{\bs}{\boldsymbol}
+
+\newcommand{\mgcplus}{\textsc{MGC\textit{plus}}}
+\newcommand{\mlb}{\textsc{ML55B}}
+\newcommand{\ap}{\textsc{AP01}}
+\newcommand{\niusb}{\textsc{NI~USB-6251~BNC}}
+\newcommand{\labview}{\textsc{Labview}}
+\newcommand{\matlab}{\textsc{Matlab}}
+\newcommand{\mvs}{\textsc{Microsoft Visual Studio 2008}}
+\newcommand{\kds}{\textsc{KD24S-2N}}
+\newcommand{\art}{\textsc{ARTtrack}}
+\newcommand{\hcu}{\textsc{HCU-3DM~USB}}
+% ------------------------------------------------------------------------------------------
+% Mathematische Symbole
+% ------------------------------------------------------------------------------------------
+%\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\vectil}[1]{\tilde{\boldsymbol{#1}}}
+\newcommand{\vek}[3]{\boldsymbol{#1}^{#2}_{#3}}
+\newcommand{\vektil}[3]{{\tilde{\boldsymbol{#1}}}^{#2}_{#3}}
+\newcommand{\ortvek}[4]{{ }_{(#1)}{\boldsymbol{#2}}^{#3}_{#4} }
+\newcommand{\ortvektil}[4]{{ }_{(#1)}{\tilde{\boldsymbol{#2}}}^{#3}_{#4} }
+\newcommand{\tbvek}[5]{{ }_{(#5)}^{#4}{\boldsymbol{#1}}^{#3}_{#2} }
+\newcommand{\tbvektil}[5]{{ }_{(#5)}^{#4}{\tilde{\boldsymbol{#1}}}^{#3}_{#2} }
+\newcommand{\rotmat}[2]{{\boldsymbol{R}}^{#1}_{#2}}
+\newcommand{\homtr}[2]{{\boldsymbol{T}}_{#2}^{#1}}
+
+\newcommand{\dvec}[1]{\dot{\boldsymbol{#1}}}
+\newcommand{\ddvec}[1]{\ddot{\boldsymbol{#1}}}
+\newcommand{\dvectil}[1]{\dot{\tilde{\boldsymbol{#1}}}}
+\newcommand{\dvek}[3]{\dot{\boldsymbol{#1}}^{#2}_{#3}}
+\newcommand{\dvektil}[3]{\dot{\tilde{\boldsymbol{#1}}}^{#2}_{#3}}
+\newcommand{\dortvek}[4]{{ }_{(#1)}{\dot{\boldsymbol{#2}}}^{#3}_{#4} }
+\newcommand{\ddortvek}[4]{{ }_{(#1)}{\ddot{\boldsymbol{#2}}}^{#3}_{#4} }
+\newcommand{\dortvektil}[4]{{ }_{(#1)}{\dot{\tilde{\boldsymbol{#2}}}}^{#3}_{#4} }
+\newcommand{\tbdvek}[5]{{ }_{(#5)}^{#4}{\dot{\boldsymbol{#1}}}^{#3}_{#2} }
+\newcommand{\tbdvektil}[5]{{ }_{(#5)}^{#4}{\dot{\tilde{\boldsymbol{#1}}}}^{#3}_{#2} }
+
+
+\newcommand{\norm}[1]{|| #1 ||}
+
+% ------------------------------------------------------------------------------------------
+% software-befehl
+% ------------------------------------------------------------------------------------------
+%\newcommand{\befehl}[1]{\ifthenelse{\equal{#1}{a}}{ohne}{mit}}
+\newcommand{\befehl}[2][aaa]{\ifthenelse{\equal{#1}{aaa}}{\texttt{#2}}{\texttt{#2~<#1>}}}
+
+% ------------------------------------------------------------------------------------------
+\newenvironment{myverbatim}{%
+\verbatim % <== nicht \begin{verbatim} !
+}{%
+\endverbatim % <== nicht \end{verbatim} !
+}

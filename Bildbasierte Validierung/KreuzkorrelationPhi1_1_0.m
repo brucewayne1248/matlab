@@ -36,6 +36,8 @@ title('Video')
 [P,Q] = rat((1/T_s)/frameRate);     
 phi1Resample = resample(phi1,P,Q);    % resample the slower measurement
 phi1Resample = phi1Resample(1:17e3);
+phi2Resample = resample(phi2,P,Q);    % resample the slower measurement
+phi2Resample = phi2Resample(1:17e3);
 [C, lag] = xcorr(phi1Resample,phi1MeasDeg);
 [~,I] = max(C);
 lagDiff = lag(I);
@@ -72,4 +74,4 @@ set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 8, 'Color', 'black
 xlabel('t in Sek.'), ylabel('Winkel in Grad');
 
 %%
-% save('input_ekf_1.0.mat','tMeas','phi1Meas','xMeas','ddxMeas')
+save('input_ekf_1.0_v2.mat','tMeas','phi1MeasDeg','dphi1MeasDeg','ddphi1MeasDeg','ddphi1MeasDeg','phi1VideoDeg','phi2VideoDeg','xMeasReal','dxDes','ddxDes')
