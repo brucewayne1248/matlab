@@ -70,11 +70,6 @@ figure(1),
 plot(dphi2VideoDeg), title('dphi2 ungefiltert')
 
 nfft = length(dphi2VideoDegMag);
-<<<<<<< HEAD
-figure(4),
-plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2))
-=======
->>>>>>> b7617ab454f45445fa2aa9491070a3fa44722648
 
 figure(2)
 plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
@@ -83,11 +78,8 @@ plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbere
 
 H = freqz(b,a, floor(nfft/2));
 figure(3),
-<<<<<<< HEAD
-plot([0:1/(nfft/2 -1):1], abs(H),'r')
-=======
 plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
->>>>>>> b7617ab454f45445fa2aa9491070a3fa44722648
+
 dphi2VideoDegFiltLP = filter(b,a,dphi2VideoDeg);
 dphi2VideoDegFiltLP = [0  dphi2VideoDegFiltLP ];
 
