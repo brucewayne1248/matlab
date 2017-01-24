@@ -1,10 +1,10 @@
 clear all, close all
 load('ausschwing_0901_alu.mat')
-load('video_angles_ausschwing01.mat')
+load('video_angles_ausschwing02.mat')
 
 %%
 T_s = 1e-3;
-t1 = 50.25; t2 = 71;
+t1 = 104.2; t2 = 134;
 Daten = Daten(t1/T_s:t2/T_s,:);
 d2r = pi/180; r2d = 1/d2r;
 tMeas = (0:length(Daten(:,1))-1) * T_s;

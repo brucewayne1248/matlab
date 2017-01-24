@@ -2,10 +2,8 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 A level-1 auxiliary file: cover.aux
 A level-1 auxiliary file: einleitung.aux
 A level-1 auxiliary file: robotersysteme.aux
-The style file: alphadin.bst
-Database file #1: masterbib.bib
-Warning--entry type for "TUM2011" isn't style-file defined
---line 356 of file masterbib.bib
-Warning--entry type for "WillowGarage2010" isn't style-file defined
---line 579 of file masterbib.bib
-(There were 2 warnings)
+A level-1 auxiliary file: stateoftheart.aux
+A level-1 auxiliary file: modellierung.aux
+I found no \bibdata command---while reading file main.aux
+I found no \bibstyle command---while reading file main.aux
+(There were 2 error messages)

@@ -1,4 +1,4 @@
-function [x, K]  = extended_kalman_filter(P, Q, R, x0, para_sys, T_s, u, y)
+function [x, K]  = extended_kalman_filter(P, Q, R, x0, para_sys, T_s, u, y, init)
 % Extended Kalman Filter (EKF) fuer nichtlineare Systeme
 % Das Extended Kalman Filter praediziert den Zustand eines nichtlinearen
 % Systems durch Linearisierung im Arbeistpunkt.
@@ -18,7 +18,7 @@ m_3 = para_sys(6);
 d_p1 = para_sys(7);
 d_p2 = para_sys(8);
 
-if isempty(x_p)
+if (isempty(x_p) || init == 1)
    x_p = x0;
    P_p = P;
    x = x_p;

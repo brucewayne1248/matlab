@@ -1,10 +1,10 @@
 clear all, close all
 load('ausschwing_0901_alu.mat')
-load('video_angles_ausschwing01.mat')
+load('video_angles_ausschwing02.mat')
 
 %%
 T_s = 1e-3;
-t1 = 50.25; t2 = 71;
+t1 = 104.2; t2 = 134;
 Daten = Daten(t1/T_s:t2/T_s,:);
 d2r = pi/180; r2d = 1/d2r;
 tMeas = (0:length(Daten(:,1))-1) * T_s;
@@ -39,7 +39,7 @@ phi2Resample = phi2Resample(30:end-30);
 [~,I] = max(C);
 lagDiff = lag(I);
 timeDiff = lagDiff*T_s;
-lagDiffManual= -1030;
+lagDiffManual= 350;
 % timeDiffManual = lagDiffManual*T_s;
 figure(4),
 plot(lag,C)
@@ -54,8 +54,8 @@ plot(tVideo, phi1VideoDeg)
 title('Video')
 
 %%
-phi1VideoDeg = phi1Resample(-lagDiffManual+1:end);
-phi2VideoDeg = phi2Resample(-lagDiffManual+1:end);
+phi1VideoDeg = phi1Resample(lagDiffManual+1:end);
+phi2VideoDeg = phi2Resample(lagDiffManual+1:end);
 phi1MeasDeg = phi1MeasDeg(1:length(phi1VideoDeg));
 dphi1MeasDeg = dphi1MeasDeg(1:length(phi1VideoDeg));
 ddphi1MeasDeg = ddphi1MeasDeg(1:length(phi1VideoDeg));
@@ -76,4 +76,4 @@ plot(tVideo, phi1VideoDeg,'b'), legend('Messung','Video')
 xlabel('t in Sek.'), ylabel('Winkel in Grad');
 
 %%
-save('input_ekf_ausschwing01.mat','tMeas','tVideo','phi1MeasDeg','dphi1MeasDeg','ddphi1MeasDeg','phi1VideoDeg','phi2VideoDeg','xMeasReal','dxDes','ddxDes')
+save('input_ekf_ausschwing02.mat','tMeas','tVideo','phi1MeasDeg','dphi1MeasDeg','ddphi1MeasDeg','phi1VideoDeg','phi2VideoDeg','xMeasReal','dxDes','ddxDes')

@@ -41,14 +41,16 @@
 \ifpdf
     \hypersetup{
     %   colorlinks,  % Links mit farbigem Text
-        pdftitle    = {Aufbau und Evaluation eines automatisierten, kraftsensorischen Insertionstools für Cochleaimplantate},
-        pdfsubject  = {Masterarbeit},
-        pdfauthor   = {Daniel Beckmann},
-        pdfkeywords = {Kraftsensorik, Insertionskräfte, Cochleaimplantate}
+        pdftitle    = {Nichtlineare Zustandsbeobachtung mit bildbasierter Validierung am inversen Doppelpendel},
+        pdfsubject  = {Studienarbeit},
+        pdfauthor   = {Andreas Serov},
+        pdfkeywords = {Zustandsbeobachtung, Doppelpendel}
         }
 \else
 \fi
 
+%\usepackage[utf8]{inputenc}					% umlaute
+%\usepackage[ansinew]{inputenc}				% umlaute
 \usepackage{befehle}                        % eigene Befehle wie:
                                             % \zB\,
                                             % \abbildung{Position h,b,t,p}{Dateiname ohne Endung}{Caption}
@@ -87,7 +89,10 @@
 		%\input{abkuerzungen}                    % Abkürzungen im Text, z.B. CI = Cochleaimplantat
 		%\input{variablen}                       % Mathematische Variablen
     \include{einleitung}										% die einzelnen Kapitel einbinden
-		\include{robotersysteme}
+	%\include{stateoftheart}
+	\include{robotersysteme}
+	\include{stateoftheart}
+	\include{modellierung}
     %\include{aufbau}
     %\include{versuchsdurchfuehrung}
     %\include{ergebnisse}
@@ -95,32 +100,32 @@
     %\nocite{*}                             % alle Literaturquellen einbinden, sonst werden nur die zitierten
                                             % Quellen im Literaturverzeichnis angezeigt (ist Geschmackssache).
                                             % eher nicht verwenden, außer man hat einen guten Grund
-    \appendix                               % Anhang starten, jedes weitere Kapitel bekommt jetzt einen Buchstaben
-    \chapter*{Anhang}                       % Anhang als Chapter
-    \thispagestyle{empty}                   % keine Kopfzeile, Seitenzahl u.a., leere Seite mit Überschrift Anhang
-    \setcounter{chapter}{1}                 % Chapter Counter auf 1 = im Anhang A
-    \setcounter{equation}{0}                % Equation Counter nullen
-    \addstarredchapter{Anhang}              % Minitoc mitteilen, dass neues Chapter
-    \newpage                                
-    \ihead{\normalfont Anhang}              % Kopfzeile auf Anhang setzen
-    
-    \minitoc                                % Anhangsverzeichnis plotten
-    %% --- Ab hier der Anhang einfügen
-
-    %\include{anhang_wheatstone}            % Anhang
-    %\include{anhang_fehlerfortpflanzung}
-		%\include{anhang_mgcEinstellungen}
-		%\include{anhang_trafos}
-		%\include{anhang_befestigen}
-		%\include{anhang_datenblaetter}
-  
-
-    %% --- Anhang zu Ende
-    \ihead{\normalfont\headmark}            % kolumnentitel innen
- 
-    %% --- Literaturverzeichnis
-    \bibliographystyle{alphadin}            % Darstellung nach DIN, mit Name und Jahr z.B. [Sch06]
-    \bibliography{masterbib}                % Literaturverzeichnis einbinden
+%    \appendix                               % Anhang starten, jedes weitere Kapitel bekommt jetzt einen Buchstaben
+%    \chapter*{Anhang}                       % Anhang als Chapter
+%    \thispagestyle{empty}                   % keine Kopfzeile, Seitenzahl u.a., leere Seite mit Überschrift Anhang
+%    \setcounter{chapter}{1}                 % Chapter Counter auf 1 = im Anhang A
+%    \setcounter{equation}{0}                % Equation Counter nullen
+%    \addstarredchapter{Anhang}              % Minitoc mitteilen, dass neues Chapter
+%    \newpage                                
+%    \ihead{\normalfont Anhang}              % Kopfzeile auf Anhang setzen
+%    
+%    \minitoc                                % Anhangsverzeichnis plotten
+%    %% --- Ab hier der Anhang einfügen
+%
+%    %\include{anhang_wheatstone}            % Anhang
+%    %\include{anhang_fehlerfortpflanzung}
+%		%\include{anhang_mgcEinstellungen}
+%		%\include{anhang_trafos}
+%		%\include{anhang_befestigen}
+%		%\include{anhang_datenblaetter}
+%  
+%
+%    %% --- Anhang zu Ende
+%    \ihead{\normalfont\headmark}            % kolumnentitel innen
+% 
+%    %% --- Literaturverzeichnis
+%    \bibliographystyle{alphadin}            % Darstellung nach DIN, mit Name und Jahr z.B. [Sch06]
+%    \bibliography{masterbib}                % Literaturverzeichnis einbinden
 
 \end{spacing}
 \end{document}                              % fertig!
