@@ -1,0 +1,841 @@
+% Encoding: windows-1252
+
+@ARTICLE{Ber59,
+  author = {Bertodo, R.},
+  title = {Development of High-temperature Strain Gauges},
+  journal = {Proceedings of the Institution of Mechanical Engineers},
+  year = {1959},
+  volume = {173},
+  pages = {605 -- 616},
+  number = {23},
+  owner = {Daniel},
+  timestamp = {2011.05.29}
+}
+
+@BOOK{Boenninghaus05,
+  title = {Hals-Nasen-Ohren-Heilkunde},
+  publisher = {Springer},
+  year = {2005},
+  author = {Hans-Georg Boenninghaus and Thomas Lenarz},
+  address = {Heidelberg},
+  edition = {12. Auflage},
+  owner = {Daniel},
+  timestamp = {2011.06.27}
+}
+
+@BOOK{Gross09,
+  title = {Technische Mechanik -- Band 2: Elastostatik},
+  publisher = {Springer},
+  year = {2009},
+  author = {Dietmar Gross and Werner Hauger and Jörg Schröder and Wolfgang A.
+	Wall},
+  address = {Darmstadt, Essen, München},
+  edition = {10. Auflage},
+  month = {Januar},
+  owner = {Daniel},
+  timestamp = {2011.06.14}
+}
+
+@BOOK{Goerne06,
+  title = {Tontechnik},
+  publisher = {Hanser Verlag},
+  year = {2006},
+  author = {Thomas Görne},
+  address = {Detmold, Svensbyn},
+  edition = {2. Auflage},
+  month = {Juni},
+  owner = {Daniel},
+  timestamp = {2011.06.27}
+}
+
+@BOOK{Heimann06,
+  title = {Mechatronik, Komponenten -- Methoden -- Beispiele},
+  publisher = {Hanser Verlag},
+  year = {2006},
+  author = {Bodo Heimann and Wilfried Gerth and Karl Popp},
+  pages = {399},
+  address = {Hannover},
+  edition = {3. Auflage},
+  month = {August},
+  owner = {Daniel},
+  timestamp = {2011.05.13}
+}
+
+@BOOK{Hilleringmann06,
+  title = {Mikrosystemtechnik -- Prozessschritte, Technologien, Anwendungen},
+  publisher = {Teubner Verlag},
+  year = {2006},
+  author = {Ulrich Hilleringmann},
+  address = {Wiesbaden},
+  edition = {1. Auflage},
+  month = {April},
+  owner = {Daniel},
+  timestamp = {2011.06.23}
+}
+
+@BOOK{Hoffmann87,
+  title = {Eine Einführung in die Technik des Messens mit Dehnungsmessstreifen},
+  publisher = {Hottinger Baldwin Messtechnik GmbH},
+  year = {1987},
+  author = {Karl Hoffmann},
+  pages = {291},
+  address = {Darmstadt},
+  owner = {Daniel},
+  timestamp = {2011.05.06},
+  url = {http://www.hbm.com/de/menu/anwendungen/experimentelle-spannungsanalyse/fachbuch/}
+}
+
+@INPROCEEDINGS{Hussong08,
+  author = {Hussong, Andreas and Rau, Thomas and Eilers, Hubertus and Baron,
+	Stephan and Heimann, Bodo and Leinung, Martin and Lenarz, Thomas
+	and Majdani, Omid},
+  title = {Conception and design of an automated insertion tool for cochlear
+	implants},
+  booktitle = {Proc. 30th Annual Int. Conf. of the IEEE Engineering in Medicine
+	and Biology Society EMBS 2008},
+  year = {2008},
+  pages = {5593--5596},
+  doi = {10.1109/IEMBS.2008.4650482},
+  owner = {Daniel},
+  timestamp = {2011.05.12}
+}
+
+@ARTICLE{Hussong08a,
+  author = {Andreas Hussong and Thomas Rau and Hubertus Eilers and Stephan Baron
+	and Bodo Heimann and Martin Leinung and Thomas Lenarz and Omid Majdani},
+  title = {Conception and design of an automated insertion tool for cochlear
+	implants.},
+  journal = {Conf Proc IEEE Eng Med Biol Soc},
+  year = {2008},
+  volume = {2008},
+  pages = {5593--5596},
+  abstract = {Cochlear implants (CI) are electronic devices incorporating an electrode
+	inserted into the human cochlea for direct electric stimulation of
+	the auditory nerve. The implantation has become the standard treatment
+	for patients with severe-to-profound sensorineural loss not aidable
+	with conventional hearing aids. The state of the art operative technique
+	is a facial recess approach to the middle ear, following the opening
+	of the scala tympani (cochleostomy) and insertion of the electrode
+	array. The facial recess approach is applicable only by experienced
+	surgeons and optimal CI results primarily depend on optimal electrode
+	placement and minimal traumatic insertion. This also requires a certain
+	amount of experience. Additionally several groups work on minimally-invasive
+	approaches to the cochlea, resulting in the necessity to insert the
+	implant via a keyhole access, which is not applicable with current
+	techniques. This paper presents a mechatronic device for an automated
+	insertion of the electrode array of a cochlear implant system. Being
+	designed especially for minimally-invasive approaches, the tool is
+	also applicable for regular facial recess approaches. Moreover the
+	device allows reliable and repeatable insertion studies at synthetic
+	models or cadaver specimen. The functionality of the tool is proofed
+	with first experiments on a synthetic model.},
+  doi = {10.1109/IEMBS.2008.4650482},
+  institution = {Institute of Robotics, Leibniz Universität Hannover, Germany.},
+  keywords = {Cochlear Implantation, instrumentation/methods; Cochlear Implants;
+	Equipment Design; Equipment Failure Analysis; Micro-Electrical-Mechanical
+	Systems, instrumentation/methods; Reproducibility of Results; Robotics,
+	instrumentation/methods; Sensitivity and Specificity},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pmid = {19163985},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.1109/IEMBS.2008.4650482}
+}
+
+@ARTICLE{Hussong10,
+  author = {Andreas Hussong and Thomas S Rau and Tobias Ortmaier and Bodo Heimann
+	and Thomas Lenarz and Omid Majdani},
+  title = {An automated insertion tool for cochlear implants: another step towards
+	atraumatic cochlear implant surgery.},
+  journal = {Int J Comput Assist Radiol Surg},
+  year = {2010},
+  volume = {5},
+  pages = {163--171},
+  number = {2},
+  month = {Mar},
+  abstract = {Atraumatic electrode insertion has been identified to be a crucial
+	step for the preservation of residual hearing abilities, which allows
+	hybrid electro-acoustic stimulation (EAS). The authors propose a
+	tool for automation of the insertion process to achieve this.General
+	benefits as well as concept and design of an automated insertion
+	tool are presented. Thirty insertions of Nucleus 24 Contour Advance
+	Practice Electrodes in an artificial scala tympani model as well
+	as 20 insertions in a human cochlea specimen were performed using
+	the tool, implementing the AOS technique. For both studies, the achieved
+	insertion depth angle was evaluated by photographic or X-ray documentation.The
+	mean achieved insertion depth angle was 410 degrees for the lubricated
+	model and 330 degrees for the human cochlea specimen.The automated
+	insertion tool has proven its capability to perform electrode insertions
+	with final insertion depth angles within the target range of a standard
+	cochlear implant surgery. Additionally, to the knowledge of the authors,
+	it represents the only possibility to automatically insert cochlear
+	implant electrodes via minimally invasive approaches.},
+  doi = {10.1007/s11548-009-0368-0},
+  institution = {Institute of Mechatronic Systems (former Institute of Robotics),
+	Leibniz Universität Hannover, Appelstrasse 11a, 30167, Hannover,
+	Germany. andreas.hussong@imes.uni-hannover.de},
+  keywords = {Acoustic Stimulation; Cochlear Implantation, instrumentation/methods;
+	Cochlear Implants; Electrodes, Implanted; Equipment Design; Humans;
+	Micro-Electrical-Mechanical Systems, instrumentation; Models, Statistical;
+	Surgical Procedures, Minimally Invasive},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pmid = {20033518},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.1007/s11548-009-0368-0}
+}
+
+@ARTICLE{IvdHG+99,
+  author = {A. Illg and S. von der Haar-Heise and J. E. Goldring and A. Lesinski-Schiedat
+	and R. D. Battmer and T. Lenarz},
+  title = {Speech perception results for children implanted with the CLARION
+	cochlear implant at the Medical University of Hannover.},
+  journal = {Ann Otol Rhinol Laryngol Suppl},
+  year = {1999},
+  volume = {177},
+  pages = {93--98},
+  month = {Apr},
+  __markedentry = {[Daniel]},
+  abstract = {The perception of speech of 167 children implanted with a CLARION
+	Multi-Strategy Cochlear Implant (1.2 device) was evaluated preimplantation
+	and at 3, 6, 12, 18, and 24 months postimplantation. The children
+	were between 15 months and 15 years of age. The test materials consisted
+	of 8 tests involving syllable structure, single- and 2-syllable words,
+	differentiation of word pairs, and sentences. Two difficulty levels
+	were used, depending on developmental age (<7, and 7 to 15 years).
+	There was an improvement in test scores over time for both age groups.
+	The younger children (particularly those under age 4) improved steadily
+	over the first 2 years, while the older children tended to plateau
+	between 12 and 18 months after implantation. These findings demonstrate
+	that deaf children up to 15 years old benefit from cochlear implants.
+	Children under 4 years of age may even have the ability to compensate
+	for delays in speech development before they reach school age.},
+  institution = {Department of Otolaryngology, Medizinische Hochschule Hannover, Germany.},
+  keywords = {Adolescent; Auditory Perception, physiology; Child; Child, Preschool;
+	Cochlear Implantation; Cochlear Implants; Deafness, rehabilitation/surgery;
+	Hearing Tests; Humans; Infant; Speech Perception, physiology},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pmid = {10214810},
+  timestamp = {2011.07.01}
+}
+
+@ARTICLE{Kan82,
+  author = {Kanda, Y.},
+  title = {A graphical representation of the piezoresistance coefficients in
+	silicon},
+  journal = {IEEE Transactions on Electron Devices},
+  year = {1982},
+  volume = {29},
+  pages = {64--70},
+  number = {1},
+  doi = {10.1109/T-ED.1982.20659},
+  owner = {Daniel},
+  timestamp = {2011.06.23}
+}
+
+@ARTICLE{Kehrer02,
+  author = {Reinhard Kehrer},
+  title = {... in Richtung Sonnenaufgang -- Neue Horizonte in der Trägerfrequenztechnik},
+  journal = {MessTec \& Automation},
+  year = {2002},
+  volume = {4},
+  pages = {42 -- 44},
+  owner = {Daniel},
+  timestamp = {2011.05.09}
+}
+
+@MANUAL{Halbleiter-DMSZEMSG07,
+  title = {Halbleiter-DMS -- Technisches Informationsblatt},
+  author = {Stephan Keil},
+  organization = {ZSE Electronic Mess-Systeme \& Sensortechnik GmbH},
+  address = {Bietigheim-Bissingen},
+  edition = {02/01},
+  month = {März},
+  year = {2007},
+  note = {Technische Daten},
+  owner = {Daniel},
+  timestamp = {2011.06.08}
+}
+
+@ARTICLE{Kumme2008,
+  author = {Rolf Kumme and Jens Illemann and Vladimir Nesterov and Uwe Brand},
+  title = {Kraftmessung von Mega- bis Nanonewton},
+  journal = {PTB-Mitteilungen},
+  year = {2008},
+  volume = {3},
+  pages = {143 -- 151},
+  number = {118},
+  month = {September},
+  part = {2},
+  owner = {beckmann},
+  timestamp = {2011.08.26}
+}
+
+@BOOK{Laible09,
+  title = {Mechanische Größen, elektrisch gemessen : Grundlagen und Beispiele
+	zur technischen Ausführung ; mit 5 Tabellen},
+  publisher = {Expert-Verlag},
+  year = {2009},
+  author = {Michael Laible and Robert K. Müller and Berhard Bill and Klaus Gehrke},
+  volume = {45},
+  pages = {255},
+  address = {Renningen},
+  edition = {7. Auflage},
+  booktitle = {Kontakt \& Studium ; 45},
+  comment = {Literaturverz. S. 245 - 250},
+  keywords = {Mechanische Größe / Elektrische Messung, Mechanische Größe / Elektrische
+	Messung},
+  owner = {Daniel},
+  refid = {587279532},
+  timestamp = {2011.05.11},
+  url = {http://www.gbv.de/dms/bs/toc/587279532.pdf}
+}
+
+@ARTICLE{Majdani10,
+  author = {Omid Majdani and Daniel Schurzig and Andreas Hussong and Thomas Rau
+	and Justin Wittkopf and Thomas Lenarz and Robert F Labadie},
+  title = {Force measurement of insertion of cochlear implant electrode arrays
+	in vitro: comparison of surgeon to automated insertion tool.},
+  journal = {Acta Otolaryngol},
+  year = {2010},
+  volume = {130},
+  pages = {31--36},
+  number = {1},
+  abstract = {We have demonstrated that an automated insertion tool (i.e. a robot)
+	can be used to duplicate a complex surgical motion in inserting cochlear
+	implant (CI) electrode arrays via the 'advance-off-stylet' (AOS)
+	technique. As compared with human operators, the forces generated
+	by the robot were slightly larger but the robot was more reliable
+	(i.e. less force maxima).We present force data collected during CI
+	electrode insertion by human operators and by an automated insertion
+	tool.Using a three-dimensional, anatomically correct, translucent
+	model of the scala tympani chamber of the cochlea, CI electrodes
+	were inserted either by one of three surgeons (26 insertions) or
+	by the robotic insertion tool (8 insertions). Force was recorded
+	using a load beam cell calibrated for expected forces of <0.1 Newtons
+	(N). The insertions were also videotaped to allow correlation of
+	force with depth of penetration into the cochlea and speed of insertion.Average
+	insertion force used by the surgeons was 0.004+/-0.001 N and for
+	the insertion tool it was 0.005+/-0.014 N (p<0.00001, Student's t
+	test). While the average insertion force of the automated tool was
+	larger than that of the surgeons, the surgeons did have intermittent
+	peaks during the AOS component of the insertion (between 120 degrees
+	and 200 degrees ).},
+  doi = {10.3109/00016480902998281},
+  institution = {Vanderbilt University Medical Center, Department of Otolaryngology-Head
+	and Neck Surgery, Nashville, TN 37232, USA.},
+  keywords = {Biomechanics; Cochlear Implantation, instrumentation; Electrodes,
+	Implanted; Equipment Design; Humans; Microsurgery, instrumentation;
+	Models, Anatomic; Reproducibility of Results; Robotics, instrumentation;
+	Scala Tympani, surgery; Software; Surgical Instruments; Time and
+	Motion Studies; Video Recording},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pii = {911832745},
+  pmid = {19484593},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.3109/00016480902998281}
+}
+
+@TECHREPORT{MZ10,
+  author = {Roland Mühler and Michael Ziese},
+  title = {Technischer Leitfaden Cochlea Implantat},
+  institution = {Universitäts-HNO-Klinik Magdeburg},
+  year = {2010},
+  address = {Magdeburg},
+  owner = {Daniel},
+  timestamp = {2011.07.02}
+}
+
+@ELECTRONIC{TUM2011,
+  author = {Technische Universität München},
+  month = {10},
+  year = {2011},
+  title = {TUM Rosie and PR2 James make pancakes together},
+  language = {Englisch},
+  howpublished = {Internet},
+  note = {(Blogeintrag von Willow Garage)},
+  url = {http://www.willowgarage.com/blog/2010/10/21/tum-rosie-and-pr2-james-make-pancakes-together},
+  owner = {youBotOne},
+  timestamp = {2011.08.18}
+}
+
+@MISC{Ortmaier11,
+  author = {Tobias Ortmaier},
+  title = {Skript zur Vorlesung Robotik I},
+  month = {Oktober},
+  year = {2011},
+  address = {Institut für Mechatronische Systeme, Leibniz Universität Hannover},
+  owner = {Daniel},
+  timestamp = {2011.09.02}
+}
+
+@MISC{Ortmaier11a,
+  author = {Tobias Ortmaier},
+  title = {Skript zur Vorlesung Robotik II},
+  month = {April},
+  year = {2011},
+  address = {Institut für Mechatronische Systeme, Leibniz Universität Hannover},
+  owner = {Daniel},
+  timestamp = {2011.09.02}
+}
+
+@ARTICLE{Rau10,
+  author = {Thomas S Rau and Andreas Hussong and Anna Herzog and Omid Majdani
+	and Thomas Lenarz and Martin Leinung},
+  title = {Accuracy of computer-aided geometric 3D reconstruction based on histological
+	serial microgrinding preparation.},
+  journal = {Comput Methods Biomech Biomed Engin},
+  year = {2010},
+  pages = {1},
+  month = {Nov},
+  abstract = {Purpose: For our research on computer-optimised and automated cochlear
+	implant surgery, we pursue a model-based approach to overcome the
+	limitations of currently available clinical imaging modalities. A
+	serial cross section preparation procedure has been developed and
+	evaluated concerning accuracy to serve for modelling of a digital
+	anatomic atlas to make delicate soft tissue structures available
+	for pre-operative planning. Methods: A special grinding tool was
+	developed allowing the setting of a specific amount of abrasion as
+	equidistant slice thickness was considered a crucial step. Additionally,
+	each actual abrasion was accurately measured and used during three-dimensional
+	reconstruction of the serial cross-sectional images obtained via
+	digital photo documentation after each microgrinding step. A well-known
+	reference object was prepared using this procedure and evaluated
+	in terms of accuracy. Results: Reconstruction of the whole sample
+	was achieved with an error less than 0.4\%, and the edge lengths
+	in the direction of abrasion could be reconstructed with an average
+	error of 0.6 ± 0.3 mm; both prove the realisation of equidistant
+	abrasion. Using artificial registration fiducials and a custom-made
+	algorithm for image alignment, parallelism and rectangularity could
+	be preserved with average errors less than 0.4° ± 0.3°. Conclusion:
+	We present a systematic, practicable and reliable method for the
+	geometrically accurate reconstruction of anatomical structures, which
+	is especially suitable for the middle and inner ear anatomy including
+	soft tissue structures. For the first time, the quality of such a
+	reconstruction process has been quantified and successfully proven
+	for its usability.},
+  doi = {10.1080/10255842.2010.487049},
+  institution = {Department of Otolaryngology, Medical University of Hannover, Hannover,
+	Germany.},
+  language = {eng},
+  medline-pst = {aheadofprint},
+  owner = {Daniel},
+  pii = {929645359},
+  pmid = {21082462},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.1080/10255842.2010.487049}
+}
+
+@ARTICLE{Rau10a,
+  author = {Thomas S Rau and Andreas Hussong and Martin Leinung and Thomas Lenarz
+	and Omid Majdani},
+  title = {Automated insertion of preformed cochlear implant electrodes: evaluation
+	of curling behaviour and insertion forces on an artificial cochlear
+	model.},
+  journal = {Int J Comput Assist Radiol Surg},
+  year = {2010},
+  volume = {5},
+  pages = {173--181},
+  number = {2},
+  month = {Mar},
+  abstract = {As a substantial part of our concept of a minimally invasive cochlear
+	implant (CI) surgery, we developed an automated insertion tool. Studies
+	on an artificial scala tympani model were performed in order to evaluate
+	force application when using the insertion tool.Contour electrodes
+	were automatically inserted into a transparent cochlea model in Advance
+	Off-Stylet technique. Occurring forces were measured by the use of
+	a load cell and correlated with observed intracochlear movement of
+	the electrode carriers.Mean insertion forces were measured up to
+	20 mN comparable to previous studies on temporal bones. The most
+	influencing factor is the implant's 2D curling behaviour in comparison
+	to the 3D helical shape of the cochlea.The study confirms the functionality
+	and reliability of the automated insertion tool for insertion of
+	preformed CI. Improved insertion strategies considering patient-specific
+	anatomy become possible.},
+  doi = {10.1007/s11548-009-0299-9},
+  institution = {Department of Otolaryngology, Medical University of Hannover, Carl-Neuberg-Str.
+	1, 30625, Hannover, Germany. Rau.Thomas@mh-hannover.de},
+  keywords = {Cochlear Implantation, instrumentation/methods; Cochlear Implants;
+	Electrodes, Implanted; Equipment Design; Humans; Models, Anatomic;
+	Scala Tympani},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pmid = {20033522},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.1007/s11548-009-0299-9}
+}
+
+@ARTICLE{Rau11,
+  author = {Thomas S Rau and Omid Majdani and Andreas Hussong and Thomas Lenarz
+	and Martin Leinung},
+  title = {Determination of the curling behavior of a preformed cochlear implant
+	electrode array.},
+  journal = {Int J Comput Assist Radiol Surg},
+  year = {2011},
+  volume = {6},
+  pages = {421--433},
+  number = {3},
+  month = {May},
+  abstract = {Accurate insertion of a cochlear implant electrode array into the
+	cochlea's helical shape is a crucial step for residual hearing preservation.
+	In image-guided surgery, especially using an automated insertion
+	tool, the overall accuracy of the operative procedure can be improved
+	by adapting the electrode array's intracochlear movement to the individual
+	cochlear shape.The curling characteristic of a commercially available
+	state-of-the-art preformed electrode array (Cochlear Ltd. Contour
+	Advance(TM) Electrode Array) was determined using an image-processing
+	algorithm to detect its shape in series of images. An automatic image-processing
+	procedure was developed using Matlab and the Image Processing Toolbox
+	(MathWorks, Natick, Massachusetts, USA) to determine the complete
+	curvature of the electrode array by identifying the 22 platinum contacts
+	of the electrode. A logarithmic spiral was used for a comprehensive
+	mathematical description of the shape of the electrode array. A fitting
+	algorithm for nonlinear least-squares problems was used to provide
+	a complete mathematical description of the electrode array. The system
+	was tested for curling behavior as a function of stylet extraction
+	using nine Contour Advance Research Electrodes (RE) and additionally
+	for nine Contour Advance Practice Electrodes (PE).All arrays show
+	a typical pattern of curling with adequate predictability after the
+	first 2 or 3 millimeters of stylet extraction. Although non-negligible
+	variations in the overall curling behavior were detected, the electrode
+	arrays show a characteristic movement due to the stylet extraction
+	and only vary minimally after this initial phase.These results indicate
+	that the risk of intracochlear trauma can be reduced if the specific
+	curling behavior of the electrode carrier is incorporated into the
+	insertion algorithm. Furthermore, the determination of the curling
+	behavior is an essential step in computer-aided cochlear implant
+	electrode development. Experimental data are required for accurate
+	evaluation of the simulation model.},
+  doi = {10.1007/s11548-010-0520-x},
+  institution = {Department of Otolaryngology, Medical University Hannover, Carl-Neuberg-Str.
+	1, 30625, Hannover, Germany, rau.thomas@mh-hannover.de.},
+  language = {eng},
+  medline-pst = {ppublish},
+  owner = {Daniel},
+  pmid = {20665247},
+  timestamp = {2011.05.12},
+  url = {http://dx.doi.org/10.1007/s11548-010-0520-x}
+}
+
+@BOOK{Roddeck06,
+  title = {Einführung in die Mechatronik},
+  publisher = {Teubner Verlag},
+  year = {2006},
+  author = {Werner Roddeck},
+  pages = {483},
+  address = {Wiesbaden},
+  edition = {3. Auflage},
+  month = {August},
+  owner = {Daniel},
+  timestamp = {2011.06.05}
+}
+
+@ARTICLE{Schurzig11,
+  author = {Schurzig, D. and Labadie, R. F. and Hussong, A. and Rau, T. S. and
+	Webster, III, R. J.},
+  title = {Design of a Tool Integrating Force Sensing With Automated Insertion
+	in Cochlear Implantation},
+  journal = {IEEE/ASME Transactions on Mechatronics},
+  year = {2011},
+  pages = {1--9},
+  number = {99},
+  note = {Early Access},
+  doi = {10.1109/TMECH.2011.2106795},
+  owner = {Daniel},
+  timestamp = {2011.05.11}
+}
+
+@INPROCEEDINGS{Schurzig10,
+  author = {Schurzig, D. and Labadie, R. F. and Hussong, A. and Rau, T. S. and
+	Webster, R. J. },
+  title = {A force sensing Automated Insertion Tool for cochlear electrode implantation},
+  booktitle = {Proc. IEEE Int Robotics and Automation (ICRA) Conf},
+  year = {2010},
+  pages = {3674--3679},
+  doi = {10.1109/ROBOT.2010.5509341},
+  owner = {Daniel},
+  timestamp = {2011.05.11}
+}
+
+@BOOK{Tietze07,
+  title = {Halbleiterschaltungstechnik},
+  publisher = {Springer},
+  year = {2007},
+  author = {Ulrich Tietze and Christoph Schenk},
+  address = {Berlin, Heidelberg, New York},
+  edition = {12. Auflage},
+  owner = {Daniel},
+  timestamp = {2011.05.25}
+}
+
+@ELECTRONIC{WillowGarage2010,
+  author = {{Willow Garage}},
+  month = {05},
+  year = {2010},
+  title = {The Results Are In: PR2 Beta Program Recipients!},
+  language = {Englisch},
+  howpublished = {Internet},
+  url = {http://www.willowgarage.com/blog/2010/05/04/pr2-beta-program-recipients},
+  owner = {youBotOne},
+  timestamp = {2011.08.16}
+}
+
+@BOOK{Wintermantel09,
+  title = {Medizintechnik -- Life Science Engineering},
+  publisher = {Springer},
+  year = {2009},
+  author = {Erich Wintermantel and Suk-Woo Ha},
+  pages = {1401 -- 1417},
+  address = {München, Schaffhausen},
+  edition = {5. Auflage},
+  month = {März},
+  chapter = {Funktionsersatz des Innenohres},
+  owner = {Daniel},
+  timestamp = {2011.06.27}
+}
+
+@BOOK{Gevatter06,
+  title = {Handbuch der Mess- und Automatisierungstechnik in der Produktion},
+  publisher = {Springer},
+  year = {2006},
+  editor = {Hans-Jürgen Gevatter and Ulrich Grünhaupt},
+  address = {Berlin, Heidelberg, New York},
+  edition = {2. Auflage},
+  month = {März},
+  owner = {Daniel},
+  timestamp = {2011.06.19}
+}
+
+@BOOK{Grote07,
+  title = {Dubbel -- Taschenbuch für den Maschinenbau},
+  publisher = {Springer},
+  year = {2007},
+  editor = {K.-H. Grote and J. Feldhusen},
+  pages = {1810},
+  address = {Berlin},
+  edition = {22. Auflage},
+  owner = {Daniel},
+  timestamp = {2011.06.03}
+}
+
+@BOOK{Hoffmann07,
+  title = {Taschenbuch der Messtechnik},
+  publisher = {Carl Hanser Verlag},
+  year = {2007},
+  editor = {Jörg Hoffmann},
+  pages = {678},
+  address = {Osnabrück},
+  edition = {5. Auflage},
+  month = {August},
+  owner = {Daniel},
+  timestamp = {2011.05.05}
+}
+
+@BOOK{Wallaschek07,
+  title = {Formelsammlung zur Technischen Mechanik I -- IV},
+  publisher = {Institutsverbund für Mechanik},
+  year = {2007},
+  editor = {Jörg Wallaschek},
+  address = {Hannover},
+  month = {September},
+  owner = {Daniel},
+  timestamp = {2011.06.14}
+}
+
+@MANUAL{CochlearCL11,
+  title = {Cochlear Nucleus 5 System},
+  organization = {Cochlear Ltd},
+  address = {Hannover},
+  edition = {N34546F ISS3},
+  month = {Januar},
+  year = {2011},
+  note = {Broschüre},
+  owner = {Daniel},
+  timestamp = {2011.06.30}
+}
+
+@MANUAL{AuswahlVPGM10,
+  title = {Auswahl von DMS -- Kriterien, Verfahren, Empfehlungen},
+  organization = {Vishay Precision Group Micro-Measurements},
+  address = {Heilbronn, Deutschland},
+  edition = {Tech Note TN-505-4},
+  month = {Mai},
+  year = {2010},
+  note = {Technische Daten},
+  owner = {Daniel},
+  timestamp = {2011.06.08},
+  url = {www.micro-measurements.com}
+}
+
+@MANUAL{DehnungsmessstreifenHBMG10,
+  title = {Dehnungsmessstreifen und Zubehör},
+  organization = {Hottinger Baldwin Messtechnik GmbH},
+  address = {Darmstadt},
+  edition = {S1264-3.0 de},
+  month = {Mai},
+  year = {2010},
+  note = {Technische Daten},
+  owner = {Daniel},
+  timestamp = {2011.06.01},
+  url = {www.hbm.com/de/}
+}
+
+@MANUAL{MessverstaerkersystemHBMG10,
+  title = {Messverstärkersystem MGCplus -- Technische Daten},
+  organization = {Hottinger Baldwin Messtechnik GmbH},
+  address = {Darmstadt},
+  edition = {B0544-22.0 de},
+  month = {August},
+  year = {2010},
+  note = {Technische Daten},
+  owner = {Daniel},
+  timestamp = {2011.06.01},
+  url = {www.hbm.com/de/}
+}
+
+@MANUAL{MessverstaerkersystemHBMG10a,
+  title = {Messverstärkersystem MGCplus -- Bedienungsanleitung},
+  organization = {Hottinger Baldwin Messtechnik GmbH},
+  address = {Darmstadt},
+  edition = {B0526-26.0 de},
+  month = {August},
+  year = {2010},
+  note = {Bedienungsanleitung},
+  owner = {Daniel},
+  timestamp = {2011.05.05},
+  url = {www.hbm.com/de/}
+}
+
+@MANUAL{SCU-SimpleSG10,
+  title = {SCU - Simple Control Unit - USB Interface},
+  organization = {SmarAct GmbH},
+  address = {Oldenburg, Germany},
+  edition = {v0.1},
+  month = {Juni},
+  year = {2010},
+  note = {Programmer's Guide},
+  owner = {beckmann},
+  timestamp = {2011.08.25}
+}
+
+@MANUAL{KraftsensorMG09,
+  title = {Kraftsensor KD24S},
+  organization = {ME-Messsysteme GmbH},
+  address = {Hennigsdorf},
+  edition = {v0.1},
+  month = {November},
+  year = {2009},
+  note = {Datenblatt},
+  owner = {Daniel},
+  timestamp = {2011.06.23},
+  url = {www.me-systeme.de}
+}
+
+@MANUAL{NucleusCL09,
+  title = {Nucleus CI512 cochlear implant with Contour Advance electrode},
+  organization = {Cochlear Ltd},
+  address = {Lane Cove, Australia},
+  edition = {211651 ISS2},
+  month = {April},
+  year = {2009},
+  note = {Surgeon's Guide},
+  owner = {Daniel},
+  timestamp = {2011.07.05}
+}
+
+@MANUAL{NucleusCL09a,
+  title = {Nucleus 5 Cochlear Implant (CI512)},
+  organization = {Cochlear Ltd},
+  address = {Usa},
+  edition = {FUN1007 ISS3},
+  month = {August},
+  year = {2009},
+  note = {Technical Specifications},
+  owner = {Daniel},
+  timestamp = {2011.07.05}
+}
+
+@MANUAL{BackedMI08,
+  title = {Backed Semiconductor Strain Gages},
+  organization = {Micron Instruments},
+  address = {Simi Valley, California},
+  edition = {v0.1},
+  month = {April},
+  year = {2008},
+  note = {Datenblatt},
+  file = {:C\:\\Users\\Daniel\\micron2011.pdf:PDF},
+  owner = {Daniel},
+  timestamp = {2011.05.05},
+  url = {http://www.microninstruments.com/}
+}
+
+@MANUAL{NI625xSpecificationsNI07,
+  title = {NI 625x Specifications},
+  organization = {National Instruments},
+  address = {Austin, Texas, USA},
+  edition = {371291H-01},
+  month = {Juni},
+  year = {2007},
+  owner = {beckmann},
+  timestamp = {2011.08.05},
+  url = {www.ni.com}
+}
+
+@MANUAL{INA128TI05,
+  title = {INA128 -- Precision, Low Power Instrumentation Amplifier},
+  organization = {Texas Instruments},
+  address = {Dallas, Texas},
+  edition = {Rev. B},
+  month = {Februar},
+  year = {2005},
+  note = {Datenblatt},
+  owner = {Daniel},
+  timestamp = {2011.06.23},
+  url = {www.ti.com}
+}
+
+@MANUAL{AD620AD04,
+  title = {AD620 -- Low Cost Low Power Instrumentation Amplifier},
+  organization = {Analog Devices},
+  address = {Norwood},
+  edition = {Rev. G},
+  year = {2004},
+  note = {Datenblatt},
+  owner = {Daniel},
+  timestamp = {2011.06.23},
+  url = {www.analog.com}
+}
+
+@MANUAL{INA116BC95,
+  title = {INA116 -- Ultra Low Input Bias Current Instrumentation Amplifier},
+  organization = {Burr-Brown Corporation},
+  address = {Tucson, AZ},
+  edition = {PDS-1242B},
+  month = {Mai},
+  year = {1995},
+  note = {Datenblatt},
+  owner = {Daniel},
+  timestamp = {2011.06.05},
+  url = {www.ti.com}
+}
+
+@STANDARD{DIN1304-1,
+  title = {Formelzeichen; Allgemeine Formelzeichen},
+  organization = {Deutsches Institut für Normung e. V.},
+  type = {Norm},
+  number = {DIN 1304-1},
+  month = {März},
+  year = {1994},
+  key = {DIN 1304-1},
+  owner = {Daniel},
+  timestamp = {2011.06.14}
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}

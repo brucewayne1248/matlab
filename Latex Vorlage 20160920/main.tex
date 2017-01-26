@@ -73,25 +73,25 @@
 \dominitoc
 \begin{spacing}{1.15}                       % Zeilenabstand auf 1,15 fach stellen, ist nicht so eng aber
                                             % auch nicht so eine Seitenschinderei wie 1,5-fach
-    \frontmatter                            % mit kleinen römischen Seitenzahlen beginnen für class scrbook
-    %\pagenumbering{roman}                  % das gleiche fücrartcl
-    \setcounter{page}{0}
-    \pdfbookmark[0]{Titel}{tit}             % damit der Titel auch im Acrobat angezeigt wird
-		\include{cover}
-    \clearpage
-    \pdfbookmark[0]{\contentsname}{toc}
-    %\setcounter{page}{1}
-    \tableofcontents                        % Inhaltsverzeichnis
-    \listoffigures
-    \listoftables
-    \printnomenclature                      % Formelverzeichnis einbinden
-    \mainmatter                             % der eigentliche Tex
-		%\input{abkuerzungen}                    % Abkürzungen im Text, z.B. CI = Cochleaimplantat
-		%\input{variablen}                       % Mathematische Variablen
-    \include{einleitung}										% die einzelnen Kapitel einbinden
-	%\include{stateoftheart}
-	\include{robotersysteme}
-	\include{stateoftheart}
+%    \frontmatter                            % mit kleinen römischen Seitenzahlen beginnen für class scrbook
+%    %\pagenumbering{roman}                  % das gleiche fücrartcl
+%    \setcounter{page}{0}
+%    \pdfbookmark[0]{Titel}{tit}             % damit der Titel auch im Acrobat angezeigt wird
+%		\include{cover}
+%    \clearpage
+%    \pdfbookmark[0]{\contentsname}{toc}
+%    %\setcounter{page}{1}
+%    \tableofcontents                        % Inhaltsverzeichnis
+%    \listoffigures
+%    \listoftables
+%    \printnomenclature                      % Formelverzeichnis einbinden
+%    \mainmatter                             % der eigentliche Tex
+%		%\input{abkuerzungen}                    % Abkürzungen im Text, z.B. CI = Cochleaimplantat
+%		%\input{variablen}                       % Mathematische Variablen
+%    \include{einleitung}										% die einzelnen Kapitel einbinden
+%	%\include{stateoftheart}
+%	\include{robotersysteme}
+%	\include{stateoftheart}
 	\include{modellierung}
     %\include{aufbau}
     %\include{versuchsdurchfuehrung}
@@ -125,7 +125,9 @@
 % 
 %    %% --- Literaturverzeichnis
 %    \bibliographystyle{alphadin}            % Darstellung nach DIN, mit Name und Jahr z.B. [Sch06]
-%    \bibliography{masterbib}                % Literaturverzeichnis einbinden
+%%    \bibliography{masterbib}                % Literaturverzeichnis einbinden
+%    \bibliography{literaturserov}                % Literaturverzeichnis einbinden
+
 
 \end{spacing}
 \end{document}                              % fertig!

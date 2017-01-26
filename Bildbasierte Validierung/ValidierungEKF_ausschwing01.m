@@ -15,7 +15,7 @@ Fs = 1/T_s;
 dt = T_s;
 d2r = pi/180;
 r2d = 180/pi;
-x_0=0; dx_0=0; phi1_0=90*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
+x_0=0; dx_0=0; phi1_0=86.42*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
 x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
 x0_ekf = [210*d2r; 1; 150*d2r; -3];
 phi1MeasRad = d2r*phi1MeasDeg;

@@ -39,9 +39,10 @@ errMin = Inf;
 %                 Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
                 
                 phi1EstRad = []; dphi1EstRad = []; phi2EstRad = []; dphi2EstRad = []; K = [];
-                
+                init = 1;
                 for k = 1:length(phi1MeasRad)
-                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0, para_sys, T_s, ddxDes(k), phi1MeasRad(k));
+                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0, para_sys, T_s, ddxMeasDes(k), phi1MeasRad(k), init);
+                    init = 0;
                     phi1EstRad(k) = states(1);
                     dphi1EstRad(k) = states(2);
                     phi2EstRad(k) = states(3);
@@ -67,19 +68,19 @@ errMin = Inf;
 dphi2VideoDeg = diff(phi2VideoDeg)/dt;  % diff 
 dphi2VideoDegMag = abs(fft(dphi2VideoDeg));
 
-figure(1),
-plot(dphi2VideoDeg), title('dphi2 ungefiltert')
+% figure(1),
+% plot(dphi2VideoDeg), title('dphi2 ungefiltert')
 
 nfft = length(dphi2VideoDegMag);
 
-figure(2)
-plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
+% figure(2)
+% plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
 
 [b, a] = butter(2, 0.02, 'low');
 
 H = freqz(b,a, floor(nfft/2));
-figure(3),
-plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
+% figure(3),
+% plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
 dphi2VideoDegFiltLP = filter(b,a,dphi2VideoDeg);
 dphi2VideoDegFiltLP = [0  dphi2VideoDegFiltLP ];
 

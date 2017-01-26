@@ -1,0 +1,10 @@
+% Encoding: windows-1252
+
+@MastersThesis{Behm2016,
+  author = {Alexander Behm},
+  title  = {Aufbau, Inbetriebnahme und Regelung eines inversen Pendels zu Demonstrationszwecken in Forschung und Lehre},
+  school = {Leibniz Universität Hannover},
+  year   = {2016},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

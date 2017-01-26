@@ -37,7 +37,7 @@ title('Video')
 [P,Q] = rat((1/T_s)/frameRate);     
 phi1Resample = resample(phi1,P,Q);    % resample the slower measurement
 phi1Resample = phi1Resample(30:13.035e3);
-phi2Resample = resample(phi1,P,Q);    % resample the slower measurement
+phi2Resample = resample(phi2,P,Q);    % resample the slower measurement
 phi2Resample = phi2Resample(30:13.035e3);
 [C, lag] = xcorr(phi1Resample,phi1MeasDeg);
 [~,I] = max(C);

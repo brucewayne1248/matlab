@@ -1,9 +1,2 @@
-\BOOKMARK [0][-]{tit.0}{Titel}{}% 1
-\BOOKMARK [0][-]{toc.0}{Inhaltsverzeichnis}{}% 2
-\BOOKMARK [0][-]{chapter.1}{1 Einleitung}{}% 3
-\BOOKMARK [0][-]{chapter.2}{2 Robotersysteme}{}% 4
-\BOOKMARK [1][-]{section.2.1}{2.1 PR2}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.2}{2.2 Technische Daten der youBot-Plattform}{chapter.2}% 6
-\BOOKMARK [0][-]{chapter.3}{3 Stand der Technik}{}% 7
-\BOOKMARK [0][-]{chapter.4}{4 Modellierung und Zustandsraumdarstellung des Doppelpendels}{}% 8
-\BOOKMARK [1][-]{section.4.1}{4.1 Dynamische Gleichungen}{chapter.4}% 9
+\BOOKMARK [0][-]{chapter.1}{1 Modellierung und Zustandsraumdarstellung des Doppelpendels}{}% 1
+\BOOKMARK [1][-]{section.1.1}{1.1 Dynamische Gleichungen}{chapter.1}% 2

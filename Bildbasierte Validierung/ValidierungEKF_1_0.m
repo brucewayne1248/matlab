@@ -69,27 +69,27 @@ dphi2VideoDeg = diff(phi2VideoDeg)/dt;  % diff
 dphi2VideoDeg = [0 dphi2VideoDeg];
 dphi2VideoDegMag = abs(fft(dphi2VideoDeg));
 
-figure(1),
-plot(tMeas,dphi2VideoDeg), title('dphi2 ungefiltert')
-xlabel('t in Sek.')
-ylabel('Grad/s')
+% figure(1),
+% plot(tMeas,dphi2VideoDeg), title('dphi2 ungefiltert')
+% xlabel('t in Sek.')
+% ylabel('Grad/s')
 
 nfft = length(dphi2VideoDegMag);
 
-figure(2)
-plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
-xlabel('Normierte Frequenz')
-ylabel('Betrag FFT')
+% figure(2)
+% plot([0:1/(nfft/2 -1):1], dphi2VideoDegMag(1:nfft/2)), title('dphi2 Frequenzbereich')
+% xlabel('Normierte Frequenz')
+% ylabel('Betrag FFT')
 
 
 [b, a] = butter(2, 0.02, 'low');
 
 H = freqz(b,a, floor(nfft/2));
-figure(3),
-plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
+% figure(3),
+% plot([0:1/(nfft/2 -1):1], abs(H),'r'), title('Filter Übertragungsfunktion')
+% xlabel('Normierte Frequenz')
+% ylabel('Verstärkung Filter')
 dphi2VideoDegFiltLP = filter(b,a,dphi2VideoDeg);
-xlabel('Normierte Frequenz')
-ylabel('Verstärkung Filter')
 
 
 %% plots of states and measurements
