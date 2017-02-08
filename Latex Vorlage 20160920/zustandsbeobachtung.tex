@@ -1,0 +1,41 @@
+\chapter{Zustandsbeobachtung}
+\label{ch:zustandsbeobachtung}
+
+\begin{figure}[!ht]		% signalflussplan zustandsbeobachter allgemein
+	\begin{center}
+		%\begin{scaletikzpicturetowidth}{\textwidth}
+		\begin{tikzpicture}[node distance=1.25cm]
+		\node[draw,rectangle, align = center] (real) {\footnotesize reales\\\footnotesize System};		% reales System
+		\node[inner sep=0,minimum size=0,right of=int] (real-y) {}; 	% Unsichtbarer Knoten zwischen real und y
+		\node[inner sep=0,minimum size=0,right of=real-y] (real-y2) {};	 	% y
+		\node[inner sep=0,minimum size=0,right of=real-y2] (y) {};	 	% y
+		\node[inner sep=0,minimum size=0,below of=real] (real-beobachter) {};	 	% y		 
+		\node[draw,rectangle, below of=real-beobachter, align = center, node distance = 1cm] (beobachter) {\footnotesize Zustands- \\\footnotesize beobachter};
+		\node[draw,rectangle, below of=real-y2, align = center] (select) {\footnotesize messbare \\\footnotesize Ausgänge};		
+		\node[inner sep=0,minimum size=0,left of=real] (u-real) {};
+		\node[inner sep=0,minimum size=0,left of=u-real] (u-real2) {};		
+		\node[inner sep=0,minimum size=0,left of=u-real2] (u) {};
+		\node[inner sep=0,minimum size=0,below of=beobachter] (xdach) {};				
+		
+		%		% 1st pass: draw arrows
+		\draw[vecArrow] (real) to node [above right, align = center] {\footnotesize Ausgänge\\$ \bm{y} $} (y);
+		\draw[vecArrow] (real-y2) to (select);		
+		\draw[vecArrow] (select) |- (beobachter);				
+		\draw[->] (u) to node [above, align = center] {\footnotesize Eingang\\$ u $} (real);			
+		\draw[->] (u-real2) |-  (beobachter);					
+		\draw[vecArrow] (beobachter) to node [below right, align = center] {\footnotesize geschätzte Zustände\\$ \bm{\hat{x}} $} (xdach);						
+		
+		%		% 2nd pass: copy all from 1st pass, and replace vecArrow with innerWhite
+		% Note: If you have no branches, the 2nd pass is not needed
+		\draw[innerWhite] (real) to (y);
+		
+		
+		\end{tikzpicture}
+		%\end{scaletikzpicturetowidth}
+	\end{center}
+	\caption{Signalflussplan der allgemeinen Zustandsbeobachtung}
+	\label{fig:zustandsbeobachter}
+\end{figure}
+
+Bild~\ref{fig:zustandsbeobachter} zeigt die allgemeine Idee der Zustandsbeobachtung auf. Die Eingänge des Zustandsbeobachters, der auf den Systemgleichungen des Zustandsraums beruht, sind die Eingangsgröße $ u = \ddot{x}$ sowie der messbare Ausgang $ \varphi_1 $. Der Zustandsbeobachter rekonstruiert mithilfe zugrunde liegender Systemgleichungen den geschätzten Zustandsvektor $ \hat{\bm{x}} $. 
+

@@ -1,0 +1,55 @@
+\documentclass[]{article}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc} 
+\setlist[enumerate]{label*=\arabic*.}
+\newcounter{saveenumerate}
+\makeatletter
+\newcommand{\enumeratext}[1]{%
+	\setcounter{saveenumerate}{\value{enum\romannumeral\the\@enumdepth}}
+\end{enumerate}
+#1
+\begin{enumerate}
+	\setcounter{enum\romannumeral\the\@enumdepth}{\value{saveenumerate}}%
+}
+\makeatother
+%opening
+\title{Inhaltsverzeichnis Studienarbeit}
+\author{}
+
+\begin{document}
+
+%\maketitle
+
+\hspace{-0.5cm}\textbf{Inhaltsverzeichnis Studienarbeit: Nichtlineare Zustandsbeobachtung mit bildbasierter Validierung am inversen Doppelpendel}
+\begin{enumerate}
+	\item Einleitung
+	\item Stand der Technik/ Motivation
+	\item Dynamische Bewegungsgleichungen (Lagrange)
+	\item Zustandsregelung (Simulation)
+	\begin{enumerate}
+		\item Zustandsraumdarstellung (Linearisierung)
+		\item Grundlagen Zustandsregelung (Steuerbarkeit, Beobachtbarkeit ...)
+		\item Stabilisierung des Doppelpendels mittels LQR (Fazit Zustandsbeobachtung notwendig)
+		\item (Stabilisierung des Doppelpendels mittels Polvorgabe, möglicherweise)
+	\end{enumerate}
+	\item Zustandsbeobachtung
+	\begin{enumerate}
+		\item Kalman-Filter Einleitung
+		\item Nichtlineare Zustandsbeobachtung mittels EKF
+	\end{enumerate}
+	\item Bildbasierte Beobachtervalidierung
+	\begin{enumerate}
+		\item Bildbasierte Winkelmessung
+		\item Signalverarbeitung
+		\begin{enumerate}
+			\item Kreuzkorrelation
+			\item Filterung
+		\end{enumerate}
+		\item Validierung EKF
+	\end{enumerate}
+	\item Schlussfolgerungen und Ausblick
+\end{enumerate}
+
+
+
+\end{document}

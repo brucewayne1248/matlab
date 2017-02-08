@@ -49,6 +49,34 @@
 \else
 \fi
 
+\usepackage{tikz}							% package für blockschaltbilder in latex
+\usetikzlibrary{arrows, decorations.markings, positioning}
+% for double arrows a la chef
+% adapt line thickness and line width, if needed
+\tikzstyle{vecArrow} = [semithick, decoration={markings,mark=at position
+	1 with {\arrow[semithick]{open triangle 60}}},
+double distance=1.4pt, shorten >= 5.5pt,
+preaction = {decorate},
+postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1pt, shorten >= 4.5pt]
+
+\usepackage{environ}
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+	\def\tikz@width{#1}%
+	\def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+		\BODY
+	\end{lrbox}%
+	\pgfmathparse{#1/\wd\measure@tikzpicture}%
+	\edef\tikzscale{\pgfmathresult}%
+	\BODY
+}
+\makeatother
+
+\usepackage{bm}								% für fettgedruckte ausdrücke in Mathe-Umgebung \bm{math expression}
+\usepackage{mathtools}						% für *Matrizen zum Ausrichten der Einträge
+\usepackage{dsfont}						% für die mathematischen zeichen wie  x enthalten in Relle Zahlen -> fancy R
 %\usepackage[utf8]{inputenc}					% umlaute
 %\usepackage[ansinew]{inputenc}				% umlaute
 \usepackage{befehle}                        % eigene Befehle wie:
@@ -93,6 +121,8 @@
 %	\include{robotersysteme}
 %	\include{stateoftheart}
 	\include{modellierung}
+	\include{zustandsregelung}
+	\include{zustandsbeobachtung}
     %\include{aufbau}
     %\include{versuchsdurchfuehrung}
     %\include{ergebnisse}

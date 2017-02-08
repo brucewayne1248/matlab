@@ -1,2 +1,5 @@
-\BOOKMARK [0][-]{chapter.1}{1 Modellierung und Zustandsraumdarstellung des Doppelpendels}{}% 1
-\BOOKMARK [1][-]{section.1.1}{1.1 Dynamische Gleichungen}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.1}{1 Modellbildung des Doppelpendels}{}% 1
+\BOOKMARK [0][-]{chapter.2}{2 Zustandsregelung des inversen Doppelpendels}{}% 2
+\BOOKMARK [1][-]{section.2.1}{2.1 Zustandsraumdarstellung}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{2.2 Stabilisierung des Doppelpendels mittels Optimalregelung}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{3 Zustandsbeobachtung}{}% 5
