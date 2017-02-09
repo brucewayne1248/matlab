@@ -171,14 +171,14 @@ b_{6} &= \dfrac{-3m_1}{l_2(4 m_1 + 3m_2 + 12 m_3)}.
 
 Bevor die hier angewendete \textit{Optimalregelung} erläutert wird, werden die grundsätzlichen Eigenschaften der \textit{vollständigen Steuerbarkeit} und \textit{Beobachtbarkeit} eingeführt. Die in diesem Abschnitt dargestellten Zusammenhänge beziehen sich auf~\ref{Lunze2016x}. 
 
-Es ist für eine beliebige Regelung zu klären, ob mithilfe der Eingangsgröße $ u(t) $ die Zustände von einem beliebigen Anfangszustand $ \bm{x}_0 $ in einen gewünschten Endzustand $ \bm{x}_\mathrm{e} $ überführt werden können. Ist diese Bedingung erfüllt, nennt man das System \textit{vollständig steuerbar}. Es gibt diverse Ansätze die Steuerbarkeit eines Systems zu überprüfen, wobei im Rahmen dieser Arbeit das Steuerbarkeitskriterium von \textit{Kalman} herangezogen wird. Der Vorteil dieses Kriteriums ist der einfache Nachweis, wobei nur eine Untersuchung der \mbox{$(n\times~n)$-Steuerbarkeitsmatrix}, bestehend aus der System- und Steuervektor,
+Es ist für eine beliebige Regelung zu klären, ob mithilfe der Eingangsgröße $ u(t) $ die Zustände von einem beliebigen Anfangszustand $ \bm{x}_0 $ in einen gewünschten Endzustand $ \bm{x}_\mathrm{e} $ überführt werden können. Ist diese Bedingung erfüllt, nennt man das System \textit{vollständig steuerbar}. Es gibt diverse Ansätze die Steuerbarkeit eines Systems zu überprüfen, wobei im Rahmen dieser Arbeit das Steuerbarkeitskriterium von \textit{Kalman} herangezogen wird. Der Vorteil dieses Kriteriums ist der einfache Nachweis. Es genügt eine Untersuchung der \mbox{$(n\times~n)$-Steuerbarkeitsmatrix}, bestehend aus der System- und Steuervektor:
 %
 \begin{align}
 \label{eq:steuerbarkeitsmatrix}
 \bm{S}_\mathrm{S} = (\bm{b} \hspace{0.25cm} \bm{Ab} \hspace{0.25cm} \bm{A^2b} \hspace{0.25cm} ... \hspace{0.25cm} \bm{A^{n-1}b} )
 \end{align}
 
-notwendig ist. Für die \textit{vollständige Steuerbarkeit} des Systems muss $ \bm{S}_\mathrm{S} $ den vollen Rang $ n = dim(\bm{x}) $ aufweisen. Eine quadratische Matrix besitzt genau dann vollen Rang, wenn die Determinante der Matrix ungleich null ist. Mit den in Abschnitt~\ref{sec:zustandsraumdarstellung} aufgestellten Systemmatrix  $ \bm{A} $ und dem Steuervektor $ \bm{b} $ wird die \textit{vollständige Steuerbarkeit} nachgewiesen:
+Für die \textit{vollständige Steuerbarkeit} des Systems muss $ \bm{S}_\mathrm{S} $ den vollen Rang $ n = dim(\bm{x}) $ aufweisen. Eine quadratische Matrix besitzt genau dann vollen Rang, wenn die Determinante der Matrix ungleich null ist. Mit den in Abschnitt~\ref{sec:zustandsraumdarstellung} aufgestellten Systemmatrix  $ \bm{A} $ und dem Steuervektor $ \bm{b} $ wird die \textit{vollständige Steuerbarkeit} nachgewiesen:
 %
 \begin{align*}
 \text{det}(\bm{S}_\mathrm{S}) = \left|
@@ -272,14 +272,39 @@ Die allgemeine Zustandsrückführung bei einer skalaren Eingangsgröße lautet
 wobei $ \bm{k}^{\mathrm{T}} \in\mathds{R}^n $ der Rückführvektor ist und der zweite Summand für eine Führungsregelung benötigt wird. Hierbei sind $ V $ ein Vorfilter und $ w(t) $ die neue Führungsgröße. Im Fall der Stabilisierung des Doppelpendels ist keine neue Führungsgröße vorhanden, stattdessen wird versucht das Pendel aus einem ausgelenkten Zustand in den Arbeitspunkt~\ref{eq:arbeitspunkt} zu regeln. Hierfür genügt es für die Untersuchung der Regelkreisdynamik den ersten Summanden der Zustandsrückführung~\ref{eq:zustandsrückführung} zu betrachten. Mithilfe der Gleichung~\ref{eq:zustandsrückführung} lässt sich der Signalflussplan, wie in Bild~\ref{fig:zustandsrückführung} zu sehen, ableiten. Unter Berücksichtigung der neuen Eingangsgröße aus Gleichung~\ref{eq:zustandsrückführung} ergibt sich das folgende System:
 %
 \begin{align}
-	\bm{\dot{x}}(t)  &=  \underbrace{(\bm{A}-\bm{k}^\mathrm{T}\bm{b})}_{\bm{\tilde{A}}}\bm{x}(t),  \nonumber \\
+\begin{split}
+	\bm{\dot{x}}(t)  &=  \underbrace{(\bm{A}-\bm{k}^\mathrm{T}\bm{b})}_{\bm{\tilde{A}}}\bm{x}(t),  \\
 	\bm{y}(t)  &=  \bm{C x}(t). \label{eq:system2}
+\end{split}
 \end{align}
 
 Hierbei ist $ \bm{\tilde{A}} $ die neue Systemmatrix. Es ist direkt ersichtlich, dass der Rückführvektor $ \bm{k}^\mathrm{T} $ einen Einfluss auf die Eigenwerte des Systems hat. Somit ist es möglich, die Systemdynamik über die Einträge des Rückführvektors zu beeinflussen. Zwei beliebte Methoden der Zustandsregelung stellen die \textit{Polvorgabe} und die \textit{Linear-Quadratische-Regelung }(LQ-Regelung) dar. 
 
-Bei der ersten Methode wird die Systemdynamik strikt über die Wahl bestimmter Pole des geschlossenen Kreises vorgegeben. Der Nachteil hierbei ist, dass es keine eleganten Auswahlkriterien bei der Polwahl gibt. Außerdem nimmt mit zunehmender Systemordnung die Anzahl der zu wählenden Pole automatisch zu. Besonders bei hoch instabilen Systemen wie dem inversen Doppelpendel, kann das Auffinden günstiger Pole zu Problemen führen. 
+Bei der ersten Methode wird die Systemdynamik des geschlossenen Kreises strikt über die Wahl bestimmter Pole der Übertragungsfunktion vorgegeben. Der Nachteil hierbei ist, dass es keine eleganten Auswahlkriterien bei der Polvorgabe gibt. Außerdem nimmt mit zunehmender Systemordnung die Anzahl der zu wählenden Pole automatisch zu. Offensichtlich müssen die Pole für ein stabiles System in der linken s-Halbebene liegen. Jedoch steht dann offen, in welcher Größenordnung die Pole vorzuliegen haben, in welchem Abstand sie angeordnet werden und in welcher Weise komplexe Pole berücksichtigt werden können. Besonders bei hoch instabilen Systemen wie dem inversen Doppelpendel, kann das Auffinden geeigneter Pole zur Systemstabilisierung zu Schwierigkeiten führen. 
 
-Bei der LQ-Regelung werden die Pole des geschlossenen Kreises zwar auch verändert, jedoch geschieht dies auf indirekte Art und Weise. Die LQ-Regelung gehört zur Gruppe der optimalen Regelungsverfahren. Über die Definition eines Gütefunktionals, welches die Stell- und Regelgrößen bewertet, kann die Regelungsaufgabe in ein Optimierungsproblem umgeformt werden. Der große Vorteil von optimalen Regelung ist die gleichzeitige Berücksichtigung der Stell- und Regelgrößen, was bei der Zustandsrückführung mittels Polvorgabe nicht möglich ist. Aus diesem Grund wird im Rahmen dieser Arbeit die LQ-Regelung verwendet und im folgenden näher beleuchtet. 
+Bei der LQ-Regelung werden die Pole des geschlossenen Kreises auch verändert, jedoch geschieht dies auf indirekte Art und Weise. Die LQ-Regelung gehört zur Gruppe der optimalen Regelungsverfahren. Über die Definition eines Gütefunktionals, welches die Stell- und Regelgrößen bewertet, kann die Regelungsaufgabe in ein Optimierungsproblem umgeformt werden. Der große Vorteil von optimalen Regelung ist die gleichzeitige Berücksichtigung der Stell- und Regelgrößen, was bei der Zustandsrückführung mittels Polvorgabe nicht möglich ist. Aus diesem Grund wird im Rahmen dieser Arbeit die LQ-Regelung für die Stabilisierung des Doppelpendels verwendet und im folgenden näher beleuchtet. Die hier aufgeführten Darstellungen beziehen sich auf Kapitel 7 von~\cite{Lunze2010}.
 
+Das Gütefunktional eines zeitinvarianten Reglers mit unendlichem Zeithorizont lautet
+%
+\begin{equation}
+	J(\bm{x}_0,u(t)) = \int^{\infty}_0 (\bm{x}^\mathrm{T}(t)\bm{Q}\bm{x}(t) + u(t) \bm{R} u(t)) \text{d}t,
+	\label{eq:gütefunktion}
+\end{equation}
 
+wobei $ \bm{Q} $ und $ \bm{R} $ Wichtungsmatrizen darstellen. Über die Wahl der Wichtungseinträge lassen sich die Gütewerte der Zustände und der Stellgröße bewerten. Werden die Einträge von $ \bm{Q} $ bspw. höher als die von $ \bm{R} $ gewählt, werden hohe Zustandswerte stärker bestraft als die Stellgröße. Die Einstellregeln der Wichtungsmatrizen werden später in diesem Abschnitt behandelt. In Gleichung~\ref{eq:gütefunktion} ist ersichtlich, dass sowohl die Ausgänge als auch die Stellgröße quadratisch auftauchen. 
+%Da sich das Gütefunktional auf ein lineares Regelungssystem~\ref{eq:system2} bezieht wird kommt der Name Linear-Quadratische-Regelung her. 
+Damit die Gütefunktion einen endlichen Wert liefert, muss $ \lim\limits_{t \rightarrow \infty}{\bm{x}(t)} = \bm{0} $ gelten. Dies ist bei einer erfolgreichen Regelung in der oberen Gleichgewichtslage in Anlehnung an den Arbeitspunkt~\ref{eq:arbeitspunkt}, der in den Nullpunkt des Systems führt, der Fall. Es lässt sich nun das dynamische Optimierungsproblem 
+%
+\begin{equation}
+	\min\limits_{u(t)}{J(\bm{x}_0,u(t))} 
+	\label{eq:minDyn}
+\end{equation}
+
+definieren. Wird die Eingangsgröße durch die Zustandsrückführung ersetzt, erhält man
+%
+\begin{equation}
+	\min\limits_{\bm{k}^\mathrm{T}}{J(\bm{x}_0,-\bm{k}^\mathrm{T}\bm{x}(t))}.
+	\label{eq:minStat}
+\end{equation}
+
+Das Optimierungsproblem~\ref{eq:minStat} ist nun statisch und lässt sich über Ermittlung des bestmöglichen Gütewerts $ J_\mathrm{opt} $ mit dem optimalen Rückführvektor $ \bm{k}^\mathrm{T}_\mathrm{opt} $ lösen.

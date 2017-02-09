@@ -1,21 +1,11 @@
 clear all; close all;
 %% Reading video
-v = VideoReader('D:\Documents\Studienarbeit imes\Aufnahmen\ausschwing02cut.MP4');
-% v.CurrentTime = 0.25;
-frameRate = v.FrameRate;
-% v = VideoReader(v);
-% for saving into new video
-% writerObj = VideoWriter('newdp.avi');
-% writerObj.FrameRate = 1;
-% writerObj.FrameRate = v.FrameRate;
-% writerObj_bin = VideoWriter('newdp_bin.avi');
-% open(writerObj);
-% open(writerObj_bin);
-phi1VideoDeg = [];
-phi2VideoDeg = [];
+v = VideoReader('D:\Documents\Studienarbeit imes\Aufnahmen\harmErr2_5.mp4');
 %counter
+v.CurrentTime = 5;
+v.
 k = 0;
-centroidGreen = [635.5185 177.4338];
+% centroidGreen = [635.5185 177.4338];
 while hasFrame(v)
 % while (v.CurrentTime <= 2)
     k = k+1;
@@ -23,9 +13,9 @@ while hasFrame(v)
     image = readFrame(v);
     
     % filters image according to intensity level [0...1] and returns binary image
-    binRed = filterRed(image, 0.13);
-    binGreen = filterGreen(image, 0.03);
-    binBlue = filterBlue(image, 0.1);
+%     binRed = filterRed(image, 0.09);
+%     binGreen = filterGreen(image, 0.03);
+%     binBlue = filterBlue(image, 0.1);
     
 % plots to find color levels
 %     figure(1), imshowpair(binRed, image, 'montage'), impixelinfo
@@ -34,16 +24,16 @@ while hasFrame(v)
 
 % manual adjustment 
 % binRed = manualPreFilter(binRed, 635, 720, 1091, 1280); 
-binGreen = manualPreFilter(binGreen, 1, 720, 1, 601);
-binGreen = manualPreFilter(binGreen, 1, 720, 670, 1280);
-binGreen = manualPreFilter(binGreen, 205, 720, 580, 675);
-binBlue = manualPreFilter(binBlue, 1, 720, 1, 326);
-binBlue = manualPreFilter(binBlue, 1, 720, 1100, 1280); 
+% binGreen = manualPreFilter(binGreen, 1, 720, 1, 601);
+% binGreen = manualPreFilter(binGreen, 1, 720, 670, 1280);
+% binGreen = manualPreFilter(binGreen, 205, 720, 580, 675);
+% binBlue = manualPreFilter(binBlue, 1, 720, 1, 326);
+% binBlue = manualPreFilter(binBlue, 1, 720, 1100, 1280); 
 
 % Remove all those blobs less than certain pixel number
-    binRed = bwareaopen(binRed, 200);
-    binGreen = bwareaopen(binGreen, 500);
-    binBlue = bwareaopen(binBlue, 500);
+%     binRed = bwareaopen(binRed, 200);
+%     binGreen = bwareaopen(binGreen, 500);
+%     binBlue = bwareaopen(binBlue, 500);
 
     % Remove all blobs less than and higher than certain pixel number
 %     lbRed = 200; ubRed = 500;
@@ -60,27 +50,27 @@ binBlue = manualPreFilter(binBlue, 1, 720, 1100, 1280);
 
     % image blob analysis
     % We get a set of properties for each labeled region.
-    statsRed = regionprops(binRed, 'Area', 'BoundingBox', 'Centroid');
-    statsGreen = regionprops(binGreen, 'Area', 'BoundingBox', 'Centroid');
-    statsBlue = regionprops(binBlue, 'Area', 'BoundingBox', 'Centroid');
+%     statsRed = regionprops(binRed, 'Area', 'BoundingBox', 'Centroid');
+%     statsGreen = regionprops(binGreen, 'Area', 'BoundingBox', 'Centroid');
+%     statsBlue = regionprops(binBlue, 'Area', 'BoundingBox', 'Centroid');
 
 % Winkelberechnung
 
-try
-    if ( isempty(statsGreen) ) 
-        phi1VideoDeg(k) = winkel(centroidGreen, statsBlue.Centroid);
-    else
-    phi1VideoDeg(k) = winkel(statsGreen.Centroid, statsBlue.Centroid);
-    end
-catch ME
-    phi1VideoDeg(k) = phi1VideoDeg(k-1);
-end
-
-try
-    phi2VideoDeg(k) = winkel(statsBlue.Centroid, statsRed.Centroid);
-catch ME
-    phi2VideoDeg(k) = phi2VideoDeg(k-1);
-end
+% try
+%     if ( isempty(statsGreen) ) 
+%         phi1VideoDeg(k) = winkel(centroidGreen, statsBlue.Centroid);
+%     else
+%     phi1VideoDeg(k) = winkel(statsGreen.Centroid, statsBlue.Centroid);
+%     end
+% catch ME
+%     phi1VideoDeg(k) = phi1VideoDeg(k-1);
+% end
+% 
+% try
+%     phi2VideoDeg(k) = winkel(statsBlue.Centroid, statsRed.Centroid);
+% catch ME
+%     phi2VideoDeg(k) = phi2VideoDeg(k-1);
+% end
 
 %% debugging: display calculated angles, blobs, centroids
 
@@ -133,7 +123,7 @@ end
 % %     F = getframe;
 % %     writeVideo(writerObj,F);
   %%
-%       pause(0.01)
+      pause(0.01)
 end
 % close(writerObj);
 % close(writerObj_bin);

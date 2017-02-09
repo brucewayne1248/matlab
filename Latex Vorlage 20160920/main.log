@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  8 FEB 2017 20:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  9 FEB 2017 15:39
 entering extended mode
 **./main.tex
 (main.tex
@@ -2141,24 +2141,35 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 272.
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 277.
+(babel)             in language  on input line 279.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 277.
+(babel)             in language  on input line 279.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 277.
+(babel)             in language  on input line 279.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 277.
- [10])
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 124.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 124.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 124.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 124.
+(babel)             in language  on input line 279.
+ [10]
 
-[11]
+LaTeX Warning: Citation `Lunze2010' on page 11 undefined on input line 285.
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 286.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 286.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 286.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 286.
+[11])
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 124.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 124.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 124.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 124.
+ [12]
 \openout2 = `zustandsbeobachtung.aux'.
 
  (zustandsbeobachtung.tex
@@ -2176,7 +2187,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 125.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 125.
- [12
+ [13
 
 
 
@@ -2205,11 +2216,11 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 163.
  ) 
 Here is how much of TeX's memory you used:
- 47931 strings out of 493634
- 1054769 string characters out of 3143747
- 1303975 words of memory out of 3000000
- 50121 multiletter control sequences out of 15000+200000
- 52438 words of font info for 171 fonts, out of 3000000 for 9000
+ 47945 strings out of 493634
+ 1054923 string characters out of 3143747
+ 1304245 words of memory out of 3000000
+ 50125 multiletter control sequences out of 15000+200000
+ 52698 words of font info for 175 fonts, out of 3000000 for 9000
  1029 hyphenation exceptions out of 8191
  75i,21n,100p,10448b,1133s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
@@ -2229,9 +2240,9 @@ e1/public/doublestroke/dsrom12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw
 /helvetic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (12 pages, 244768 bytes).
+Output written on main.pdf (13 pages, 252133 bytes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 46 named destinations out of 1000 (max. 500000)
+ 239 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
  32314 words of extra memory for PDF output out of 35830 (max. 10000000)
 
