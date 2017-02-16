@@ -1,4 +1,4 @@
-function [ bw_filter ] = manualPreFilter( bw, ymin, ymax, xmin, xmax )
+function [ bw ] = manualPreFilter( bw, ymin, ymax, xmin, xmax )
 %MANUALPREFILTER sets pixels in binary image to 0 within given pixel ranges
 [rows, col] = size(bw);
 
@@ -7,6 +7,6 @@ for k = ymin:ymax
     bw(k,kk)=0;
     end
 end
-bw_filter = bw;
+
 end
 

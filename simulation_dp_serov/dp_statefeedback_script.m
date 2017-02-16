@@ -6,6 +6,7 @@
 % p_v = 0.8;      % p_v= 15.34; simu = 0.8
 % p_c = 0;        % p_c= 8.95; simu = 0.8
 % r = 0.011935;
+d2r = pi/180;
 g = 9.81;
 l_1 = 0.194;    
 l_2 = 0.1855;   
@@ -16,7 +17,7 @@ m_3 = 0.0308;
 d_p1 = 0.001;   % d_p1= 5.3239e-4;
 d_p2 = 0.001;   % d_p2= 5.3239e-4;
 T_s = 0.001;
-x_0=0; dx_0=0; phi1_0=3*0.0175; dphi1_0=0; phi2_0=0; dphi2_0=0;
+x_0=0; dx_0=0; phi1_0=-3*d2r; dphi1_0=0; phi2_0=3*d2r; dphi2_0=0;
 x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
 %% Zustandsraum des linearisierten Systems
 % m_ges=m_w+m_1+m_2+m_3+J_m/(r^2);
@@ -93,10 +94,11 @@ r_O6 = rank(O6);
 % Maximalwerte für Zustände festsetzen
 x_max = 0.2;
 dx_max = 5;
-phi1_max = 0.087;
-dphi1_max = 2;
-phi2_max = 0.087;
-dphi2_max = 2;
+ddx_max = 20;
+phi1_max = 20*d2r;
+dphi1_max = 100;
+phi2_max = 20*d2r;
+dphi2_max = 100;
 % Einträge der Wichtungsmatrix
 Q_11 = 1/(x_max^2);
 Q_22 = 1/(dx_max^2);
@@ -109,9 +111,8 @@ Q6 = diag([Q_11 Q_22 Q_33 Q_44 Q_55 Q_66]);
 Q_2 = 1*eye(6);
 Q_3 = diag([100 1 100 1]);
 % Wichtungsfaktor für Wagenbeschleunigung
-ddx_max = 20;
 R = 1/ddx_max^2;
-R_2 = 1/20;
+R_2 = 1/ddx_max^2;
 [K_lqr,S_lqr,eig_lqr] = lqr(A,B,Q,R);
 [K6_lqr,S6_lqr,eig6_lqr]=lqr(A6,B6,Q6,R_2);
 %% Zustandsrückführung durch Polvorgabe

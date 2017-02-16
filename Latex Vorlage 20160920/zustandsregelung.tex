@@ -143,16 +143,16 @@ Die einzelnen Einträge der Matrizen lauten
 a_{43} &= \dfrac{3g(2 m_1 + 4 m_2 + 4 m_3)}{l_1 (4 m_1 + 3 m_2 +1 2 m_3)}, \\ 
 a_{44} &= \dfrac{- 3(4d_1l_2 + d_2(6l_1+4l_2))}{l_1^2l_2(4 m_1 + 3m_2 + 12 m_3)},\\ 
 a_{45} &= \dfrac{-9 g m_2}{l_1(4 m_1 + 3m_2 + 12 m_3)},\\
-a_{46} &= \dfrac{3d_2}{l_1^2 l_2(4 m_1 + 3m_2 + 12 m_3)},
+a_{46} &= \dfrac{6d_2(3l_1+2l_2)}{l_1^2 l_2(4 m_1 + 3m_2 + 12 m_3)},
 \end{aligned}
 \end{equation*}
 \begin{equation*}
 \setlength{\jot}{12pt}
 \begin{aligned}
-a_{63} &= -\dfrac{3g}{l_2} \dfrac{3g(3 m_1 + 6 m_2 + 6 m_3)}{l_1(4 m_1 + 3m_2 + 12 m_3)}, \\
-a_{64} &= \dfrac{18d_1l_2m_2+ 3d_2(l_1(4m_1+12m_2+12m_3)+6l_2m_2)}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}, \\
-a_{65} &= \dfrac{3g(2 m_1 + 6 m_2 + 6 m_3)}{l_2 (4 m_1 + 3 m_2 +1 2 m_3)}, \\
-a_{66} &= \dfrac{-3d_2( l_1(4m_1+12m_2+12m_3+6l_2m_2))}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}.
+a_{63} &= \dfrac{-9g( m_1 + 2 m_2 + 2 m_3)}{l_2(4 m_1 + 3m_2 + 12 m_3)}, \\
+a_{64} &= \dfrac{18d_1l_2m_2+ 6d_2(l_1(2m_1+6m_2+6m_3)+3l_2m_2)}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}, \\
+a_{65} &= \dfrac{6g( m_1 + 3 m_2 + 3 m_3)}{l_2 (4 m_1 + 3 m_2 +1 2 m_3)}, \\
+a_{66} &= \dfrac{-6d_2( l_1(2m_1+6m_2+6m_3+3l_2m_2))}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}.
 \end{aligned}
 \end{equation*}
 
@@ -166,8 +166,8 @@ b_{6} &= \dfrac{-3m_1}{l_2(4 m_1 + 3m_2 + 12 m_3)}.
 \end{aligned}
 \end{equation*}
 
-\section{Stabilisierung des Doppelpendels mittels Optimalregelung}
-\label{sec:zustandsregelung}
+\section{Steuerbarkeit und Beobachtbarkeit}
+\label{sec:steuerbarkeit}
 
 Bevor die hier angewendete \textit{Optimalregelung} erläutert wird, werden die grundsätzlichen Eigenschaften der \textit{vollständigen Steuerbarkeit} und \textit{Beobachtbarkeit} eingeführt. Die in diesem Abschnitt dargestellten Zusammenhänge beziehen sich auf~\ref{Lunze2016x}. 
 
@@ -190,7 +190,7 @@ Für die \textit{vollständige Steuerbarkeit} des Systems muss $ \bm{S}_\mathrm{S}
 0 & -0,86 & 37,45 & -1074,92 & 14488,56 & -293533,44 \\
 -0,86 & 37,45 & -1074,92 & 14488,56 & -293533,44 & 4293776,72
 \end{smallmatrix}
-\right| = \small{ -7.0768e+14 \neq 0}
+\right| = \small{ -7.0768\cdot 10^{14} \neq 0}
 \end{align*}
 
 Für die Stabilisierung des inversen Doppelpendels im Zustandsraum müssen die Systemvariablen bekannt sein. In der Simulation ist die Bestimmung des Zustandsvektors mithilfe der ermittelten Bewegungsgleichungen möglich. Während des Betriebs des realen Doppelpendels hingegen ist der zweite Pendelwinkel $ \varphi_2(t) $ aufgrund fehlender Sensorik nicht messbar. Trotzdem ist es mithilfe von Beobachtern möglich, Zustände über die Systemgleichungen zu rekonstruieren. Kann ein \mbox{Anfangszustand $ \bm{x}_0 $} aus dem bekannten Verlauf der Eingangsgröße $ \bm{u} $ und der Ausgangsgröße $ \bm{y} $ in einem endlichen Zeitintervall bestimmt werden, so heißt das System \textit{vollständig beobachtbar}. Auch hier wird aufgrund des einfachen Nachweises das Beobachtbarkeitskriterium von \textit{Kalman} angewendet. Die \mbox{$(p\cdot n\times~n)$-Beobachtbarkeitsmatrix}
@@ -210,6 +210,9 @@ Für die Stabilisierung des inversen Doppelpendels im Zustandsraum müssen die Sys
 \end{equation}
 
 muss wiederum den vollen Rang $ n = dim(\bm{x})$ besitzen. Da es sich bei $ \bm{S}_\mathrm{B} $ um eine nicht quadratische Matrix handelt wird hier der Rang der Matrix mit den in Abschnitt~\ref{sec:zustandsraumdarstellung} ermittelten Ergebnissen überprüft. Es ergibt sich: $ 	\text{rg}(\bm{S}_\mathrm{B}) = dim(\bm{x}) = 6 $, womit die \textit{vollständige Beobachtbarkeit} nachgewiesen ist. 
+
+\section{Zustandsregelung mittels LQ-Regelung}
+\label{sec:lqr}
 
 Die allgemeine Zustandsrückführung bei einer skalaren Eingangsgröße lautet
 %
@@ -273,7 +276,7 @@ wobei $ \bm{k}^{\mathrm{T}} \in\mathds{R}^n $ der Rückführvektor ist und der zwe
 %
 \begin{align}
 \begin{split}
-	\bm{\dot{x}}(t)  &=  \underbrace{(\bm{A}-\bm{k}^\mathrm{T}\bm{b})}_{\bm{\tilde{A}}}\bm{x}(t),  \\
+	\bm{\dot{x}}(t)  &=  \underbrace{(\bm{A}-\bm{b}\bm{k}^\mathrm{T})}_{\bm{\tilde{A}}}\bm{x}(t), \bm{x}(\bm{0}) = \bm{x}_0 \\
 	\bm{y}(t)  &=  \bm{C x}(t). \label{eq:system2}
 \end{split}
 \end{align}
@@ -287,24 +290,98 @@ Bei der LQ-Regelung werden die Pole des geschlossenen Kreises auch verändert, je
 Das Gütefunktional eines zeitinvarianten Reglers mit unendlichem Zeithorizont lautet
 %
 \begin{equation}
-	J(\bm{x}_0,u(t)) = \int^{\infty}_0 (\bm{x}^\mathrm{T}(t)\bm{Q}\bm{x}(t) + u(t) \bm{R} u(t)) \text{d}t,
+	J = \int^{\infty}_0 (\bm{x}^\mathrm{T}(t)\bm{Q}\bm{x}(t) + u(t) \bm{R} u(t)) \hspace{0.1cm} \text{d}t,
 	\label{eq:gütefunktion}
 \end{equation}
 
-wobei $ \bm{Q} $ und $ \bm{R} $ Wichtungsmatrizen darstellen. Über die Wahl der Wichtungseinträge lassen sich die Gütewerte der Zustände und der Stellgröße bewerten. Werden die Einträge von $ \bm{Q} $ bspw. höher als die von $ \bm{R} $ gewählt, werden hohe Zustandswerte stärker bestraft als die Stellgröße. Die Einstellregeln der Wichtungsmatrizen werden später in diesem Abschnitt behandelt. In Gleichung~\ref{eq:gütefunktion} ist ersichtlich, dass sowohl die Ausgänge als auch die Stellgröße quadratisch auftauchen. 
-%Da sich das Gütefunktional auf ein lineares Regelungssystem~\ref{eq:system2} bezieht wird kommt der Name Linear-Quadratische-Regelung her. 
-Damit die Gütefunktion einen endlichen Wert liefert, muss $ \lim\limits_{t \rightarrow \infty}{\bm{x}(t)} = \bm{0} $ gelten. Dies ist bei einer erfolgreichen Regelung in der oberen Gleichgewichtslage in Anlehnung an den Arbeitspunkt~\ref{eq:arbeitspunkt}, der in den Nullpunkt des Systems führt, der Fall. Es lässt sich nun das dynamische Optimierungsproblem 
+wobei $ \bm{Q} $ und $ \bm{R} $ Wichtungsmatrizen darstellen. Die Einstellregeln der Wichtungsmatrizen werden später in diesem Abschnitt behandelt. Es wird für die Lösung des Optimierungsproblems vorausgesetzt, dass beide Matrizen positiv definit sind, sodass das Paar $ (\bm{A}, \bar{\bm{Q}}) $ vollständig beobachtbar ist. Die Matrix $ \tilde{\bm{Q}} $
+ergibt sich aus der Zerlegung
+%
+\begin{equation*}
+	\bm{Q} = \tilde{\bm{Q}}^\mathrm{T} \tilde{\bm{Q}}.
+\end{equation*}
+ 
+Damit die Gütefunktion einen endlichen Wert liefert, muss $ \lim\limits_{t \rightarrow \infty}{\bm{x}(t)} = \bm{0} $ gelten. Dies ist bei einer erfolgreichen Regelung in der oberen Gleichgewichtslage in Anlehnung an den Arbeitspunkt~\ref{eq:arbeitspunkt}, der in den Nullpunkt des Systems führt, der Fall. Es lässt sich nun das Optimierungsproblem
+%
+\begin{equation*}
+	\min\limits_{\bm{k}^\mathrm{T}}{J}
+\end{equation*}
+
+mittels der Zustandsrückführung 
+%
+\begin{equation*}
+	u(t) = -\bm{k}^\mathrm{T}_\mathrm{opt}\bm{x}(t)
+\end{equation*}
+
+mit
 %
 \begin{equation}
-	\min\limits_{u(t)}{J(\bm{x}_0,u(t))} 
-	\label{eq:minDyn}
+	\bm{k}^\mathrm{T}_\mathrm{opt} = \bm{R}^{-1}\bm{b}^\mathrm{T} \bm{P}
+	\label{eq:kOpt}
 \end{equation}
 
-definieren. Wird die Eingangsgröße durch die Zustandsrückführung ersetzt, erhält man
+lösen. Hierbei ist $ \bm{P} $ die symmetrische, positiv definite Lösung der Matrix-Ricattigleichung
 %
 \begin{equation}
-	\min\limits_{\bm{k}^\mathrm{T}}{J(\bm{x}_0,-\bm{k}^\mathrm{T}\bm{x}(t))}.
-	\label{eq:minStat}
+\bm{A}^\mathrm{T} \bm{P} + \bm{P} \bm{A} - \bm{P} \bm{b} \bm{R}^{-1}\bm{b}^\mathrm{T}\bm{P} +\bm{Q}
+=  \bm{0}.
+\label{eq:matrixricatti}
 \end{equation}
 
-Das Optimierungsproblem~\ref{eq:minStat} ist nun statisch und lässt sich über Ermittlung des bestmöglichen Gütewerts $ J_\mathrm{opt} $ mit dem optimalen Rückführvektor $ \bm{k}^\mathrm{T}_\mathrm{opt} $ lösen.
+Eine genau Herleitung und Lösung der Matrix-Ricattigleichung wird an dieser Stelle nicht aufgeführt. In Kapitel 7 von\cite{Lunze2010} sind Details einsehbar. 
+
+%Es lässt sich nun das dynamische Optimierungsproblem 
+%%
+%\begin{equation}
+%	\min\limits_{u(t)}{J(\bm{x},u(t))} 
+%	\label{eq:minDyn}
+%\end{equation}
+%
+%definieren. Wird die Eingangsgröße durch die Zustandsrückführung ersetzt, erhält man
+%%
+%\begin{equation}
+%	\min\limits_{\bm{k}^\mathrm{T}}{J(\bm{x},-\bm{k}^\mathrm{T}\bm{x}(t))}.
+%	\label{eq:minStat}
+%\end{equation}
+
+%Das Optimierungsproblem~\ref{eq:minStat} ist nun statisch und lässt sich über Ermittlung des bestmöglichen Gütewerts $ J_\mathrm{opt} $ mit dem optimalen Rückführvektor $ \bm{k}^\mathrm{T}_\mathrm{opt} $ lösen. Das Gütefunktional der Zustandsgleichung~\ref{eq:system2} mit der Systemmatrix $ \bm{\tilde{A}} = \bm{A} - \bm{b}\bm{k}^\mathrm{T} $ lässt sich umformen zu
+%%
+%\begin{equation*}
+%	J = \int_{0}^{\infty} \bm{x}^\mathrm{T}(t) (\bm{Q} + \bm{k}^\mathrm{T} \bm{R} \bm{k} \bm{x}(t)) \hspace{0.1cm} \text{d}t = \int_{0}^{\infty} \bm{x}^\mathrm{T}(t)\bm{\bar{Q}} \bm{x}(t) \hspace{0.1cm} \text{d}t
+%\end{equation*}
+%
+%mit 
+%%
+%\begin{equation*}
+%	\bm{\tilde{Q}} = \bm{Q} + \bm{k}^\mathrm{T} \bm{R} \bm{k}. 
+%\end{equation*}
+%
+%
+%In einem weiteren Schritt ist es möglich, die Gütefunktion von dem Anfangszustand abhängig zu machen:
+%%
+%
+%
+%wobei die Matrix $ \bm{P} $ die symmetrische, positiv definite Lösung der resultierenden Matrix-Ricattigleichung
+%%
+%\begin{equation}
+%	\tilde{\bm{A}}^\mathrm{T} \bm{P} + \bm{P} \bm{\tilde{A}} - \bm{P} \bm{b} \bm{R}^{-1}\bm{b}^\mathrm{T}\bm{P} +\bm{Q}
+%	= - \bm{\tilde{Q}}
+%	\label{eq:matrixricatti}
+%\end{equation}
+%
+%ist. Auf
+
+Über die Wahl der Wichtungseinträge von $ \bm{Q} \text{ und } \bm{R} $ lassen sich die Gütewerte der Zustände und der Stellgröße bewerten. Werden die Einträge von $ \bm{Q} $ bspw. höher als die von $ \bm{R} $ gewählt, werden hohe Zustandswerte im Rahmen einer Minimierung stärker bestraft als die Stellgröße. Eine Methode für die Wahl der Wichtungseinträge ist in\cite{Luo1995} dargestellt. Anstatt die Einträge iterativ zu bestimmen, werden nur die Diagonaleinträge der Matrizen mit positiven Werten besetzt, wodurch die Bedingung der positiven Definitheit erfüllt ist. Die Diagonaleinträge werden in Abhängigkeit der realen, maximal zulässigen Zustands- bzw. Eingangswerte gewählt und lauten
+%
+\begin{align}
+	Q_{ii} &= 1/x_{i,\text{max}}^2, \hspace{1cm} &Q_{i,j} = 0, \text{ für } i\neq j, \nonumber \\
+	R_{ii} &= 1/u_{i,\text{max}}^2, \hspace{1cm} &R_{i,j} = 0, \text{ für } i\neq j.
+\end{align}
+
+Somit ist das zu minimierende Gütefunktional~\ref{eq:gütefunktion} an die limitierenden Faktoren des untersuchten Systems geknüpft. 
+
+\begin{figure}[!h]
+	\centering
+	\input{plots/sinplot.tex}
+\end{figure}
+
