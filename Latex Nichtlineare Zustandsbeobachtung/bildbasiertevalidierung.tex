@@ -1,0 +1,134 @@
+\chapter{Bildbasierte Beobachtervalidierung}
+\label{ch:bildverarbeitung}
+
+In diesem Kapitel wird die Validierung der Zustandsbeobachtung am realen Doppelpendel behandelt. Hierfür wird im ersten Abschnitt die bildbasierte Winkelbestimmung der Pendel erläutert. 
+
+\section{Bildbasierte Winkelmessung}
+\label{sec:bildbasiertewinkelmessung}
+
+Der äußere Pendelwinkel $ \varphi_2(t) $ muss am realen Doppelpendel gemessen werden, um die Zustandsbeobachtung des EKF bewerten zu können. Wird das mechatronische System für die Winkelmessung mit zusätzlicher Sensorik ausgestattet, hat dies zur Folge, dass die Massenträgheiten des Pendels verändert werden. Folglich wäre die Modellierung aus Kapitel~\ref{ch:modellbildung} nicht mehr korrekt und müsste angepasst werden. Geschieht die Winkelmessung hingegen berührungslos, kann das bereits modellierte System weiterhin verwendet werden. Eine Möglichkeit der berührungslosen Winkelbestimmung der Pendel kann mithilfe von Kameraaufnahmen bewerkstelligt werden. 
+Die Bilder einer Kamera liefern eine zweidimensionale Aufnahme einer dreidimensionalen Umgebung. Es wird die Annahme getroffen, dass die zweidimensionale Abbildung des Doppelpendels ausreichend ist, um die Pendelwinkel hinreichend genau zu bestimmen, wenn die Kamera zentral vor dem Doppelpendel ausgerichtet wird. Im Rahmen dieser Arbeit wird eine \textit{GoPro HERO4} RGB-Kamera verwendet. Dieses Kamerasystem ist in der Lage, Videoaufnahmen mit einer Bildfrequenz von \SI{240}{fps} bei einer Auflösung von $ 720\times1280 $ Pixeln zu erzeugen. Im Vergleich dazu wird die Wagenposition $ x(t) $ und der innere Pendelwinkel $ \varphi_1(t) $ mit einer etwa vier Mal so großen Frequenz von \SI{1000}{\hertz} abgetastet. Für die Winkelbestimmung des Doppelpendels ist vor allem eine hohe Bildfrequenz von Vorteil, damit auch schnelle Pendelbewegungen ausreichend oft pro Sekunde erfasst werden. \\
+Die Winkelbestimmung der Pendelstäbe wird mithilfe einer Farbsegmentierung der Bilddaten unter Verwendung von Markern, die an den Stäben befestigt werden, bewerkstelligt. Die Marker weisen eine so geringe Masse auf, dass der Einfluss auf die Massenträgheiten der Pendelstäbe vernachlässigt wird. Es werden drei Farb-Marker benötigt, um beide Pendelwinkel eindeutig bestimmen zu können. Ein Marker ist jeweils am Rotationsgelenk der Pendelstäbe angebracht und der letzte Marker ist am äußeren Ende des  zweiten Pendels befestigt. Eine Skizze dieses Aufbaus ist in Bild~\ref{fig:winkelskizze} zu sehen. Für die Beobachtervalidierung ist prinzipiell nur die bildbasierte Bestimmung des äußeren Winkels $ \varphi_2(t) $ notwendig. Trotzdem werden beide Pendelwinkel bildbasiert ermittelt, wobei der Winkel $ \varphi_1(t) $ benötigt wird, um die Winkelbestimmung mittels Kameraaufnahmen im Abgleich mit der Resolverwinkelmessung zu validieren. 
+Es wird zunächst die Winkelberechnung anhand von fertig verarbeiteten Bilddaten behandelt. Der Grundgedanke der Winkelbestimmung liegt darin, die Schwerpunkte der Farbmarker in jedem Einzelbild im Koordinatensystem $ \mathrm{KS}_\mathrm{B}  $ zu bestimmen. Ein Schwerpunkt setzt sich aus den Schwerpunktkoordinten eines in den Bilddaten erkannten, zusammenhängenden Objekts zusammen. Die detaillierte Berechnung der Schwerpunkte wird später in diesem Abschnitt behandelt. Mithilfe der Schwerpunkte
+%
+\begin{align*}
+	\bm{c}_\mathrm{r} = \left[u_\mathrm{r}\text{, } v_\mathrm{r}\right]^\mathrm{T}
+	\text{, } \bm{c}_\mathrm{g} = \left[u_\mathrm{g}\text{, } v_\mathrm{g}\right]^\mathrm{T}
+	 \text{ und } \bm{c}_\mathrm{b} = \left[u_\mathrm{b}\text{, } v_\mathrm{b}\right]^\mathrm{T}
+\end{align*}
+
+\begin{figure}[!b]
+	\centering{
+		\resizebox{125mm}{!}{\input{skizzen/winkeltest.pdf_tex}}
+		\caption{Skizze eines Einzelbilds des Doppelpendels mit Farbmarkern}
+		\label{fig:winkelskizze}
+	}
+\end{figure}
+
+lassen sich die Winkel jeweils vom inneren Stabende zum äußeren bestimmen. Da die Winkelbestimmung anhand von Einzelbildern der Videoaufnahmen betrachtet wird, wird die Zeitabhängigkeit der Winkelgrößen im folgenden nicht aufgeführt. Es werden die Schritte für die Berechnung des Winkels $ \varphi_{1,\mathrm{K}}$ dargestellt. Die Winkel der Pendelstäbe, die mithilfe von Kameraaufnahmen ermittelt werden erhalten das zusätzliche Subkript $ \mathrm{K} $. Die Pixel der Bilddaten werden im Bildkoordinatensystem $ \mathrm{KS}_\mathrm{B} $ mit den Hauptachsen $ u $ und $ v $ dargestellt. 
+Die Winkel $ \alpha_1 $ und $ \alpha_2 $ werden zusätzlich als Hilfsgrößen für die Winkelbestimmung eingeführt. Es wird die Differenz der Schwerpunktkoordinaten
+%
+\begin{align}
+	\Delta u_1 = u_\mathrm{b} - u_\mathrm{g} \text{ und } 	\Delta v_1 = v_\mathrm{b} - v_\mathrm{g}
+\end{align} 
+
+vom grünen zum blauen Farbmarker gebildet. Es wird die Arcustangens-Funktion $ \mathrm{arctan2}(x,y) $ mit dem Wertebereich $ [-\pi\text{, }\pi] $ verwendet, um den Winkel $ \alpha_1 $ zu bestimmen:
+%
+\begin{align}
+	\alpha_1 = \mathrm{arctan2}(\Delta v_1, \Delta u_1).
+	\label{eq:alpha}
+\end{align}
+
+Im Anschluss kann durch die Additionen des Winkelversatzes der gesuchte Pendelwinkel
+%
+\begin{equation}
+	\varphi_{1,\mathrm{K}} = \alpha_1+\pi
+	\label{eq:phi}
+\end{equation}
+
+berechnet werden. Der äußere Pendelwinkel $ \varphi_2 $ wird analog mit den Schwerpunkten $ \bm{c}_\mathrm{b} $ und $ \bm{c}_\mathrm{r} $ berechnet. \\\\
+Für die Berechnung der Winkel anhand der Videoaufnahmen des Doppelpendels muss das Videorohmaterial verarbeitet werden. Das Ziel ist es, aus den Einzelbildern der Kameraaufnahmen drei Binärmasken zu erzeugen, in denen nur noch die Farbmarker abgebildet werden. 
+Die RGB-Einzelbilder der Kamera werden mit einer mehrdimensionalen Matrix $ \bm{B} \in \mathds{R}^{(h\times b\times 3)} $ repräsentiert. Es sind $ h $ Anzahl der Pixel auf der $ v $-Achse und $ b $ die Pixelanzahl auf der $ u $-Achse. Mit der hier verwendeten Auflösung der \textit{GoPro Hero 4} ergibt sich $ h=720 $ und $ b =1280 $. Die Matrix $ \bm{B} $ besitzt drei Schichten $ \bm{B}^\mathrm{r} $, $ \bm{B}^\mathrm{g} $, $ \bm{B}^\mathrm{b} \in \mathds{R}^{(h\times b)}$, welche den Farbkanälen rot, grün und blau zugeordnet sind. Die Einträge der Matrizen entsprechen den Intensitätswerten des Pixels an der jeweiligen Stelle im Bild. Die Pixel besitzen eine 8-bit Farbtiefe für jeden Farbkanal. Die Farbsegmentierung wird für den roten Farbkanal exemplarisch erläutert. Zunächst wird das Farbbild in ein Graustufenbild überführt, wobei für die Intensität jedes Pixel 
+%
+\begin{align}
+	\bm{G}_{ij} = \dfrac{\bm{B}^\mathrm{r}_{ij}}{3} +\dfrac{\bm{B}^\mathrm{g}_{ij}}{3} + \dfrac{\bm{B}^\mathrm{b}_{ij}}{3} \hspace{0.4cm}\text{ für }  i= 1,...,720 \text{ und } j = 1,...,1280
+\end{align}
+
+gilt.  Im Anschluss wird Differenz zwischen den Intensitäten des Farbkanals und des Graustufenbilds 
+%
+\begin{align}
+	\Delta \bm{B}^\mathrm{r}_{ij} = \begin{cases}
+	\bm{B}^\mathrm{r}_{ij} - \bm{G}_{ij} & \text{für } \bm{B}^\mathrm{r}_{ij} \geq \bm{G}_{ij} \text{ und } i= 1,...,720 \text{, } j = 1,...,1280 \\
+	0 & \text{für } \bm{B}^\mathrm{r}_{ij} < \bm{G}_{ij} \text{ und } i= 1,...,720 \text{, } j = 1,...,1280
+	\end{cases}
+	\label{eq:imsubtract}
+\end{align}
+
+
+berechnet. Dies hat zur Folge, dass die Pixel des Farbkanals $ \bm{B}^\mathrm{r} $ mit einer hohen Farbintensität in auch hohe Werte in $ \Delta \bm{B}^\mathrm{r}_{ij} $ aufweisen. Der Vergleich zwischen einem unverarbeiteten RGB-Einzelbild und dem Ergebnis der Anwendung von~\eqref{eq:imsubtract} ist in Bild~\ref{fig:imsubtractbild} zu sehen. Bei dem hier gezeigten Bild handelt es sich um eine typische Aufnahme des Doppelpendels, die bei der Winkelmessung entsteht. Der rote Farbmarker am Ende des äußeren Pendelstabs ist im rechten Bild als hellgrauer Punkt zu sehen. Der Rest des Bilds weist dunkelgraue Töne auf. 
+
+\begin{figure}[!htb]
+	\centerline{%
+		\includegraphics[width=0.7\textwidth]{imsubtract.png}%
+	}%
+	\centerline{%
+		\includegraphics[width=0.7\textwidth]{imsubtractbintest.png}%
+	}%
+	\caption{Einzelbild des Doppelpendels: RGB-Rohbild (oben), Graustufenbild nach Anwendung von~\eqref{eq:imsubtract} (unten)}
+	\label{fig:imsubtractbild}
+\end{figure}
+
+Für die Aufnahmen des Doppelpendels wird versucht, Störeinflüsse bei der Farbsegmentierung zu vermeiden. Es tauchen neben den Markern keine farbigen Objekte auf. Das Doppelpendel wird vor eine weiße Wand gestellt. Außerdem werden farbige Kabel oder der braune Tisch mit weißem Papier verdeckt, um diese nicht fälschlicherweise als farbige Objekte zu ermitteln. Dies erleichtert die Identifikation der Marker bei der Farbsegmentierung. 
+
+Auf das Graustufenbild wird ein nichtlineares $ (3\times 3)$-Medianfilter angewendet, um das Bild zu glätten und sogenannte \textit{Ausreißerpixel} zu eliminieren. In der definierten Umgebung des untersuchten Pixels werden die Grauwerte der Größe nach sortiert und der mittlere Intensitätswert für das Pixel eingesetzt. Damit wird sichergestellt, dass die Marker als zusammenhängendes Objekt erkannt werden und Pixel mit deutlich zu hohen oder geringen Intensitätswerten nicht berücksichtigt werden. 
+
+Im letzten Schritt der Farbsegmentierung wird das gefilterte Graustufenbild in eine binäre Maske
+%
+\begin{align}
+	\bm{SW}^\mathrm{r}_{ij} = \begin{cases}
+		1 & \text{für } \Delta \bm{B}^\mathrm{r}_{ij} \geq I_\mathrm{r} \text{ und } i= 1,...,720 \text{, } j = 1,...,1280\\
+		0 & \text{für } \Delta \bm{B}^\mathrm{r}_{ij} < I_\mathrm{r} \text{ und } i= 1,...,720 \text{, } j = 1,...,1280
+	\end{cases}
+	\label{eq:maskbin}
+\end{align}
+
+überführt mit $ \bm{SW}^\mathrm{r}_{ij} \in \mathds{R}^{(h\times b)}$. Es werden alle Einträge der Maske, die gleich oder größer als der Schwellwert $ I_\mathrm{r} $ sind, auf 1 und die restlichen Werte auf 0 gesetzt. Der Schwellwert wird so eingestellt, dass neben dem farbigen Marker keine weiteren Objekte in der binären Maske auftauchen. Die Ermittlung der binären Masken $ \bm{SW}^\mathrm{g} $ und $ \bm{SW}^\mathrm{b} $ für den grünen und blauen Farbkanal werden analog unter Anwendung von~\eqref{eq:imsubtract}, des $ (3\times 3) $-Medianfilters und~\eqref{eq:maskbin} mit den Matrizen $ \bm{B}^\mathrm{g} $, $ \bm{B}^\mathrm{b} $ bestimmt. Für die Berechnung des Objektschwerpunkts wird die Fläche des Objekts
+%
+\begin{align}
+	A = \sum_{i = 1}^{h} \sum_{j=1}^{b} \bm{SW}_{ij}
+\end{align}
+
+ermittelt. Trotz geschickter Wahl des Schwellwerts $ I $ bei der Bildung der binären Maske in~\eqref{eq:maskbin} können Pixel, die nicht zum Farbmarker gehören, fälschlicherweise in dem Binärbild auftauchen. Aus diesem Grund werden alle Objekte, die eine Mindestfläche $ A_{\mathrm{min}} $ unterschreiten, nicht beachtet. In den Binärmasken taucht nun genau ein zusammenhängendes Objekt auf, welches dem farblichen Marker entspricht. Die Schwerpunktkoordinaten $ u_\mathrm{S} $ und $ v_\mathrm{S} $ im Bildkoordinatensystem $ KS_\mathrm{B} $ eines detektierten Markers in der Binärmaske ergeben sich damit zu
+%
+\begin{align}
+	u_\mathrm{S} &= \frac{1}{A} \sum_{i=1}^{h} \left(  i \sum_{j=1}^{b}\bm{SW}_{\mathrm{ij}}\right), \label{eq:us} \\
+	v_\mathrm{S} &= \frac{1}{A} \sum_{j=1}^{b} \left(  j \sum_{i=1}^{h} \bm{SW}_{ij} \right).
+	\label{eq:vs}
+\end{align}
+
+Die Schwerpunkte $ \bm{c}_\mathrm{r} $, $ \bm{c}_\mathrm{g} $ und $ \bm{c}_\mathrm{b} $ der Marker werden mit~\eqref{eq:us} und~\eqref{eq:vs} bestimmt. Damit sind alle notwendigen Schritte für die Winkelberechnung gemäß~\eqref{eq:phi} getätigt. In Bild~\ref{fig:winkelmontage} ist ein Einzelbild des Doppelpendels vor und nach der Bildverarbeitung zu sehen. Es sind im unteren Bild die Schwerpunktkoordinaten der einzelnen Objekte und die berechneten Winkel $ \varphi_{1,\mathrm{K}} $ und $ \varphi_{2,\mathrm{K}} $ zu sehen. 
+
+\begin{figure}[!htb]
+	\centerline{%
+	\includegraphics[width=0.7\textwidth]{dp.png}%
+}%
+	\centerline{%
+	\includegraphics[width=0.7\textwidth]{bindptest.png}%
+}%
+	\caption{Einzelbild des Doppelpendels: RGB-Rohbild (oben), Binärmasken der drei Farbkanäle mit berechneten Winkeln $ \varphi_{1,\mathrm{K}} $ und $ \varphi_{2,\mathrm{K}} $ (unten)}
+	\label{fig:winkelmontage}
+\end{figure}
+
+
+
+\section{Validierung der bildbasierten Winkelbestimmung}
+\label{sec:validierungwinkelbestimmung}
+
+Bevor die Zustandsschätzung des EKF mit der bildbasierten Winkelbestimmung verglichen wird, wird der innere Pendelwinkel $ \varphi_{1,\mathrm{K}}(t) $ anhand der Winkelmessung des Resolvers $ \varphi_1(t) $ validiert. Die Signale $ \varphi_1(t) $ und $ \varphi_{1,\mathrm{K}}(t) $ weisen unterschiedliche Merkmale auf. Sie besitzen zum einen unterschiedliche Abtastraten, wie in Abschnitt~\ref{sec:bildbasiertewinkelmessung} erläutert. Zum anderen weisen die Signale unterschiedliche Startzeitpunkte und Längen auf, da es nicht möglich ist, die Messungen der Wagenposition $ x(t) $ und des Winkels $ \varphi_1(t) $ und die Kameraufnahmen synchron zu starten.  Um die Winkelsignale miteinander zu vergleichen, wird das Kamerasignal $ \varphi_{1,\mathrm{K}}(t) $ mit einer Bildfrequenz von \SI{240}{fps} mit der Abtastrate des mechatronischen Systems von \SI{1000}{\hertz} erneut abgetastet und interpoliert. Im Anschluss wird eine Kreuzkorrelation von $ \varphi_1(t) $ und $ \varphi_{1,\mathrm{K}}(t) $ vorgenommen, um den Zeitversatz beider Signale zu ermitteln. Im Anschluss können beide Signale gleichgerichtet werden. Die einzelnen Schritte der erneuten Abtastung und Kreuzkorrelation werden an dieser Stelle nicht im Detail erläutert. 
+
+\begin{figure}[!htb]
+	\centering
+	\input{plots/validierungphi1.tex}
+	\caption{Gleichgerichtete Signale der Winkelmessung }
+	\label{fig:validierungphi1}
+\end{figure}

@@ -1,0 +1,469 @@
+% ------------------------------------------------------------------------------------------
+% Latex - Präambel
+% hier werden alle wichtigen Dokumenteinstellungen getroffen, normalerweise müssen
+% keine Änderungen mehr durchgeführt werden.
+% Pakete die das Schriftbild, den Satzspiegel oder die Ränder verändern, dürfen
+% nicht hinzugefügt werden, erst nach Abstimmung mit dem Betreuer.
+% nützliche Pakete sind willkommen, bitte die Wiki entsprechend aktualisieren
+% viele Pakete sind drin, die vielleicht nicht jeder braucht und das Kompilieren verlängern
+% sollten diese das Layout nicht verändern, können diese natürlich auskommentiert werden.
+% ------------------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------------------
+% Dokumentenklasse definieren:
+\ifdraft
+    \documentclass[draft, 
+                   paper=a4,
+                   BCOR5mm,
+                   fontsize=12pt, 
+                   DIV13, 
+                   headsepline, 
+                   numbers=noenddot, 
+                   %bibtotoc,
+                   bibliography = totoc,
+                   %version=first,
+                   %smallheadings,
+                   headings = small,
+                   oneside]{scrbook}
+\else
+    \documentclass[paper=
+                   a4,
+                   BCOR5mm,
+                   fontsize=12pt, 
+                   DIV13, 
+                   headsepline, 
+                   numbers=noenddot, 
+                   %bibtotoc,
+                   bibliography = totoc, 
+                   %version=first,
+                   %smallheadings,
+                   headings = small,
+                   headinclude=true,
+                   footinclude=false,
+                   fleqn, % formeln links bündig
+                   oneside,
+                   enabledeprecatedfontcommands]{scrbook}
+\fi
+% Standard-Koma-Dokument mit
+%   Papierformat A4
+%   Binderand 5 mm
+%   Schrift 12-Punkt
+%   Seitenlayout nach DIV, siehe scrguide.pdf text b/h rand oben/innen: 168,00 237,60 19,80 14,00 (ist raus)
+%   Linie unter der Kopfzeile
+%   Nummern ohne Punkt am Ende
+%   Literaturverzeichnis im Inhaltsverzeichnis
+%   Überschriften etwas kleiner als standard
+%   weitere Informationen zum Koma-Skript: www.komascript.de
+
+%---------------------------------------------------------------
+% Basis-Pakete
+%---------------------------------------------------------------
+\usepackage{ifpdf}		%   Ueberprueft, ob LaTeX oder pdfLaTeX verwendet wird (nur ab MikTeX 2.5)
+\usepackage[T1]{fontenc}        %   8-Bit-Fonts
+\usepackage{textcomp,latexsym}  %   zusaetzliche Symbole
+\usepackage[ansinew]{inputenc}   %   Quelltext ist Latin-1 (d.h. Windows-) kodiert
+\usepackage[ngerman]{babel}            %   neue deutsche Rechtschreibung
+\usepackage{scrtime}            %   fuer die aktuelle Zeit
+%\usepackage{scrdate}            %   fuer das aktuelle Datum
+%\usepackage{natbib}             %   Literaturverweise mit (Autor Jahr) nach DIN
+%\bibpunct[; ]{[}{]}{,}{a}{}{;}  %   eckige Klammern statt runde bei Zitaten
+%\usepackage[T1]{url}            %   Web-Addressen auch mit T1-Encoding
+%\urlstyle{tt}                   %   und in tt-Font
+%\usepackage[activate=normal]{pdfcprot} % dient dem optischen Randausgleich bei kürzeren Zeichen wie '-', '.', ',', '!'
+
+\usepackage{color}
+
+\PassOptionsToPackage{x11names}{xcolor}
+\usepackage{xcolor}
+
+
+%---------------------------------------------------------------
+% nützliche Zusatz-Pakete
+%---------------------------------------------------------------
+%\usepackage{makeidx}            %   Index (wenn gewuenscht)
+
+\usepackage{setspace}           %   Zeilenabstand setzen. Befehl:
+                                %   \begin{spacing{Wert}
+                                %   Text
+                                %   \end{spacing}
+%\usepackage{placeins}           %   das Positionieren von float-Umgebungen bestimmen:
+                                %   der Befehl \floatbarrier sorgt dafür, dass alle vorher eingegebenen
+                                %   float-Umgebungen VOR diesem Befehl eingefügt werden.
+                                
+%\usepackage{subfig}          %   Bilder gruppieren, mehrere Bilder in einer Umgebung einfügen
+                                %   Bsp.:
+                                %   \begin{figure}
+                                %   \centering
+                                %    \subfloat[Text a]
+                                %    {\includegraphics{bild a}}
+                                %    \subfloat[text b]
+                                %    {\includegraphics{bild b}}
+                                %    \caption{Untertitel}
+                                %    \label{fig.Beziechnung_subfigure} <- am besten mit fig. dann kann mit \bild{Bezeichnung_figure} referenziert werden
+                                %   \end{figure}                                
+
+%\usepackage{textcomp}           %   fuer Trademark und Copyright Zeichen
+                                %   z.B \texttrademark, \textregistered, \texteuro etc.
+
+\usepackage{tabularx}           %   erweiterte Funktionen für Tabellen
+
+\usepackage{longtable}          %   Longtable-Package für Tabellen die länger als eine DIN-A4-Seite sind
+
+\usepackage{colortbl}						%		farbige Tabellenzeilen
+
+\usepackage{nicefrac}           %   Schräge Bruchstriche \nicefrac{Nenner}{Zähler}
+
+%\usepackage{numprint}           %   Zahlen mit Einheiten näher an der Zahl/kein Umbruch und 1 000er Format \numprint[Einheit]{Zahl}
+
+%\usepackage{mathcomp}           %   für \tcdegree (° Gradzeichen bei numprint) \numprint[\tcdegree]{180} für 180°
+
+%\usepackage{hhline}             %   hhline-Package
+                                %   Fuer komplexe Linienzuege in Tabellen \hhline{}
+                                %   = Spalte mit doppelter Linie      | vertikale Linie die horizontale schneidet
+                                %   - Spalte mit einfacher Linie      : vertikale Linie die von horizantaler unterbrochen ist
+                                %   ~ Spalte ohne Linie               # doppelte horiz. geschnitten mit doppelter vert. Linie
+                                %   t oberer Teil ->                  b unterer Teil einer doppelten Linie
+
+%\usepackage[active]{srcltx}     %   bei verwendung v. \includeonly spring winedt jetzt bei fehlern an die richtige stelle
+
+\usepackage{flafter}            %   Ein float-Objekt immer erst NACH seiner Definition platzieren
+
+\usepackage{ifthen}             %   definiert \ifthenelse{}{}{}
+
+%\usepackage{path}               %   dateinamen und pfade darstellen
+
+%\usepackage{pdfsync}						%   Synchronisation mit SumatraPDF <<-- geht auch ohne
+
+\usepackage{booktabs}
+
+%% Eigene Pakete
+
+\usepackage{scrhack} % Löscht Warnungen von Packages wie hyperref, listings
+\usepackage[ locale = DE,            % deutsch
+            load-configurations=abbreviations, % zusätzliche Einheiten siehe manual
+            per-mode=symbol,%-or-fraction,
+            separate-uncertainty% 
+            ]
+            {siunitx}								% SI-Einheiten  
+
+            
+\usepackage{multirow}               % zwei Zeilen kombinieren (wie multicolumn)
+\usepackage[babel]{microtype}       % schickeres Schriftbild -> aber längeres Kompilieren
+
+\usepackage{blindtext}							% sinnlosen text einbauen
+\usepackage{subfigure}
+
+\usepackage{newunicodechar}
+%\newunicodechar{ }{~}
+
+%\DeclareUnicodeCharacter{00A0}{~}
+
+
+%%
+
+%---------------------------------------------------------------
+% Grafik-Paket für eps bzw. pdf
+%---------------------------------------------------------------
+% überprüft ob Latex oder PDFLatex ausgeführt wird, dementsprechend werden pdf/jpg oder eps Bilder eingefügt
+% sollen dvi oder pdf Dokumente erstellt werden müssen alle Bilder in beiden Formaten vorliegen
+% hierfür gibt es Tools wie epstopdf oder jpgtoeps
+ \ifdraft
+    \usepackage[draft]{graphicx}
+\else
+    \ifpdf
+        \usepackage{graphicx}
+        \usepackage{pgfplots} % pgfplots zum plotten in LaTeX
+    \else
+        \usepackage[final]{graphicx}
+    \fi
+\fi
+% von wo sollen die Grafiken kommen?
+\graphicspath{{./fotos/}{./skizzen/}{./zeichnungen/}{./plots/}{./bilder/}}
+
+%Einstellungen für pgfplots
+\pgfplotsset{compat=1.3,
+	%enlargelimits=auto,
+	tick label style={font=\small,/pgf/number format/use comma}, %Komma nutzen in allen Axen
+	%axis x line=center, %alle x-Achsen center
+	%axis y line=center, %alle y-achsen center
+	%every axis x label/.style={at={(current axis.right of origin)},anchor=west}, % achsenbeschriftung bei allen x-achsen rechts
+	%every axis y label/.style={at={(current axis.above origin)},anchor=south},   % achsenbeschriftung bei allen y-achsen oben
+	%every x tick scale label/.style={at={(current axis.right of origin)},anchor=north,yshift=-0.5em}, %positionierung des scale faktors geändert
+	every axis legend/.append style={at={(1.0,0.5)},anchor=west,nodes=right,font=\small}, % Legende über der Grafik, schriftgröße small
+	label style={font=\small}, % label schriftgröße small
+	ticklabel style={% gilt für x und y
+		/pgf/number format/.cd,
+		use comma,% Komma als Dezimaltrenner
+		1000 sep = {}% keine Tausendertrennung 
+	}
+}
+\newlength\tikzwidth
+\setlength{\tikzwidth}{0.7\textwidth}
+\definecolor{mycolor1}{rgb}{0,0.5,0}
+
+\ifpdf
+ \ifdraft
+    \usepackage[draft]{pdfpages}%   externe PDF Seiten einbinden nur bei PDF-Latex möglich
+    \else
+    \usepackage[final]{pdfpages}%   externe PDF Seiten einbinden nur bei PDF-Latex möglich
+ \fi                            %   Befehl: \includepdf{PDF-Datei} soll die Datei im Querformat angezeigt werden
+    \else
+\fi                             %   \includepdf[landscape=true]{PDF-Datei}
+
+%---------------------------------------------------------------
+% Debug-Ausgabe der Labels und References
+%---------------------------------------------------------------
+\ifdraft
+  \usepackage{showkeys} % Label werden im Draft Modus im Text angezeigt
+\fi
+
+%---------------------------------------------------------------
+% Abweichende PostScript-Schriftarten
+% werden in der main Datei ausgewählt, hier nichts ändern
+%---------------------------------------------------------------
+\ifthenelse{\equal{ 1 }{ \value{schrift} }}
+    {
+    \usepackage{mathptmx}          %   Times als Hauptschriftart, keine mathematische Fettschrift
+    \usepackage{amssymb}
+    \usepackage{amsbsy}
+    \usepackage{amsmath}
+    \usepackage{amsfonts}
+    \usepackage{amstext}
+    \renewcommand{\boldsymbol}[1]{\mathbf{#1}} % nur bei mathptmx !
+                                               % damit boldsymbol wenigstens fette aufrechte Buchstaben macht
+    }{}
+\ifthenelse{\equal{ 2 }{ \value{schrift} }}
+    {
+    \usepackage[lf, minionint]{MinionPro} %   OpenType von Adobe, mathematische Fettschrift vorhanden, Schrift ist
+                                %   ist im Standard-LaTeX nicht installiert.
+                                %   Ist ein wenig Aufwand das Ganze zu installieren, Matthias Dagen fragen
+    }{}
+\ifthenelse{\equal{ 3 }{ \value{schrift} }}
+    {
+    \usepackage{mathpazo}          %   nette Buchschrift aber sehr gross, mathematische Fettschrift vorhanden
+    \usepackage{amssymb}
+    \usepackage{amsbsy}
+    \usepackage{amsmath}
+    \usepackage{amsfonts}
+    \usepackage{amstext}
+    }{}
+\ifthenelse{\equal{ 4 }{ \value{schrift} }}
+    {
+    \usepackage{times}
+    \usepackage{amssymb}
+    \usepackage{amsbsy}
+    \usepackage{amsmath}
+    \usepackage{amsfonts}
+    \usepackage{amstext}
+    }{}
+\ifthenelse{\equal{ 5 }{ \value{schrift} }}
+    {
+    \usepackage{amssymb}
+    \usepackage{amsbsy}
+    \usepackage{amsmath}
+    \usepackage{amsfonts}
+    \usepackage{amstext}
+    \usepackage{lmodern}
+    }{}
+\usepackage[scaled=.92]{helvet} %   11pt Helvetica für Überschriften etc. etwas kleiner da, Helvetica an sich größer ist
+%\usepackage{courier}            %   Courier bei \texttt
+%\usepackage{upgreek}            %   Aufrechte griechische Buchstaben
+
+% ------------------------------------------------------------------------------------------
+% Bild- und Tabellentitel FETT
+% ------------------------------------------------------------------------------------------
+%\def\figurename{\bfseries Bild}
+%\def\tablename{\bfseries Tabelle}
+
+%%Andere Beschreibung von figure
+\addto\captionsngerman{
+	\renewcommand{\figurename}{\bfseries Bild}%%Andere Beschreibung von figure
+	\renewcommand{\listfigurename}{Bildverzeichnis}
+	\renewcommand{\tablename}{\bfseries Tabelle}
+}
+
+%---------------------------------------------------------------
+% Quelltexte formatieren
+%---------------------------------------------------------------
+\usepackage{listings}
+
+
+%\lstloadlanguages{
+		%C,
+		%C++,
+		%XML
+%}
+
+\lstset{
+		language=XML,
+		basicstyle=\footnotesize\ttfamily, % Standardschrift
+		numbers=left,               % Ort der Zeilennummern
+		numberstyle=\tiny,          % Stil der Zeilennummern
+		numbersep=5pt,              % Abstand der Nummern zum Text
+		tabsize=2,                  % Groesse von Tabs
+		extendedchars=true,         %
+		breaklines=true,            % Zeilen werden Umgebrochen        
+		keywordstyle=\color{Red2},
+		frame= b,         
+		stringstyle=\color{Purple2}\ttfamily, % Farbe der String
+		showspaces=false,           % Leerzeichen anzeigen ?
+		showtabs=false,             % Tabs anzeigen ?
+		xleftmargin=17.5pt,
+		framexleftmargin=17pt,
+		framexrightmargin=5pt,
+		framexbottommargin=4pt,
+		linewidth= \dimexpr\textwidth-2\fboxsep-2\fboxrule,
+		comment=[l]{\#},
+		morecomment=[s]{<!--}{-->},
+		commentstyle=\color{Green4},
+		%backgroundcolor=\color{grey},
+		showstringspaces=false,      % Leerzeichen in Strings anzeigen ?        
+		morekeywords={__global__, name, pkg, args, type, from, to, textfile, respawn, value, output, radius, ixx, ixy, ixz, iyy, iyz, xyz, rpy, reference},  % CUDA specific keywords
+		aboveskip = 18pt, 
+		belowskip = 18pt
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{darkgray}{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+%---------------------------------------------------------------
+% ein paar Längen einstellen
+%---------------------------------------------------------------
+%\setlength{\parskip}{1ex plus0.5ex minus0.2ex} % Absatzabstand etwas größer
+\setlength{\itemsep}{0ex plus0.2ex}            % Abstand zweier Listenelemente kleiner
+\setlength{\parindent}{0ex}                     % kein Absatzeinzug
+\setlength{\belowcaptionskip}{0.4cm}            % Abstand caption - Tabelle größer
+\setlength{\abovecaptionskip}{0.4cm}            % Abstand caption - Tabelle größer
+
+%---------------------------------------------------------------
+% Kopf- und Fusszeilen
+%---------------------------------------------------------------
+\usepackage[plainheadsepline,  % linie zw. kopf und text auch bei seitenstil "plain"
+           %headexclude,       % kopfzeile gehört nicht zum textkörper
+           %footexclude        % fusszeile gehört nicht zum textkörper
+          ]       
+           {scrpage2}
+\pagestyle{scrheadings}
+\clearscrheadfoot              % voreinstellungen loeschen
+\ihead{\normalfont\headmark}   % kolumnentitel innen
+\ohead[\pagemark]{\pagemark}   % seitenzahl aussen
+
+%---------------------------------------------------------------
+% Nummerierungs-Tiefe des Inhaltsverzeichnis und der Abschnitte einstellen
+%---------------------------------------------------------------
+\setcounter{secnumdepth}{2} \setcounter{tocdepth}{2}
+
+%---------------------------------------------------------------
+% Abkürzungsverzeichnis
+%---------------------------------------------------------------
+% mit dem Befehl \nomenclature[l/g/a]{Abkürzung}{Bezeichnung} kann direkt im Code die Abkürzung eingefügt werden
+% das Paket sortiert diese und fügt sie mit dem Befehl \printnomenclature ein
+% l, g, oder a steht dabei für die Gruppierung Lateinische bzw. Griechische Buchstaben, Abkürzungen
+% Nach Einfügen neuer Abkürzungen muss folgender Befehl in der Eingabeaufforderung im Tex-Verzeichnis eingegeben werden:
+% -> vorher einmal kompilieren
+% -> makeindex main.nlo -s nomencl.ist -o main.nls
+% -> nochmal kompilieren
+%\makeindex
+\usepackage{nomencl}
+% \let\abbrev\nomenclature
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{.25\hsize}
+\renewcommand{\nomlabel}[1]{#1 \hfill}
+\setlength{\nomitemsep}{-\parsep}
+
+\renewcommand{\nomgroup}[1]{%
+	\ifthenelse{\equal{#1}{L}}{\item[\textbf{Lateinische Buchstaben}]}
+	{%
+		\ifthenelse{\equal{#1}{G}}{\item[\textbf{Griechische Buchstaben}]}
+		{%
+			\ifthenelse{\equal{#1}{A}}{\item[\textbf{Abkürzungen}]}
+			{
+				\ifthenelse{\equal{#1}{K}}{\item[\textbf{Koordinatensysteme}]}{}
+			}
+		}
+	}
+}
+
+\makenomenclature
+
+%---------------------------------------------------------------
+% Hyperlinks für pdfTeX
+%---------------------------------------------------------------
+\ifpdf
+    % hier stehen befehle, die nur für pdftex gelten
+    \usepackage[pdfpagelabels,  % logische (z.b. auch roemische) seitenzahlen
+                bookmarks,       % Bookmarks für die einzelnen Abschnitte
+                pdftex
+                ]{hyperref}
+    \hypersetup{
+    %   colorlinks,  % Links mit farbigem Text
+        pdfborder   = 0 0 0,
+        plainpages  = false,
+        bookmarksnumbered = true,
+    %   bookmarksopen
+    }
+\else
+    % hier stehen befehle, die nur für latex gelten
+    \usepackage{hyperref} % hier ohne colorlinks und pdf-krams
+\fi
+
+%extra inhaltsverzeichnisse möglich
+\usepackage[nohints]{minitoc}     
+\renewcommand{\mtctitle}{Anhangsverzeichnis} 				% Name ändern            
+\renewcommand{\mtifont}{\large\bfseries\sffamily}		% Titel font ändern
+\renewcommand{\mtcSfont}{\rm}												% Section einträge normal
+\mtcsetrules{minitoc}{off}													% Linien ausmachen
+
+%---------------------------------------------------------------
+% SVGs einfügen
+%---------------------------------------------------------------
+%% SVG to TeX
+% from InkscapePDFLaTeX.pdf
+% by Johan Engelen, 2010
+% Information: 
+% http://tug.ctan.org/tex-archive/info/svg-inkscape
+% -shell-escape muss im Ausgabeprofil stehen
+% inkscape.exe muss im Path-Folder sein
+
+% Funktion zum ueberpruefen auf Aenderung
+\newcommand{\executeiffilenewer}[3]{%
+                \ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+                {\pdffilemoddate{#2}}>0%
+                {\immediate\write18{#3}}\fi%
+}
+% Wenn Aenderung dann TeX-Export ausfuehren und einbinden
+%\newcommand{\includesvg}[1]{%
+                %\executeiffilenewer{#1.svg}{#1.pdf}%
+                %{inkscape -z -C --file=#1.svg %
+                %--export-pdf=#1.pdf --export-latex}%
+                %\input{#1.pdf_tex}%
+%}
+
+%% Include svg mit Text aus textext plugin
+% text wird im svg mit textext hinzugefügt.
+% falls Änderungen im .svg gefunden werden, wird das Bild 
+% neu exportiert und eingefügt.
+% \includesvg{ordner/file} /ohne endung
+\newcommand{\includesvg}[4][]{
+			\executeiffilenewer{#3.svg}{#3.pdf}
+			{inkscape -z -D --file=#3.svg
+			--export-pdf=#3.pdf}
+			\begin{figure}[#2]
+				\centering
+				\includegraphics[#1]{#3}
+				\caption{#4} \label{fig.#3}
+				\vspace*{-3mm}
+			\end{figure}
+}
+
+\newcommand{\includesinglesvg}[2][]{
+			\executeiffilenewer{#2.svg}{#2.pdf}
+			{inkscape -z -D --file=#2.svg
+			--export-pdf=#2.pdf}
+			\includegraphics[#1]{#2}
+}
+
+\usepackage[right]{eurosym}
+

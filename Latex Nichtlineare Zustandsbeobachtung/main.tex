@@ -1,0 +1,154 @@
+% LaTeX Datei für Projektarbeiten etc. am MZH
+
+% ------------------------------------------------------------------------------------------
+% erlaubt das Anfangen des Draft-Modus und damit Veränderungen
+% einzustellen
+\newif\ifdraft
+% Draft-Modus: Arbeitsversion, Bilder werden nur als Rahmen dargestellt
+% Vorteil: schnelleres Kompilieren
+%\drafttrue % <- dafür hier die Kommentierung wegnehmen
+
+%-------------------------------------------------------------------------------------------
+% folgende Befehle sorgen dafür, das für jede Schrift die richtigen Pakete installiert werden
+\newcounter{schrift}
+% Schrift auswählen:
+% 1 - mathptmx
+% 2 - minionpro
+% 3 - mathpazo
+% 4 - times + computer modern
+% 5 - computer modern
+\setcounter{schrift}{4} % Hier die entsprechende Zahl setzen !
+
+% ------------------------------------------------------------------------------------------
+\input{praeambel}                           % Präambel zur Dokumentenformatierung einfügen
+                                            % braucht nicht zu verändert werden, stehen aber nützliche
+                                            % Hinweise drin
+
+%---------------------------------------------------------------
+% Trennmuster fuer Ausnahmefälle
+%---------------------------------------------------------------
+\hyphenation{} % z.B. \hypenation{Trenn-text}
+\hyphenation{Kraft-ein-wirk-ung}
+\hyphenation{ein-ge-spannt}
+\hyphenation{Coch-lea-im-plan-ta-te}
+\hyphenation{Deh-nungs-mess-streifen}
+
+%---------------------------------------------------------------
+% Dokumentenanfang:
+%---------------------------------------------------------------
+% Einstellungen für PDF-Latex:
+% Hier Titel etc. eintragen, dann wird es in den Dokumenteneigenschaften vom PDF richtig angezeigt
+\ifpdf
+    \hypersetup{
+    %   colorlinks,  % Links mit farbigem Text
+        pdftitle    = {Nichtlineare Zustandsbeobachtung mit bildbasierter Validierung am inversen Doppelpendel},
+        pdfsubject  = {Studienarbeit},
+        pdfauthor   = {Andreas Serov},
+        pdfkeywords = {Zustandsbeobachtung, Doppelpendel}
+        }
+\else
+\fi
+
+\usepackage{caption}
+\usepackage{tikz}							% package für blockschaltbilder in latex
+\usetikzlibrary{arrows, decorations.markings, positioning,automata, positioning,arrows.meta,shapes.multipart}
+\usepackage{pgfplots}
+% for double arrows a la chef
+% adapt line thickness and line width, if needed
+\tikzstyle{vecArrow} = [semithick, decoration={markings,mark=at position
+	1 with {\arrow[semithick]{open triangle 60}}},
+double distance=1.4pt, shorten >= 5.5pt,
+preaction = {decorate},
+postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1pt, shorten >= 4.5pt]
+
+\NewDocumentCommand{\angsi}{omom}{%			% für °/s
+	\ang[#1]{#2}\si[#3]{#4}%
+}		
+\usepackage{algorithmicx}					% für algorithmen
+\usepackage{algpseudocode}					% für algorithmen
+\usepackage{algorithm}						% für algorithmen
+\usepackage{tabu}							% für dicke linien in tabellen
+\usepackage{bm}								% bold math \bm{math expression}
+\usepackage{mathtools}						% für *Matrizen zum Ausrichten der Einträge
+\usepackage{dsfont}							% $ x \in mathds{R} $
+%\usepackage[utf8]{inputenc}				% umlaute
+%\usepackage[ansinew]{inputenc}				% umlaute
+\usepackage{befehle}                        % eigene Befehle wie:
+                                            % \zB\,
+                                            % \abbildung{Position h,b,t,p}{Dateiname ohne Endung}{Caption}
+                                            % \bild{Dateiname}, referenziert gemäß ...Bild x.xx...
+                                            % einfach mal nachschauen was so drin ist und eigene Befehle für
+                                            % wiederholende Sachen definieren
+
+%\includeonly{ergebnisse}                   % wenn nur ein Kapitel kompilliert werden soll
+                                            % geht schneller wenn man nur das Layout des Kapitels sehen will
+
+%\entwurf                                   % Entwurfsdatum auf jede Seite setzen,
+                                            % nicht vergessen beim Druck rauszunehmen
+%\setlength\overfullrule{5pt}                % Overfull boxes werden angezeigt
+%\setlength\underfullrule{5pt} 
+
+% Seitenspiegel neu berechnen
+\typearea[current]{last}
+%\typearea{last}
+\begin{document}                            % Dokumentenanfang
+\dominitoc
+\begin{spacing}{1.15}                       % Zeilenabstand auf 1,15 fach stellen, ist nicht so eng aber
+                                            % auch nicht so eine Seitenschinderei wie 1,5-fach
+    \frontmatter                            % mit kleinen römischen Seitenzahlen beginnen für class scrbook
+    %\pagenumbering{roman}                  % das gleiche fücrartcl
+    \setcounter{page}{0}
+    \pdfbookmark[0]{Titel}{tit}             % damit der Titel auch im Acrobat angezeigt wird
+		\include{cover}
+    \clearpage
+    \pdfbookmark[0]{\contentsname}{toc}
+    %\setcounter{page}{1}
+    \tableofcontents                        % Inhaltsverzeichnis
+    \listoffigures
+    \listoftables
+    \printnomenclature                      % Formelverzeichnis einbinden
+    \mainmatter                             % der eigentliche Tex
+%		\input{abkuerzungen}                    % Abkürzungen im Text, z.B. CI = Cochleaimplantat
+%		\input{variablen}                       % Mathematische Variablen
+%    \include{einleitung}										% die einzelnen Kapitel einbinden
+	\include{modellierung}
+	\include{zustandsregelung}
+	\include{zustandsbeobachtung}
+	\include{bildbasiertevalidierung}
+	%\include{zusammenfassung}
+    %\nocite{*}                             % alle Literaturquellen einbinden, sonst werden nur die zitierten
+                                            % Quellen im Literaturverzeichnis angezeigt (ist Geschmackssache).
+                                            % eher nicht verwenden, außer man hat einen guten Grund
+    \appendix                               % Anhang starten, jedes weitere Kapitel bekommt jetzt einen Buchstaben
+    \chapter*{Anhang}                       % Anhang als Chapter
+    \thispagestyle{empty}                   % keine Kopfzeile, Seitenzahl u.a., leere Seite mit Überschrift Anhang
+    \setcounter{chapter}{1}                 % Chapter Counter auf 1 = im Anhang A
+    \setcounter{equation}{0}                % Equation Counter nullen
+    \addstarredchapter{Anhang}              % Minitoc mitteilen, dass neues Chapter
+    \newpage                                
+    \ihead{\normalfont Anhang}              % Kopfzeile auf Anhang setzen
+%    
+    \minitoc                                % Anhangsverzeichnis plotten
+    %% --- Ab hier der Anhang einfügen
+
+    \include{anhang_bewegungsgleichungen}            % Anhang
+    %\include{anhang_fehlerfortpflanzung}
+		%\include{anhang_mgcEinstellungen}
+		%\include{anhang_trafos}
+		%\include{anhang_befestigen}
+		%\include{anhang_datenblaetter}
+  
+
+    %% --- Anhang zu Ende
+    \ihead{\normalfont\headmark}            % kolumnentitel innen
+ 
+    %% --- Literaturverzeichnis
+    \bibliographystyle{alphadin}            % Darstellung nach DIN, mit Name und Jahr z.B. [Sch06]
+%    \bibliography{masterbib}                % Literaturverzeichnis einbinden
+    \bibliography{literaturserov}                % Literaturverzeichnis einbinden
+
+
+\end{spacing}
+\end{document}                              % fertig!
+

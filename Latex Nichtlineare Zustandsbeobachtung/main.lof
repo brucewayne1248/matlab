@@ -1,0 +1,25 @@
+\select@language {ngerman}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Modellierung des Doppelpendels}{1}{chapter.1}
+\contentsline {figure}{\numberline {\relax 1.1}{\ignorespaces Skizze des inversen Doppelpendels\relax }}{2}{figure.caption.4}
+\contentsline {figure}{\numberline {\relax 1.2}{\ignorespaces Relative Wagenposition beim Ausschwingvorgang des Doppelpendels\relax }}{5}{figure.caption.5}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Zustandsregelung des inversen Doppelpendels}{7}{chapter.2}
+\contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Signalflussplan des Zustandsraums ohne Durchgangsanteil\relax }}{7}{figure.caption.7}
+\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Signalflussplan der Zustandsr\"uckf\"uhrung\relax }}{12}{figure.caption.8}
+\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Zustandsregelung mittels LQR des Doppelpendels\relax }}{16}{figure.caption.10}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Nichtlineare Zustandsbeobachtung}{17}{chapter.3}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Signalflussplan der allgemeinen Zustandsbeobachtung\relax }}{17}{figure.caption.11}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Schematischer Ablauf des EKF Algorithmus\relax }}{25}{figure.caption.12}
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Signalflussplan der Zustandsbeobachtung in der Simulation\relax }}{29}{figure.caption.13}
+\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Zustandssch\"atzung des EKF beim Ausschwingen des Doppelpendels: Pendelwinkel (oben), Pendelwinkelgeschwindigkeiten (unten)\relax }}{30}{figure.caption.14}
+\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Zustandssch\"atzung des EKF bei der harmonischen Wagenanregung: Pendelwinkel (oben), Pendelwinkelgeschwindigkeiten (unten)\relax }}{31}{figure.caption.15}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Bildbasierte Beobachtervalidierung}{33}{chapter.4}
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Skizze eines Einzelbilds des Doppelpendels mit Farbmarkern\relax }}{34}{figure.caption.16}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Einzelbild des Doppelpendels: RGB-Rohbild (oben), Graustufenbild nach Anwendung von~\textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:imsubtract}\unskip \@@italiccorr )}} (unten)\relax }}{36}{figure.caption.17}
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Einzelbild des Doppelpendels: RGB-Rohbild (oben), Bin\"armasken der drei Farbkan\"ale mit berechneten Winkeln $ \varphi _{1,\mathrm {K}} $ und $ \varphi _{2,\mathrm {K}} $ (unten)\relax }}{38}{figure.caption.18}
+\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Gleichgerichtete Signale der Winkelmessung \relax }}{39}{figure.caption.19}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Literaturverzeichnis}{43}{chapter*.21}

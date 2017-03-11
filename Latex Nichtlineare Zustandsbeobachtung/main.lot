@@ -1,0 +1,13 @@
+\select@language {ngerman}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Modellierung des Doppelpendels}{1}{chapter.1}
+\contentsline {table}{\numberline {\relax 1.1}{\ignorespaces Gemessene und gesch\"atzte Werte der Systemparameter\relax }}{6}{table.caption.6}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Zustandsregelung des inversen Doppelpendels}{7}{chapter.2}
+\contentsline {table}{\numberline {\relax 2.1}{\ignorespaces Eintr\"age der Wichtungsmatrizen $ \bm {Q}_{\mathrm {LQ}} \text { und } \bm {R}_{\mathrm {LQ}} $ der Zustandsregelung\relax }}{14}{table.caption.9}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Nichtlineare Zustandsbeobachtung}{17}{chapter.3}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Bildbasierte Beobachtervalidierung}{33}{chapter.4}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Literaturverzeichnis}{43}{chapter*.21}

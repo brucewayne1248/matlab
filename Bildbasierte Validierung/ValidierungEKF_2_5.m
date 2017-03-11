@@ -107,21 +107,23 @@ phi1VideoRad = d2r * phi1VideoDeg;
 %% plots of states and measurements
 figure(4)
 subplot(2,1,1),
-plot(tMeas, phi1EstDeg), title('Gelenkwinkel ab ca. 10 Sek. chaotisches Verhalten des ‰uﬂeren Pendels'), hold on
-plot(tMeas, phi1VideoDeg),
-plot(tMeas, phi1MeasDeg),legend('phi1\_est', 'phi1_video','phi1\_Meas')
+plot(tMeas, phi1EstDeg),ylabel('Gelenkwinkel [Grad]'), xlabel('Zeit [s]'), title('Gelenkwinkel ab ca. 10 Sek. chaotisches Verhalten des ‰uﬂeren Pendels'), hold on
+plot(tMeas, phi1VideoDeg), ylabel('Gelenkwinkel [Grad]'), xlabel('Zeit [s]')
+%plot(tMeas, phi1MeasDeg),ylabel('Gelenkwinkel [Grad]'), xlabel('Zeit [s]'),
+legend('phi1\_est', 'phi1_video')
 hold off
 
 subplot(2,1,2),
-plot(tMeas, phi2EstDeg), hold on
-plot(tMeas, phi2VideoDeg), legend('phi2\_est', 'phi2\_video')
+plot(tMeas, phi2EstDeg),ylabel('Gelenkwinkel [Grad]'), xlabel('Zeit [s]'), hold on
+plot(tMeas, phi2VideoDeg),ylabel('Gelenkwinkel [Grad]'), xlabel('Zeit [s]'), legend('phi2\_est', 'phi2\_ video')
 hold off
 
 figure(5), 
 subplot(2,1,1),
-plot(tMeas,dphi1EstDeg), title('Gelenkwinkelgeschw. ab ca. 10 Sek. chaotisches Verhalten des ‰uﬂeren Pendels'), hold on
+plot(tMeas,dphi1EstDeg),ylabel('Gelenkwinkelgeschw. [Grad/s]'), xlabel('Zeit [s]'), title('Gelenkwinkelgeschw. ab ca. 10 Sek. chaotisches Verhalten des ‰uﬂeren Pendels'), hold on
 plot(tMeas,dphi1MeasDeg2FiltLP), 
-plot(tMeas,dphi1MeasDeg),legend('dphi1\_est','dphi1\_filtfilt' ,'dphi1\_Meas')
+%plot(tMeas,dphi1MeasDeg)
+legend('dphi1\_est','dphi1\_filtfilt')
 hold off
 
 phi2VideoDegFunc = spline(tMeas, phi2VideoDeg);
@@ -129,7 +131,7 @@ dphi2VideoDegFunc = fnder(phi2VideoDegFunc);
 dphi2VideoDeg = diff(phi2VideoDeg)*1000;
 dphi2VideoDeg(end+1) = dphi2VideoDeg(end);
 subplot(2,1,2),
-plot(tMeas,dphi2EstDeg),hold on
+plot(tMeas,dphi2EstDeg),hold on,ylabel('Gelenkwinkelgeschw. [Grad/s]'), xlabel('Zeit [s]'),
 % fnplt(dphi2VideoDegFunc)
 plot(tMeas,dphi2VideoDegFiltLP), legend('dphi2\_est', 'dphi2\_video')
 hold off

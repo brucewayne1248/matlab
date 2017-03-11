@@ -1,0 +1,584 @@
+\chapter{Nichtlineare Zustandsbeobachtung}
+\label{ch:zustandsbeobachtung}
+
+In diesem Kapitel wird zunächst die lineare und nichtlineare Beobachtbarkeit des inversen Doppelpendels untersucht. Als nächstes wird das für die Zustandsbeobachtung verwendete EKF vorgestellt. Im Anschluss werden die Simulationsergebnisse der Zustandsbeobachtung des Doppelpendels dargestellt und diskutiert. 
+
+Während des Betriebs des realen Doppelpendels ist der zweite Pendelwinkel $ \varphi_2(t) $ aufgrund fehlender Sensorik nicht messbar. Trotzdem ist es mithilfe von Beobachtern möglich, Zustände über die Systemgleichungen zu rekonstruieren. Der schematische Aufbau einer Zustandsbeobachtung ist in Bild~\ref{fig:zustandsbeobachter} dargestellt. Geschätzte Größen sind mit einem Dach über der Variable versehen. 
+
+\begin{figure}[!bh]		
+	\begin{center}
+		\begin{tikzpicture}[node distance=1.25cm]
+		\node[draw,rectangle, align = center] (real) {\footnotesize reales\\\footnotesize System};		% reales System
+		\node[inner sep=0,minimum size=0,right of=real] (real-y) {}; 	% Unsichtbarer Knoten zwischen real und y
+		\node[inner sep=0,minimum size=0,right of=real-y] (real-y2) {};	 	% y
+		\node[inner sep=0,minimum size=0,right of=real-y2] (y) {};	 	% y
+		\node[inner sep=0,minimum size=0,below of=real] (real-beobachter) {};	 	% y		 
+		\node[draw,rectangle, below of=real-beobachter, align = center, node distance = 1cm] (beobachter) {\footnotesize Zustands- \\\footnotesize beobachter};
+		\node[inner sep=0,minimum size=0,left of=real] (u-real) {};
+		\node[inner sep=0,minimum size=0,left of=u-real] (u-real2) {};		
+		\node[inner sep=0,minimum size=0,left of=u-real2] (u) {};
+		\node[inner sep=0,minimum size=0,below of=beobachter] (xdach) {};				
+		
+		%		% 1st pass: draw arrows
+		\draw[vecArrow] (real) to node [above right, align = center] {\footnotesize Ausgänge\\$ \bm{y}(t) $} (y);
+		\draw[vecArrow] (real-y2) |- (beobachter);		
+		\draw[->] (u) to node [above, align = center] {\footnotesize Eingang\\$ u(t) $} (real);			
+		\draw[->] (u-real2) |-  (beobachter);					
+		\draw[vecArrow] (beobachter) to node [below right, align = center] {\footnotesize geschätzte Zustände\\$ \bm{\hat{x}(t)} $} (xdach);						
+		
+		% 2nd pass: copy all from 1st pass, and replace vecArrow with innerWhite
+		\draw[innerWhite] (real) to (y);
+		
+		\end{tikzpicture}
+	\end{center}
+	\caption{Signalflussplan der allgemeinen Zustandsbeobachtung}
+	\label{fig:zustandsbeobachter}
+\end{figure}
+
+\section{Lineare Beobachtbarkeit des Doppelpendels}
+\label{sec:lineareBeobachtbarkeit}
+
+Bevor die Beobachtung des äußeren Pendelwinkels simuliert wird, wird die Systemeigenschaft der Beobachtbarkeit eingeführt und untersucht. An dieser Stelle wird die lineare Beobachtbarkeit des Doppelpendels in dem Arbeitspunkt~\eqref{eq:arbeitspunkt} nachgewiesen. 
+
+Kann ein \mbox{Anfangszustand $ \bm{x}_0 $} aus dem bekannten Verlauf der Eingangsgröße $ \bm{u}(t) $ und der Ausgangsgröße $ \bm{y}(t) $ in einem endlichen Zeitintervall $ 0 \leq t \leq t_\mathrm{e} $ rekonstruiert werden, so heißt das System \textit{vollständig beobachtbar}. Aufgrund des einfachen Nachweises wird das Beobachtbarkeitskriterium nach \textit{Kalman} herangezogen. Die \mbox{$(p\cdot n\times~n)$-Beobachtbarkeitsmatrix}
+%
+\begin{equation}
+\begin{aligned}
+\bm{S}_\mathrm{B} = 
+\begin{bmatrix}
+\bm{C} 			\\
+\bm{CA} 		\\
+\bm{CA^2}		\\
+\vdots			\\
+\bm{CA^{n-1}}	\\
+\end{bmatrix}
+\label{eq:test}
+\end{aligned}
+\end{equation}
+
+muss den vollen Rang $ n = \mathrm{dim}(\bm{x})$ besitzen. Da es sich bei $ \bm{S}_\mathrm{B} $ um eine nicht quadratische Matrix handelt wird hier anstelle der Determinante der Rang der Matrix ermittelt. Mit der in Abschnitt~\ref{sec:zustandsraumdarstellung} ermittelten Systemmatrix $ \bm{A} $ und der Beobachtungsmatrix $  \bm{C}$ überprüft ergibt sich: $ 	\mathrm{rang}(\bm{S}_\mathrm{B}) = \mathrm{dim}(\bm{x}) = 6 $, womit die \textit{vollständige Beobachtbarkeit} nachgewiesen ist. Das bedeutet, dass in dem linearisierten Zustandsraum eine Rekonstruktion des äußeren Pendelwinkels $ \varphi_2(t) $ möglich ist.  
+
+\section{Nichtlineare Beobachtbarkeit des Doppelpendels}
+\label{sec:nichtlineareBeobachtbarkeit}
+
+Mit dem im vorigen Abschnitt angewandten Kriterium nach \textit{Kalman} ist es nur möglich, die Beobachtbarkeit linearer Systeme nachzuweisen. Da die Beobachtung des äußeren Pendelwinkels jedoch auf dem gesamten Arbeitsraum geschehen soll, wird die nichtlineare Beobachtbarkeit des Doppelpendels betrachtet. Aus Gründen der Übersichtlichkeit wird die explizite Zeitabhängigkeit der Eingangs- und Ausgangsgrößen sowie der Zustände nur in den Definitionen der \textit{globalen} und \textit{schwachen Beobachtbarkeit} aufgeführt. Nach~\cite{Adamy2014} wird das allgemeine nichtlineare System
+%
+\begin{align}
+	\dot{\bm{x}}& = \bm{f}(\bm{x},u), \text{ mit } \bm{x}(t_0) =\bm{x}_0, \nonumber\\
+	y &= g(\bm{x},u) 
+	\label{eq:nonlinsys}
+\end{align}
+
+betrachtet. Es soll darauf hingewiesen sein, dass eine skalare Ausgangsgröße in~\eqref{eq:nonlinsys} verwendet wird. Dies hängt mit dem hier dargestellten Nachweis der Beobachtbarkeit für den äußeren Pendelwinkel $ \varphi_2 $ zusammen. Es werden zunächst die Begriffe der \textit{globalen} und \textit{schwachen Beobachtbarkeit} definiert. \\\\
+Das System~\eqref{eq:nonlinsys} sei für $ \bm{x} \in D_{\bm{x}} \subseteq \mathds{R}^n $ und $ u \in C_u \subseteq \mathds{R} $ definiert und es sei $ y\in \mathds{R} $. Das System heißt \textit{global beobachtbar}, wenn alle Anfangsvektoren $ \bm{x}_0 \in D_{\bm{x}} $ aus der Kenntnis von $ u(t) \text{ und } y(t)$ in einem Zeitintervall $ [t_0,t_1<\infty] $ für alle $ u \subseteq  C_u$ eindeutig bestimmbar sind. $ C_u $ ist dabei der Raum der $ (n-1)$~mal stetig differenzierbaren Funktion $ u(t) $ und $ D_{\bm{x}} $ ist der Definitionsbereich der Zustände. 
+\newline \newline
+Für die \textit{schwache Beobachtbarkeit} wird nicht der exakte Anfangsvektor $ \bm{x}_0 $ rekonstruiert, sondern in einer Umgebung des Anfangszustands betrachtet. 
+\newline \newline
+Das System~\eqref{eq:nonlinsys} sei für $ \bm{x}\in D_{\bm{x}} \subseteq\mathds{R}^n $ und $ u\in C_u \subseteq \mathds{R} $ definiert und es sei $ y \in \mathds{R} $. Sind alle Anfangsvektoren $ \bm{x}_0 \in D_{\bm{x}} $ in einer Umgebung
+%
+\begin{equation*}
+	U = \left\lbrace  \bm{x}_0 \in \mathds{R}^n | \parallel \bm{x}_0 -\bm{x}_\mathrm{p} \parallel < \rho \right\rbrace 
+\end{equation*}
+
+eines Punktes $ \bm{x}_\mathrm{p} \in D_{\bm{x}}$ aus der Kenntnis von $ u(t) $ und $ \bm{y}(t) $ in einem 
+Zeitintervall $ \left[t_0,t_1<\infty\right] $ für alle $ u \in D_{\bm{x}} $ eindeutig bestimmbar, so heißt das System \textit{schwach beobachtbar}. 
+\newline \newline
+Für den rechnerischen Nachweis der nichtlinearen Beobachtbarkeit werden $ n-1 $ zeitliche Ableitungen der Art
+%
+\begin{align*}
+	\dot{y} &= \frac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial g}{\partial u}\dot{u} = h_1(\bm{x},u,\dot{u}), \\
+	\ddot{y} &= \frac{h_1}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial h_1}{\partial u}\dot{u} + \frac{\partial h_1}{\partial \dot{u}}\ddot{u} = h_2(\bm{x},u,\dot{u},\ddot{u}), \\
+	\dddot{y}  &= \frac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial h_2}{\partial u}\dot{u}+\frac{\partial h_2}{\partial \dot{u}}\ddot{u}+\frac{\partial h_2}{\partial \ddot{u}}\dddot{u} =h_3(\bm{x},u, \dot{u},\ddot{u},\dddot{u}),\\
+	\hspace{2cm} \vdots \hspace{-3.5cm}\\
+	y^{n-1} &= \frac{\partial h_{n-1}}{\partial \bm{x}}\bm{f}(\bm{x},u)+\sum_{i=1}^{n-1}\frac{\partial h_{n-2}}{\partial u^{(i-1)}}u^{(i)} = h_{n-1}(\bm{x},u,\dot{u},...,u^{(n-1)})
+\end{align*}
+
+benötigt. Es wird der nichtlineare Vektor
+%
+\begin{equation}
+	\bm{z} = 
+	\begin{bmatrix}
+	y\\
+	\dot{y}\\
+	\ddot{y}\\
+	\vdots\\
+	y^{(n-1)}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		g(\bm{x},u)\\
+		h_1(\bm{x},u,\dot{u})\\
+		h_2(\bm{x},u,\dot{u},\ddot{u})\\
+		\vdots\\
+		h_{n-1}(\bm{x},u,\dot{u},...,u^{(n-1)})
+	\end{bmatrix}
+	=
+	\bm{q}(\bm{x},u,\dot{u},...,u^{(n-1)})
+	\label{eq:z}
+\end{equation}
+
+definiert. Mit~\eqref{eq:z} ist es nun möglich, Kritierien für die \textit{globale} und \textit{schwache Beobachtbarkeit} aufzustellen. 
+
+Das in~\eqref{eq:nonlinsys} definierte System ist \textit{global beobachtbar}, wenn die Abbildung
+%
+\begin{equation*}
+	\bm{z} = 	\bm{q}(\bm{x},u,\dot{u},...,u^{(n-1)})
+\end{equation*}
+
+für alle $ \bm{x}\in D_{\bm{x}} $ und $ u\in C_u $ eindeutig nach $ \bm{x} $ auflösbar ist, d.h. die Umkehrfunktion 
+%
+\begin{equation}
+\bm{x} = \bm{q}^{-1}(\bm{z},u,\dot{u},...,u^{(n-1)})
+\label{eq:umkehrfuntionx}
+\end{equation}
+
+existiert und gebildet werden kann. Der Nachweis der \textit{globalen Beobachtbarkeit} ist jedoch nur für einfache Systeme möglich, da die analytische Lösung der Umkehrfunktion schwierig zu bestimmen ist. Im Fall des inversen Doppelpendels ist das Auffinden von~\eqref{eq:umkehrfuntionx} aufgrund der Vielzahl von nichtlinearen Termen in~\eqref{eq:ddphi1Entkoppelt} und~\eqref{eq:ddphi2Entkoppelt} nicht zu bewerkstelligen. Aus diesem Grund wird hier auf den Nachweis der \textit{schwachen Beobachtbarkeit} zurückgegriffen. Dazu wird zunächst die nichtlineare Beobachtbarkeitsmatrix
+%
+\begin{equation}
+\bm{S}_{\mathrm{B,nl}}\left( \bm{x},u,\dot{u},...,u^{(n-1)} \right) = \frac{\partial \bm{q}(\bm{x},u,\dot{u},...,u^{(n-1)})}{\partial \bm{x}}
+\end{equation}
+
+definiert. Das in~\eqref{eq:nonlinsys} definierte System ist \textit{schwach beobachtbar}, wenn die Bedingung
+%
+\begin{equation}
+\mathrm{rang}\left( \bm{S}_{\mathrm{B,nl}}\left( \bm{x},u,\dot{u},...,u^{(n-1)} \right) \right)
+=
+\mathrm{rang}
+\begin{bmatrix}
+\dfrac{\partial g (\bm{x},u)}{\partial \bm{x}} \\
+\dfrac{\partial h_1(\bm{x},u,\dot{u})}{\partial \bm{x}} \\
+\dfrac{\partial h_2(\bm{x},u,\dot{u},\ddot{u})}{\partial \bm{x}} \\
+\vdots \\
+\dfrac{\partial h_{n-1} (\bm{x},u,\dot{u},...,u^{(n-1)})}{\partial \bm{x}}
+\end{bmatrix}
+= n
+\label{eq:bedingungnichtlinearebeobachtbarkeit}
+\end{equation}
+
+erfüllt ist. Mit~\eqref{eq:bedingungnichtlinearebeobachtbarkeit} wird die Beobachtbarkeit an beliebigen Stützstellen des Arbeitsraums  $ \left( \bm{x},u,\dot{u},...,u^{(n-1)} \right) $ überprüft. 
+
+Im Rahmen dieser Arbeit werden die Pendelwinkel $ \varphi_1 $ und $ \varphi_2 $ beobachtet. Die Wagenbeschleunigung $ \ddot{x} $ ist weiterhin die Eingangsgröße $ u $ des Systems. Der innere Pendelwinkel $ \varphi_1 $ stellt den Ausgang $ y $ in~\eqref{eq:nonlinsys} dar. Die Wagenposition ist mittels des Inkrementalgebers des Servomotors bestimmbar und wird im Fall der Zustandsbeobachtung nicht rekonstruiert. Dementsprechend wird im folgenden der reduzierte Zustandsvektor
+%
+\begin{equation*}
+	\bm{x} = \Big[\varphi_1, \dot{\varphi}_1, \varphi_2, \dot{\varphi}_2 \Big]^\mathrm{T} 
+\end{equation*}
+
+betrachtet. Das reduzierte Gesamtsystem ergibt sich zu
+%
+\begin{align}
+	\dot{\bm{x}} &= \bm{f}(\bm{x},u) = 
+	\begin{bmatrix}
+		\dot{\varphi}_1 \\
+		\ddot{\varphi}_1\left(\bm{x}, u\right) \\
+		\dot{\varphi}_2 \\
+		\ddot{\varphi}_2\left(\bm{x}, u\right)
+	\end{bmatrix} \nonumber\\ 
+	y &= 	g(\bm{x},u) = \varphi_1.
+\end{align}
+
+Als nächstes wird die Abbildung 
+%
+\begin{align}
+	\bm{z} &=
+	\begin{bmatrix}
+		z_1 \\
+		z_2 \\
+		z_3 \\
+		z_4
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		g(\bm{x},u) = \varphi_1 \vspace{0.2cm}\\
+		\dfrac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x,u})+\underbrace{\dfrac{\partial g}{\partial u}\dot{u}}_{=0} = h_1(\bm{x}) = \dot{\varphi}_1 \vspace{0.2cm}\\
+		\dfrac{h_1}{\partial \bm{x}}\bm{f}(\bm{x,u})+\underbrace{\dfrac{\partial h_1}{\partial u}\dot{u}}_{=0} + \underbrace{\dfrac{\partial h_1}{\partial \dot{u}}\ddot{u}}_{=0} = h_2(\bm{x},u) = \ddot{\varphi}_1\left(\bm{x}, u\right) \vspace{0.3cm}\\ 
+		\dfrac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x,u})+\dfrac{\partial h_2}{\partial u}\dot{u}+\underbrace{\frac{\partial h_2}{\partial \dot{u}}\ddot{u}}_{=0}+\underbrace{\frac{\partial h_2}{\partial \ddot{u}}\dddot{u}}_{=0} = h_3(\bm{x},u, \dot{u})
+	\end{bmatrix} \nonumber\\\nonumber\\
+	&= \bm{q}(\bm{x}, u, \dot{u}). 
+	\label{eq:q}
+\end{align}
+
+gemäß~\eqref{eq:z} gebildet. Hierbei entspricht $ \ddot{\varphi}_1(\bm{x},u) $ der entkoppelten Bewegungsgleichung~\eqref{eq:ddphi1Entkoppelt}. Auf eine genaue Darstellung von $ h_3(\bm{x},u,\dot{u}) $ wird aus Gründen der Übersichtlichkeit verzichtet. Mit der nichtlinearen Abbildung~\eqref{eq:q} wird die Beobachtbarkeitsmatrix mit der Form
+%
+\begin{equation*}
+	\bm{S}_{\mathrm{O,nl}}\left( \bm{x},u,\dot{u} \right) =
+	\begin{bmatrix}
+		1 & 0 & 0 & 0\\
+		0 & 1 & 0 & 0\\
+		\dfrac{\partial \ddot{\varphi}_1(\bm{x},u)}{\partial \varphi_1} & \dfrac{\partial \ddot{\varphi}_1(\bm{x},u)}{\partial \dot{\varphi}_1} & \dfrac{\partial \ddot{\varphi}_1(\bm{x},u)}{\partial \varphi_2} & \dfrac{\partial \ddot{\varphi}_1(\bm{x},u)}{\partial \dot{\varphi}_2} \vspace{0.3cm}\\
+		\dfrac{\partial h_3(\bm{x},u,\dot{u})}{\partial \varphi_1} & \dfrac{\partial h_3(\bm{x},u,\dot{u})}{\partial \dot{\varphi}_1} & \dfrac{\partial h_3(\bm{x},u,\dot{u})}{\partial \varphi_2} & \dfrac{\partial h_3(\bm{x},u,\dot{u})}{\partial \dot{\varphi}_2}
+	\end{bmatrix}
+\end{equation*}
+
+gebildet. Wie bereits erwähnt, lässt sich nun die nichtlineare Beobachtbarkeit an beliebigen Stellen des Arbeitsraums auswerten. Examplarisch wird für die Stützstelle 
+%
+\begin{equation*}
+\left( \bm{x},u,\dot{u},...,u^{(n-1)} \right) =  \left[\varphi_1 = \dfrac{\pi}{2}, \dot{\varphi}_1 = 0, \varphi_2 = \pi, \dot{\varphi}_2 = 0, u = \SI{1}{m.s^{-2}}, \dot{u} = 0\right]
+\end{equation*}
+
+die Determinante der Beobachtbarkeitsmatrix 
+%
+\begin{equation*}
+	\det \left(\bm{S}_{\mathrm{O,nl}}\left( \bm{x}_\mathrm{S},\SI{1}{m.s^{-2}},0 \right) \right) = \left|
+	\begin{array}{cccc} 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0\\ -3.86 & -0.73& -1.67 & 0.37\\ -64.12 & -2.30 & 39.11 & -6.29 \end{array}\right| 
+	= -3.83 \neq 0
+\end{equation*}
+
+berechnet. Die Determinante ist ungleich null,  wodurch die Bedingung~\eqref{eq:bedingungnichtlinearebeobachtbarkeit} erfüllt ist. Die nichtlineare Beobachtbarkeit ist damit in der Stützstelle nachgewiesen. Da der Nachweis der \textit{globalen Beobachtbarkeit} nicht möglich ist, wird angenommen, dass das Doppelpendel für beide Pendelwinkel und -winkelgeschwindigkeiten im gesamten Arbeitsraum beobachtbar ist. Im Folgenden wird das in dieser Arbeit verwendete EKF vorgestellt. 
+ 
+
+\section{Das Erweiterte Kalmanfilter}
+\label{sec:ekf}
+
+In diesem Abschnitt werden zuerst die Grundlagen und dann die Arbeitsweise des EKF erläutert. Das EKF ermöglicht die Beobachtung nichtlinearer Systeme mithilfe einer Approximation zeitdiskreter Differenzengleichungen. 
+
+\subsection{Voraussetzungen des EKF}
+\label{subsec:grundlagenekf}
+
+Das zeitdiskrete, nichtlineare System besitzt die Zustandsdifferenzengleichung
+%
+\begin{align}
+	\bm{x}_{k+1}  = \bm{f}(\bm{x}_{k},u_{k},\bm{w}_{k})
+	\label{eq:ekfzustandsgleichung}
+\end{align}
+
+und die Ausgangsgleichung
+%
+\begin{align}
+	\bm{y}_k = \bm{g}(\bm{x}_k,\bm{v}_k).
+	\label{eq:ekfmessgleichung}
+\end{align}
+
+Neben dem Zustandsvektor und der Eingangsgröße hängt das Filter zusätzlich von zwei weiteren, zufällig verteilten Variablen ab. Es sind $ \bm{w}_k $ das Prozessrauschen und $ \bm{v}_k $ das Messrauschen des Systems. Unter realen Umständen ist es nicht möglich, Zustände exakt zu bestimmen. Gründe dafür können ungenau identifizierter Systemparameter des mathematischen Modells oder Sensorrauschen der Messeinrichtungen sein. 
+Das EKF berücksichtigt stochastische Störgrößen, wobei diese die bestimmte Eigenschaften erfüllen müssen, vgl.~\cite{Ortmaier2015}.
+Das Prozess- und Messrauschen sind:
+
+$ \bullet $ gegenseitig unkorreliert:
+%
+\begin{align*}
+	E\left\lbrace \bm{w}_k \bm{v}_k^\mathrm{T}\right\rbrace = \bm{0}
+\end{align*}
+
+$ \bullet $ mittelwertfrei:
+%
+\begin{align*}
+	E\left\lbrace \bm{w}_k\right\rbrace &= \bm{0}\\
+	E\left\lbrace \bm{v}_k\right\rbrace &= \bm{0}
+\end{align*}
+
+$ \bullet $ weiß und normalverteilt. 
+
+Desweiteren sind die Kovarianzmatrizen des Prozess- und Messrauschens positiv semidefinit:
+%
+\begin{align*}
+	E\left\lbrace \bm{w}_k \bm{w}_k^\mathrm{T}\right\rbrace &= \bm{Q}_{\mathrm{EKF}} \\
+	E\left\lbrace \bm{v}_k \bm{v}_k^\mathrm{T}\right\rbrace &= \bm{R}_{\mathrm{EKF}}.
+\end{align*}
+
+
+Sind die genannten Bedingungen erfüllt, wird die Schätzfehlerkovarianz zwischen dem realen und geschätzten Zustand
+%
+\begin{equation}
+	\bm{P}_k = E\left\lbrace (\bm{x}_k-\bm{\hat{x}_k})(\bm{x}_k-\bm{\hat{x}_k})\right\rbrace,
+\end{equation}
+
+welche im folgenden Abschnitt vorgestellt wird, bei Anwendung des EKF minimiert. Dadurch wird der Zustand $ \bm{\hat{x}}_k $ im Zeitschritt $ k $ im Sinne einer Minimierung der Fehlerkovarianz optimal geschätzt. 
+
+\subsection{Algorithmus des EKF}
+\label{subsec:algorithmusekf}
+
+Der EKF-Algorithmus basiert auf zwei sich wiederholenden Schritten: einer \textit{a priori} Zustandsprädiktion und einer \textit{a posteriori} Zustandskorrektur. Später in diesem Abschnitt werden die Schritte im Detail erklärt. Zunächst werden~\eqref{eq:ekfzustandsgleichung} und~\eqref{eq:ekfmessgleichung} verwendet, um die Zustände und die Messung ohne das Rauschen zu approximieren, vgl.~\cite{Welch2006}:
+%
+\begin{align}
+\bm{\hat{x}}_{k+1}^{\text{--}} &= \bm{f}(\bm{\hat{x}_{k},u_{k},\bm{0}})
+\label{eq:xtilde}
+\end{align}
+und
+%
+\begin{align}
+\bm{\hat{y}}_k^{\text{--}} &= \bm{g}(\hat{\bm{x}}_k^{\text{--}},\bm{0}).
+\label{eq:ztilde}
+\end{align}
+
+Dieser Schritt ist notwendig, da in Realität das genaue Prozess- und Modellrauschen nicht ermittelbar ist. Die Gleichungen~\eqref{eq:xtilde} und~\eqref{eq:ztilde} bilden die Grundlage für die linearisierte Zustandsschätzung
+%
+\begin{align}
+	\bm{x}_{k+1} &\approx \bm{\hat{x}}_k^{\text{--}} + \bm{A}\left( \bm{x}_{k} - \bm{\hat{x}}_{k}\right) + \bm{W} \bm{w}_{k}, \\
+	\bm{y}_{k+1} &\approx \bm{\hat{y}}_k^{\text{--}} + \bm{C}\left( \bm{x}_k - \bm{\hat{x}}_k^{\text{--}} \right) + \bm{V} \bm{v}_k, 
+\end{align}
+
+wobei folgende Notation gilt:
+%
+\begin{align*}
+	&\bullet \bm{x}_{k+1}  \text{ und } \bm{y}_{k+1} \text{ sind die realen Zuständs- und Ausgangsvektoren im Zeitschritt } k+1  \\
+	&\bullet \bm{\hat{x}}_k^{\text{--}}  \text{ und } \bm{\hat{y}}_k^{\text{--}} \text{ sind die \textit{a priori} geschätzten Zuständs- und Messungsvektoren}\\
+	&\bullet \bm{\hat{x}}_k \text{ ist die \textit{a posteriori} Zustandsschätzung} \\
+	&\bullet \bm{A} \text{ ist die Jacobi-Matrix von $ \bm{f} $ in Bezug zu $ \bm{x}_k $} \text{ mit } \\
+	&\hspace{1cm}\bm{A}_{k} = \dfrac{\partial \bm{f}}{\partial \bm{x}_k}\bigg|_{(\bm{\hat{x}_{k}},u_{k},\bm{0})}\\
+	&\bullet \bm{C} \text{ ist die Jacobi-Matrix von $ \bm{g} $ in Bezug zu $ \bm{x}_k $} \text{ mit} \\
+	&\hspace{1cm}\bm{C}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{x}_k}\bigg|_{(\bm{\tilde{x}_{k}},\bm{0})}\\
+	&\bullet \bm{W} \text{ ist die Jacobi-Matrix von $ \bm{f} $ in Bezug zu $ \bm{w}_k $} \text{ mit} \\
+	&\hspace{1cm}\bm{W}_{k} = \dfrac{\partial \bm{f}}{\partial \bm{w}_k}\bigg|_{(\bm{\hat{x}_{k}},u_{k},\bm{0})}\\
+	&\bullet \bm{V} \text{ ist die Jacobi-Matrix von $ \bm{g} $ in Bezug zu $ \bm{w}_k $} \text{ mit} \\
+	&\hspace{1cm}\bm{V}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{w}_k}\bigg|_{(\bm{\tilde{x}_{k}},\bm{0})}
+\end{align*}
+
+Die Matrizen $ \bm{A}_k $ und $ \bm{C}_k $ stellen die lineare Approximation des Systems im Arbeitspunkt dar. $ \bm{C}_k $ und $ \bm{V}_k $ repräsentieren das Prozess- und Messrauschen, wobei für die Matrizen die in Abschnitt~\ref{subsec:grundlagenekf} aufgeführten Bedingungen gelten. Das besondere dieser Jacobi-Matrizen gegenüber linearer Beobachter ist, dass sie in jedem Zeitschritt in Abhängigkeit des vorliegenden Zustands neu berechnet werden und so nichtlineare Systeme beobachtet werden können. Mithilfe der angegeben Matrizen und Vektoren können nun die eingangs erwähnten Schritte der Prädiktion und Korrektur formuliert werden. 
+\newline
+Im \textbf{Prädiktionsschritt} berechnet man die Zustände
+%
+\begin{align*}
+	\bm{\hat{x}}_{k+1}^{\text{--}} = \bm{f}(\bm{\hat{x}},u_k,\bm{0})
+\end{align*}
+
+und die Fehlerkovarianzmatrix
+%
+\begin{align*}
+	\bm{P}^{\text{--}}_{k+1} = \bm{A}_k\bm{P}_k\bm{A}_k^\mathrm{T} + \bm{W}_k \bm{Q}_{\mathrm{EKF}} \bm{W}_k^\mathrm{T}
+\end{align*}
+
+für den Zeitschritt $ k+1 $ mit den im vorigen Zeitschritt ermittelten Zustandsvektor $ \bm{\hat{x}}_k $ und der Fehlerkovarianzmatrix $ \bm{P}_k $. Für die Initialisierung des Algorithmus ist es deswegen notwendig, einen initialen Schätzvektor $ \bm{\hat{x}}_0 $ und eine Fehlerkovarianzmatrix $  \bm{P}_0  $ vorzugeben.
+
+Nun erfolgt die \textbf{Korrektur} im aktualisierten Schritt $ k $ unter Verwendung der Messung $ \bm{y}_k $ und der \textit{a priori} Prädiktion $ \bm{\hat{x}}_k^{\text{--}} $. Zuerst wird die Kalmanverstärkung
+%
+\begin{align*}
+	\bm{K}_k = \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T}\left(\bm{C}_k \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T} + \bm{V}_k \bm{R}_{\mathrm{EKF}} \bm{V}_k^\mathrm{T}\right)^{-1}
+\end{align*}
+
+ermittelt. Als nächstes erfolgt die \textit{a posteriori} Zustandsschätzung 
+%
+\begin{align*}
+	\bm{\hat{x}}_k = \bm{\hat{x}}_k^{\text{--}} +\bm{K}_k \left( \bm{y}_k - \bm{g}(\bm{\hat{x}}_k^{\text{--}},\bm{0})\right)
+	= \bm{\hat{x}}_k^{\text{--}} -\bm{K}_k (\bm{y}_k -\bm{\hat{y}}_k^{\text{--}})
+\end{align*}
+
+und die Aktualisierung der Schätzfehlerkovarianzmatrix
+%
+\begin{align*}
+	\bm{P}_k = \left( \bm{E} - \bm{K}_k \bm{C}_k \right) \bm{P}_k^{\text{--}}.
+\end{align*}
+
+Der gesamte Ablauf des Algorithmus kann Bild~\ref{fig:ekfschema} entnommen werden. Die Jacobi-Matrizen des Prozess- und Messrauschens $ \bm{W}_k $ und $ \bm{V}_k $ sind in den einzelnen Zeitschritten nicht bekannt, weshalb die Annahme $ \bm{V}_k = \bm{W}_k =\bm{E} $ getroffen wird. Folglich wird die Zustandsschätzung des EKF maßgeblich durch die Kovarianzmatrizen $ \bm{Q}_{\mathrm{EKF}} $ und $ \bm{R}_{\mathrm{EKF}} $ und die Initialisierung mit $ \bm{x}_0 $ und $ \bm{P}_0 $ beeinflusst. Der Umgang mit diesen Einstellfaktoren ist Gegenstand des folgenden Abschnitts. 
+
+\begin{figure}[!b]
+	\begin{center}
+		\begin{tikzpicture}[node distance=1.3cm]
+		% nodes
+		
+		\node[inner sep=0,minimum size=0] (middle) {}; 	
+		
+		\node[draw,rectangle, right of = middle, align = left, node distance = 4cm] (korrektur) 
+		{\textbf{Korrektur \textit{(a posteriori)}}: \\
+			(1) Berechnung der Kalmanverstärkung \\
+			$ 	\bm{K}_k = \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T}\left(\bm{C}_k \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T} + \bm{V}_k \bm{R}_{\mathrm{EKF}} \bm{V}_k^\mathrm{T}\right)^{-1} $  \\\\
+			(2) Korrektur des Zustands mit $ \bm{y}_k $  \\
+			$ 	\bm{\hat{x}}_k = \bm{\hat{x}}_k^{\text{--}} -\bm{K}_k (\bm{y}_k -\bm{\hat{y}}_k^{\text{--}}) $ \\\\
+			(3) Korrektur der Fehlerkovarianz \\
+			$ 	\bm{P}_k = \left( \bm{E} - \bm{K}_k \bm{C}_k \right) \bm{P}_k^{\text{--}}. $};
+		
+		\node[draw,rectangle, left of = middle, align = left, node distance = 4cm] (prädiktion) 
+		{\textbf{Prädiktion \textit{(a priori)}}: \\
+			(1) Prädiktion des folgenden Zustands \\
+			$ 	\bm{\hat{x}}_{k+1}^{\text{--}} = \bm{f}(\bm{\hat{x}},u_k,\bm{0}) $\\\\
+			(2) Prädiktion der folgenden Fehlerkovarianz  \\
+			$ 	\bm{P}^{\text{--}}_{k+1} = \bm{A}_k\bm{P}_k\bm{A}_k^\mathrm{T} + \bm{W}_k \bm{Q}_{\mathrm{EKF}} \bm{W}_k^\mathrm{T} $};
+		
+		\node[inner sep=0,minimum size=0, below  of = prädiktion, node distance = 3.5cm, align = center] (init) {Initialisierung\\$ \bm{\hat{x}}_0, \bm{P}_0 $};
+		\node[inner sep=0,minimum size=0, above of = korrektur, node distance = 3.75cm, align = center] (messung) 
+		{Messung $ \bm{y}_k $};
+		
+		\draw[-latex, ultra thick, out = 70, in = 130] (prädiktion) to 
+		node [below, align = center]{$ \bm{\hat{x}}_k^{\text{--}} $} 
+		node [above, align = center]{Zeitschrittaktualisierung}   (korrektur);
+		\draw[-latex, ultra thick, out = -130, in = -60 ] (korrektur) to 
+		node [below, align = center] {$ \bm{\hat{x}}_k $}(prädiktion);
+		\draw[-latex, ultra thick] (init) to 
+		node [below, align = center] {} (prädiktion);
+		\draw[-latex, ultra thick] (messung) to (korrektur);
+		\end{tikzpicture}
+	\end{center}
+	\caption{Schematischer Ablauf des EKF Algorithmus}
+	\label{fig:ekfschema}
+\end{figure}
+
+\subsection{Einstellregeln des EKF}
+\label{subsec:einstellregeln}
+
+Bevor die Zustandsbeobachtung in der Simulation durchgeführt wird, soll an dieser Stelle auf die Einstellregeln des EKF eingegangen werden. Obwohl in Realität das Prozess- und Messrauschen vom jeweiligen Zustand abhängt, werden sie in der Praxis oft als konstant angenommen. Dies hat den Vorteil, dass die Voraussetzungen aus Abschnitt~\ref{subsec:grundlagenekf} leicht erfüllt werden können.
+Für das Einschwingverhalten und die Dynamik des Filters ist vor allem das Verhältnis des Prozessrauschens $ \bm{Q}_{\mathrm{EKF}} $ und des Messrauschens $ \bm{R}_{\mathrm{EKF}} $ zueinander ausschlaggebend. Für hohe Einträge in $ \bm{Q}_{\mathrm{EKF}} $ wird eine hohe Prozessgüte unterstellt. Das heißt, das Vertrauen in das aufgestellte mathematische Modell ist hoch. Das EKF vertraut dem Prozess und wird diesem eher folgen. Ein geringes  $ \bm{Q}_{\mathrm{EKF}} $ hingegen impliziert, dass die Modellgüte gering ist. Möglicherweise spielen falsch identifizierte Systemparameter eine Rolle für ein ungenaues Modell. 
+
+Für das Messrauschen folgern wir analog, dass bei einer genauen Messung  $ \bm{R}_{\mathrm{EKF}} $ gering eingestellt werden sollte, da der Messung hohes Vertrauen geschenkt wird. Das Filter folgt der Messung verstärkt. Insbesondere ist über eine Grenzwertbetrachtung der Kalmanverstärkung mit einer "`perfekten"'  Messung $ \bm{R_{\mathrm{EKF}}}\rightarrow\bm{0} $
+%
+\begin{align*}
+	\lim\limits_{\bm{R_{\mathrm{EKF}}}\rightarrow\bm{0}} \bm{K}_k 
+	&= \lim\limits_{\bm{R}_{\mathrm{EKF}}\rightarrow\bm{0}} \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T}\left(\bm{C}_k \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T} + \bm{V}_k \bm{R}_{\mathrm{EKF}} \bm{V}_k^\mathrm{T}\right)^{-1} \\
+	&= \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T}\left(\bm{C}_k \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T} \right)^{-1} 
+	= \bm{P}_k^{\text{--}} \underbrace{\bm{C}_k^\mathrm{T} \bm{C}_k^\mathrm{-T}}_{\bm{E}} (\bm{P_k^{\text{--}}})^{-1}\bm{C}^{-1}\\
+	&= \underbrace{\bm{P_k^{\text{--}}}(\bm{P}_k^{\text{--}})^{-1}}_{\bm{E}} \bm{C}^{-1}
+	= \bm{C}^{-1},
+\end{align*}
+
+wodurch für die \textit{a posteriori} Zustandsschätzung folgt
+%
+\begin{align*}
+	\bm{\hat{x}}_k  = \bm{\hat{x}}_k^{\text{--}}  + \bm{C}_k^{-1} (\bm{y}_k-\bm{C}\bm{\hat{x}}_k^{\text{--}})
+	= \bm{C}_k^{\text{-1}}\bm{y}_k
+\end{align*}
+
+ersichtlich, dass die Bildung der Zustandsschätzung alleinig über das zugrunde liegende Modell erfolgt. 
+Andererseits impliziert ein hohes $ \bm{R}_{\mathrm{EKF}}  $, dass der Messung kein großes Vertrauen geschenkt wird. 
+
+Insgesamt lässt sich sagen, dass das Verhältnis des Prozess- und Messrauschens für die Dynamik des Filters ausschlaggebend sind. Ähnlich wie für die Wichtungsmatrizen der LQ-Regelung im Abschnitt~\ref{sec:lqr} werden nur die Diagonaleinträge der Kovarianzmatrizen des Prozess- und Messrauschens mit positiven Einträgen besetzt, um positive Definitheit zu garantieren. Das Ziel der Beobachtung ist es, den äußeren Pendelwinkel $ \varphi_2 $ möglichst gut zu schätzen. Dementsprechend macht es Sinn, ein Gütemaß an den geschätzten zweiten Pendelwinkel $ \hat{\varphi}_2 $ zu knüpfen. In der Simulation liegt der anhand der Bewegungsgleichungen exakt berechnete äußere Pendelwinkel als Referenz vor. Also ist es möglich, die Schätzung auf den tatsächlichen Winkel zu beziehen und die Abweichung auszurechnen. Ein Mittel für die Berechnung des Fehlers zwischen dem geschätzten und realen Winkelverlauf ist die Summe der Fehlerquadrate. Demzufolge wird Fehler
+%
+\begin{align}
+	E_{\mathrm{EKF}} = \sum_{i=0}^{N}\sqrt{(\varphi_{2,i}- \hat{\varphi}_{2,i})^2}\text{ ,}
+	\label{eq:fehlerekf}
+\end{align}
+
+definiert, wobei $ N $ der Anzahl der Zeitschritte entspricht. Der Winkel $ \varphi_{2} $ ist die simulierte Referenz und $ \hat{\varphi}_{2} $ der beobachtete Zustand.  Da nur das Verhältnis von $ \bm{Q}_{\mathrm{EKF}} $ und $ \bm{R}_{\mathrm{EKF}} $ eine Rolle spielt, wird das Messrauschen auf einen konstanten Wert gesetzt. Die Ermittlung von $ \bm{Q}_{\mathrm{EKF}} $ erfolgt, indem der Fehler~\eqref{eq:fehlerekf} als Gütemaß beim Iterieren der einzelnen Diagonaleinträge von $ \bm{Q}_{\mathrm{EKF}} $ verwendet wird. In dem Algorithmus~\ref{alg:optimierungQEKF} ist die vereinfachte Ermittlung der optimalen Gewichtungen des Prozessrauschens dargestellt. 
+%
+\begin{algorithm}
+	\floatname{algorithm}{Algorithmus}
+	\caption{Ermittlung der optimalen $ \bm{Q}_{\mathrm{EKF}} $-Einträge}
+	\label{alg:optimierungQEKF}
+	\begin{algorithmic}
+		%	\State \textbf{Initialisierung}
+		\State (1) Setze $ E_{\mathrm{EKF,opt}}  = \infty$
+		\State (2) Setze $ \bm{R}_{\mathrm{EKF}} = const $		
+		\For{$(  q_{\mathrm{11}} = q_{\mathrm{min}} \text{ to } q_{\mathrm{max}}  )$}
+		\For{$( q_{\mathrm{22}} = q_{\mathrm{min}} \text{ to } q_{\mathrm{max}}  )$} 
+		\For{$(  q_{\mathrm{33}} = q_{\mathrm{min}} \text{ to } q_{\mathrm{max}}  )$} 
+		\For{$( q_{\mathrm{44}} = q_{\mathrm{min}} \text{ to } q_{\mathrm{max}}  )$} 
+		\State  (3) Ermittle $\hat{\varphi}_{2} $ in Abhängigkeit von $ \bm{Q}_{\mathrm{EKF}} = \mathrm{diag}\Big( \left[  q_{\mathrm{11}},q_{\mathrm{22}},q_{\mathrm{33}},q_{\mathrm{44}} \right] \Big) $
+		\State  (4) Berechne den Fehler $ \bm{E}_{\mathrm{EKF}} $
+		\If{$( E_{\mathrm{EKF}} < E_{\mathrm{EKF,opt}} )$}
+		\State (5) Aktualisiere $ E_{\mathrm{EKF,opt}} = E_{\mathrm{EKF}}  $
+		\State (6) Aktualisiere $ \bm{Q}_{\mathrm{EKF,opt}}  = \bm{Q}_{\mathrm{EKF}} $
+		\EndIf
+		\EndFor
+		\EndFor
+		\EndFor
+		\EndFor	
+	\end{algorithmic}
+\end{algorithm}
+
+Hierbei repräsentieren $ \bm{E}_{\mathrm{EKF,opt}} $ den Fehler mit der minimalen Abweichung zwischen dem geschätzten und dem tatsächlichen Winkelverlauf gemäß~\eqref{eq:fehlerekf} und $ \bm{Q}_{\mathrm{EKF,opt}} $ ist die dazugehörige Matrix des Prozessrauschens. Die Variablen $ q_{\mathrm{min}} $ und $ q_{\mathrm{max}} $ stellen die Grenzen des Suchbereichs für die Einträge von $ \bm{Q}_{\mathrm{EKF}} $ dar, wobei die Werte zwischen dem kleinsten und größten Eintrag mit logarithmischen Abstand bestimmt werden. 
+Des Weiteren spielt die initiale Fehlerkovarianz eine wesentliche Rolle für das Verhalten des EKF. Es wird als erstes die Annahme getroffen, dass zwischen dem vorliegenden Zustand $ \bm{x}_k $ und der \textit{a priori} Schätzung $ \bm{x}_k^{\text{--}} $ eine sehr geringe Abweichung vorliegt. Damit lässt sich über die Grenzwertbetrachtung zeigen:
+%
+\begin{align*}
+	\lim\limits_{\bm{P_k^{\text{--}}}\rightarrow\bm{0}} \bm{K}_k  =  \lim\limits_{\bm{P_k^{\text{--}}}\rightarrow\bm{0}}
+	\bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T}\left(\bm{C}_k \bm{P}_k^{\text{--}} \bm{C}_k^\mathrm{T} + \bm{V}_k \bm{R}_{\mathrm{EKF}} \bm{V}_k^\mathrm{T}\right)^{-1} = \bm{0}
+\end{align*}
+
+und folglich
+%
+\begin{align*}
+	\bm{\hat{x}}_k = \bm{\hat{x}}_k^{\text{--}}.
+\end{align*}
+
+Dies bedeutet, dass der Fehler zwischen dem Modell und dem realen System keine Rolle bei der Schätzung spielt. Hingegen reagiert das Filter stärker auf den genannten Fehler, wenn der Schätzfehler ungleich null angenommen wird. Da die Fehlerkovarianzmatrix nach~\cite{Welch2006} schlussendlich für fast alle $ \bm{P}_0 $ konvergiert,  genügt es bei der Initialisierung $ \bm{P}_0 \neq 0$ anzunehmen. Aus diesem Grund wird $ \bm{P}_0 = \bm{E}_n $ gewählt. 
+
+Mit den hier aufgeführten Einstellregeln folgt die simulierte Zustandsbeobachtung des inversen Doppelpendels.
+
+
+\subsection{Simuationsergebnisse der Zustandsbeobachtung}
+\label{subsec:simulationsergebnisse}
+
+In der Simulation des Doppelpendels mit Zustandsbeobachtung durch das EKF werden zwei Fälle betrachtet. Zum einen werden die Zustände bei einem Ausschwingversuch des inversen Doppelpendels beobachtet. Zum anderen wird das Doppelpendel aus der unteren, stabilen Ruhelage mit einer harmonischen Wagenbeschleunigung angeregt. In Bild~\ref{fig:zustandsbeobachterspeziell} ist der Signalflussplan der Zustandsbeobachtung zu sehen. Wie im vorigen Abschnitt erwähnt sind die Eingänge des EKF die Wagenbeschleunigung $ \ddot{x}(t) $ und der Systemausgang $ \varphi_1(t) $. Um eine Aussagekraft über das Verhalten des Filters unter realen Bedingungen zu erhalten, wird der Winkel $ \varphi_1(t) $ mit einem normalverteilten Rauschsignal beaufschlagt.
+
+\begin{figure}[!ht]		% signalflussplan EKF mit Größen
+	\begin{center}
+		% Knoten
+		\begin{tikzpicture}[node distance=1.25cm]
+		\node[draw,rectangle, align = center] (real) {\footnotesize reales\\\footnotesize System};		% reales System
+		\node[inner sep=0,minimum size=0,right of=real, node distance = 2.5cm] (ausgang) {}; 	% Unsichtbarer Knoten zwischen real und y
+		\node[inner sep=0,minimum size=0,right of=ausgang] (phi1) {};	
+		\node[draw,rectangle, below of= real, align = center, node distance = 2cm] (ekf) {\footnotesize Erweitertes \\\footnotesize Kalmanfilter};
+		\node[inner sep=0,minimum size=0,left of=real, node distance = 2.5cm] (eingang) {};
+		\node[inner sep=0,minimum size=0,left of=eingang] (leftofeingang) {};
+		\node[draw, circle, inner sep = 2pt, minimum size =3pt, right  of =ekf, , node distance = 2.5cm] (add) {};
+		\node[draw,rectangle, right of=add, align = center] (rauschen) {\footnotesize Weißes \\\footnotesize Rauschen};	
+		\node[inner sep=0,minimum size=0,below of=add, node distance = 1cm] (xdach) {};	
+				
+		% Pfeile
+		\draw[->] (real) to node [above right, align = center] {\footnotesize Ausgang\\$ \varphi_1(t) $} (phi1);
+		\draw[->] (ausgang) to (add);		
+		\draw[->] (leftofeingang) to node [above left, align = center] {\footnotesize Eingang\\$ \ddot{x}(t) $} (real);			
+		\draw[->] (eingang) |-  (ekf);
+		\draw[vecArrow] (ekf) |- node [below right, align = center] {geschätzte Zustände\\$ \hat{\varphi}_1(t), \hat{\dot{\varphi}}_1(t), \hat{\varphi}_2(t), \hat{\dot{\varphi}}_2(t)$} (xdach);						
+		\draw[->] (rauschen) to (add);
+		\draw[->] (add) to (ekf);
+		\end{tikzpicture}
+	\end{center}
+	\caption{Signalflussplan der Zustandsbeobachtung in der Simulation}
+	\label{fig:zustandsbeobachterspeziell}
+\end{figure}
+
+Es wird zunächst der Ausschwingvorgang des Doppelpendels untersucht. Bei der Beobachtung des Auschwingverhaltens wird der Anfangszustand des Pendels
+%
+\begin{equation*}
+	\bm{x}_0 = \Big[ \varphi_{1,0} = \ang{1}, \dot{\varphi}_{1,0} = 0, \varphi_{2,0} = 0, \dot{\varphi_{2,0}} = 0 \Big]^{\mathrm{T}}
+\end{equation*}
+
+in die Nähe der oberen, instabilen Gleichgewichtslage festgelegt. Das EKF wird mit einem abweichenden Anfangszustand 
+%
+\begin{equation*}
+	\bm{\hat{x}}_{0} = \Big[ \hat{\varphi}_{1,0} = \ang{50}, \hat{\dot{\varphi}}_{1,0} = \angsi{286}{\,s^{-1}}, \hat{\varphi}_{2,0} = \ang{-50}, \hat{\dot{\varphi}}_{2,0} = \angsi{230}{\,s^{-1}} \Big]^{\mathrm{T}}
+\end{equation*}
+
+initialisiert, um das Einschwingverhalten des Filters zu untersuchen. Beim Ausschwingen gilt für die Wagenbeschleunigung $ \ddot{x}(t) = 0 $. Nach Anwendung des Algorithmus~\ref{alg:optimierungQEKF} ergibt sich für das Prozess- und Messrauschen:
+%
+\begin{equation*}
+	\bm{Q}_{\mathrm{EKF,opt}} = \mathrm{diag}\Big(\big[ 0,0001~~1~~0,1~~10\big]^{\mathrm{T}}\Big)
+	\text{ und } R_{\mathrm{EKF}} = 1.
+\end{equation*}
+
+Das Ergebnis der Zustandsschätzung ist in Bild~\ref{fig:simuausschwingphi} zu sehen. Die Referenzgrößen sind mit einer stetigen Linie und die Schätzungen gestrichelt dargestellt. 
+%
+\begin{figure}[!htb]
+	\centering
+	\input{plots/simuausschwing.tex}
+	\caption{Zustandsschätzung des EKF beim Ausschwingen des Doppelpendels: Pendelwinkel (oben), Pendelwinkelgeschwindigkeiten (unten)}
+	\label{fig:simuausschwingphi}
+\end{figure}
+%
+Wie erwartet, schwingen beide Pendel nach kurzer Zeit um 
+die untere, stabile Gleichgewichtslage bei $ \pm $\ang{180}, wie im oberen Graphen zu sehen. Innerhalb weniger Zeitschritte folgt die Schätzung $ \hat{\varphi}_1(t) $ der rauschbehafteten Messung $ \varphi_1(t) $ trotz der abweichenden Initialisierung des EKF. Die Schätzung des äußeren Pendelwinkels $ \hat{\varphi}_2(t) $ benötigt etwa \SI{0,8}{s}, bevor sie dem Referenzverlauf folgt. Aufgrund des Wertebereichs von mehreren Hundert Grad ist die Abweichung des Referenz- und des Schätzungsverlaufs nach Ablauf des Einschwingvorgangs nicht erkennbar, kann jedoch rechnerisch bestimmt werden. Um die falsche Initialisierung auszuschließen, wird die maximale Differenz der Verläufe nach einer Sekunde bestimmt. Die maximale Winkelabweichung für den inneren Pendelwinkel beträgt $ \Delta\varphi_{1,\mathrm{max}} = \ang{0,24} $ und für den äußeren Pendelwinkel $ \Delta\varphi_{2,\mathrm{max}} =$ \ang{1,87}.
+
+Die  
+Im unteren Graphen sind Ergebnisse der Zustandsschätzung für die Winkelgeschwindigkeiten illustriert. Die Winkelgeschwindigkeit des inneren Pendels $ \dot{\varphi}_1(t) $ resultiert aus der ungefilterten Bildung des Vorwärtsdifferenzenquotienten der rauschbehafteten Messung $ \varphi_1(t) $. Hierbei wird das Rauschen Ableiten des Winkelverlaufs zusätzlich verstärkt. Die Schätzung $ \hat{\dot{\varphi}}_1(t) $ rekonstruiert den Winkelgeschwindigkeitsverlauf, wobei sie im das Zentrum des verrauschten Signals $ \dot{\varphi}_1(t) $ verläuft. Die Winkelgeschwindigkeitsschätzung des äußeren Pendels $ \hat{\dot{\varphi}}_2(t) $ benötigt nach der unkorrekten Initialisierung etwa \SI{0,8}{s}, bis sie dem tatsächlichen Verlauf folgt. \\
+%
+Im zweiten Fall der Zustandsbeobachtung wird neben der Doppelpendelbewegung nun auch die Wagenbeschleunigung $ \ddot{x}(t) $ als Eingangsgröße des EKF betrachtet. Für die Wagenbeschleunigung wird eine harmonische Anregung
+%
+\begin{align}
+	\ddot{x}(t) = \ddot{x}_{\mathrm{max}} \sin(\omega t + \Delta\varphi)
+	\label{eq:harmonischenanregung}
+\end{align}
+
+gewählt. Es sind $ \ddot{x}_{\mathrm{max}} $ ist die Amplitude der Anregung, $ \omega $ die Kreisfrequenz und $ \Delta\varphi $ der Phasenversatz. Die hier betrachtete Wagenanregung weist die Parameter
+%
+\begin{equation*}
+	\ddot{x}_{\mathrm{max}} = \SI{5}{m.s^{-2}}\text{, }\omega = \SI{2\pi}{\radian.s^{-1}}  \text{ und } \Delta\varphi = 0. 
+\end{equation*}
+
+Der reale Anfangszustand in der unteren, stabilen Gleichgewichtslage lautet
+%
+\begin{equation*}
+	\bm{x}_0 = \Big[ \varphi_{1,0} = \ang{180}, \dot{\varphi}_{1,0} = 0, \varphi_{2,0} = \ang{180}, \dot{\varphi_{2,0}} = 0 \Big]^{\mathrm{T}}.
+\end{equation*}
+
+Für das Prozess- und Messrauschen werden die gleichen Einstellungen getroffen wie beim Ausschwingen verwendet. Das EKF wird mit dem Zustandsvektor
+%
+\begin{equation*}
+	\bm{\hat{x}}_{0} = \Big[ \hat{\varphi}_{1,0} = \ang{0}, \hat{\dot{\varphi}}_{1,0} = \angsi{573}{\,s^{-1}}, \hat{\varphi}_{2,0} = \ang{300}, \hat{\dot{\varphi}}_{2,0} = \angsi{-573}{\,s^{-1}} \Big]^{\mathrm{T}}.
+\end{equation*}
+
+abweichend vom realen Zustand initialisiert. Die Zustandsbeobachtung ist in Bild~\ref{fig:simuanregung} zu sehen. Aufgrund der hier gewählten Wagenanregung schwingen die Pendel nicht um die stabile, untere Ruhelage, sondern rotieren mehrere Male um die Gelenkachsen. Das ist aus dem Wertebereich des Winkelverlaufs ersichtlich, der Werte von über $ \ang{360} $. Die Schätzungen des EKF ist in der Lage, dem Referenzverlauf der Zustände zu folgen. 
+\begin{figure}[!hb]
+	\centering
+	\input{plots/simuanregung.tex}
+	\caption{Zustandsschätzung des EKF bei der harmonischen Wagenanregung: Pendelwinkel (oben),  Pendelwinkelgeschwindigkeiten (unten)}
+	\label{fig:simuanregung}
+\end{figure}
+Hinsichtlich der Einschwingzeit ist verhält sich das Filter ähnlich wie im Fall des Ausschwingens. Um dem Referenzverlauf der Messung $ \varphi_1(t) $ und dem sich daraus ergebenden Vorwärtsdifferenzenquotienten $ \dot{\varphi}_1(t) $ zu folgen, braucht das EKF weniger als \SI{0,2}{s}. Bis die Rekonstruktion der Verläufe von  $ \hat{\varphi}_2(t) $ und $ \hat{\dot{\varphi}}_2(t) $ den Referenzen folgt, vergehen etwa \SI{0,9}{s}. Die maximalen Abweichungen der Winkelverläufe nach Ablauf von einer Sekunde betragen im Fall der harmonischen Wagenanregung $ \Delta\varphi_{ 1,{\mathrm{max}}} = \ang{0,27} $ und $ \Delta\varphi_{2,{\mathrm{max}}} = \ang{2,7} $. Die Abweichung bei der Rekonstruktion des zweiten Pendelwinkels $ \varphi_2(t) $ ist im Fall der harmonischen Wagenanregung größer als beim Ausschwingen. Ein möglicher Grund hierfür ist, dass sich das äußere Pendel im zweiten Fall wesentlich schneller bewegt als im ersten Fall. Die Maximalgeschwindigkeit im ersten Fall beträgt \angsi{1000}{s^{-1}} und im zweiten Fall ist sie etwa doppelt so groß. Das bedeutet, dass bei schnelleren Bewegungen die Winkelschätzung tendenziell ungenauer wird. \\
+
+Zusammenfassend lässt sich sagen, dass die Zustandsschätzung am inversen Doppelpendel in der Simulation erfolgreich ist. Sowohl beim Ausschwingen des Doppelpendels, wobei die Wagenbeschleunigung $ \ddot{x}(t) $ auf Null gesetzt wird, und bei der harmonischen Wagenanregung gelingt eine zufriedenstellende Rekonstruktion der Zustände. Die Zustandsschätzung des EKF wird im nächsten Kapitel am realen Versuchsstand validiert.

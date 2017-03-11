@@ -1,0 +1,72 @@
+%% Creator: Inkscape inkscape 0.92.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'winkeltest.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{347.1072233bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.54875387)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{winkeltest.pdf}}%
+    \put(0.4943082,0.19903906){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi_{1,\mathrm{K}}$}}}%
+    \put(0.39472507,0.04054195){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u_\mathrm{r}$}}}%
+    \put(0.65419549,0.04265678){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u_\mathrm{b}$}}}%
+    \put(0.58328959,0.04334145){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u_\mathrm{g}$}}}%
+    \put(0.25588331,0.27195522){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$v_\mathrm{r}$}}}%
+    \put(0.2554111,0.42014745){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$v_\mathrm{b}$}}}%
+    \put(0.24954287,0.13971695){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$v_\mathrm{g}$}}}%
+    \put(0.92145277,0.30969667){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$g$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{winkeltest.pdf}}%
+    \put(0.60235459,0.13801639){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\alpha_1$}}}%
+    \put(0.60226786,0.35878094){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\alpha_2$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{winkeltest.pdf}}%
+    \put(0.55514038,0.49427382){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi_{2,\mathrm{K}}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{winkeltest.pdf}}%
+    \put(0.10052927,0.50486609){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u$}}}%
+    \put(0.0267276,0.42784951){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$v$}}}%
+    \put(0.02338692,0.4985721){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$KS_\mathrm{B}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{winkeltest.pdf}}%
+  \end{picture}%
+\endgroup%

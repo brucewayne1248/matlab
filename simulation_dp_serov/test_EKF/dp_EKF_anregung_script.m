@@ -1,7 +1,4 @@
 %% Konstanten
-% Dichte Alu: 2.7g/cm^3=2700kg/m^3, Dichte Eisen: 7.874g/cm^3= 7874kg/m^3,
-% ca 3 mal so schwer
-% Konstanten benötigt für momentengesteuerte Regelung
 
 g = 9.81;
 l_1 = 0.194;    
@@ -16,13 +13,13 @@ T_s = 0.001;
 d2r = pi/180;
 r2d = 180/pi;
 noise_power = 0.5*0.000000003;
-x_0=0; dx_0=0; phi1_0=180*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
+x_0=0; dx_0=0; phi1_0=180*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0; ddx_0 = 0;
 x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
-x0_ekf = [210*d2r; 1; 150*d2r; -3];%x0;
+x0_ekf = [0*d2r; 10; 300*d2r; -10];
 % Anregungsparameter Wagen
-A = 1;
-f = pi;
-phase = pi/2;
+A = 5;
+f = 2*pi;
+phase = 0;
 %% EKF
 Pk_0 = eye(4);
 Rk = 1;
@@ -62,41 +59,6 @@ paramNameValStruct.StateSaveName  = 'xout';
 paramNameValStruct.SaveOutput     = 'on';
 paramNameValStruct.OutputSaveName = 'yout';
 paramNameValStruct.SaveFormat = 'Dataset';
-%% Anregungsparameter
-x_initial = 0;
-simOut = sim('dp_EKF_anregung',paramNameValStruct);
-outputs = simOut.get('yout');
-x_initial = (max(outputs.get('x').Values.data)-min(outputs.get('x').Values.data))/2;
-dphi2_max = max(abs(outputs.get('dphi2').Values.data));
-f_gopro = 240;
-f_ndi = 60;
-dphi2_max_d = dphi2_max*r2d;
-d_per_frame = dphi2_max_d/f_gopro;
-%% Q11 = Q22, Q33 = Q44;
-% diff_min = Inf;
-% for i = 1:length(q12)
-%     for ii = 1:length(q34)
-%         set_param('dp_EKF_anregung/EKF/Qk', 'Gain', 'Qk(:,:,ii,iii)');
-%         simOut = sim('dp_EKF_anregung',paramNameValStruct);
-%         outputs = simOut.get('yout');
-%         phi2_time = (outputs.get('phi2').Values);
-%         phi2 = phi2_time.Data;
-%         phi2_est_time = (outputs.get('phi2_est').Values);
-%         phi2_est = phi2_est_time.Data;
-%         dphi2_time = (outputs.get('dphi2').Values);
-%         dphi2 = phi2_time.Data;
-%         dphi2_est_time = (outputs.get('dphi2_est').Values);
-%         dphi2_est = dphi2_est_time.Data;
-%         % criterion for choosing best fit
-%         diff = sum(sqrt((phi2-phi2_est).^2)) + sum(sqrt((dphi2-dphi2_est).^2));   
-%         %updating variables to best fit
-%         if (diff<diff_min)
-%             diff_min = diff;
-%             Qk_min = Qk(:,:,i,ii);
-%             ii_min = i; iii_min = ii;
-%         end
-%     end
-% end
 %% Qii variable 
 % for i = 1:length(qii)
 %     for ii = 1:length(qii)
@@ -125,8 +87,15 @@ d_per_frame = dphi2_max_d/f_gopro;
 %         end
 %     end
 % end
-%% optimal Q 
-Qk_min = diag([0.0001 1 0.1 10]);
+%% 
+set_param('dp_EKF_anregung/EKF/Qk', 'Gain', 'Qk_min');
+simOut = sim('dp_EKF_anregung',paramNameValStruct);
+outputs = simOut.get('yout');
+data = (outputs.get('data').Values);
+t = data.Time;
+values = data.Data;
+
+
 %% Set params according to best fit and plot phi2 
 % set_param('dp_EKF_anregung/EKF/Qk', 'Gain', 'Qk(:,:,i_min,ii_min)');
 % set_param('dp_EKF_anregung/EKF/Qk', 'Gain', 'Qk(:,:,i_min,ii_min,iii_min, iiii_min)');

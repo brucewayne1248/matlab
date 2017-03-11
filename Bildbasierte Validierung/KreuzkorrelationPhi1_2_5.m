@@ -55,8 +55,8 @@ figure(3)
 plot(tMeas,phi1MeasDeg,'r'), hold on
 title('Messung und Video')
 plot(tVideoAlign, phi1VideoDeg,'b'), legend('Messung','Video')
-a = text(0.1,90,strcat('Korrelationskoeffizient: ', num2str(corrCoef)));
-set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 8, 'Color', 'black');
+% a = text(0.1,90,strcat('Korrelationskoeffizient: ', num2str(corrCoef)));
+% set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'FontSize', 8, 'Color', 'black');
 xlabel('t in Sek.'), ylabel('Winkel in Grad');
 
 %%

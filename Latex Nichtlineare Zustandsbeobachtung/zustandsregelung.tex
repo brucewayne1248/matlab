@@ -1,0 +1,394 @@
+\chapter{Zustandsregelung des inversen Doppelpendels}
+\label{ch:zustandsregelung}
+
+In diesem Kapitel wird zuerst die Zustandsraumdarstellung des inversen Doppelpendels hergeleitet. Im Anschluss wird die grundlegende Systemeigenschaft der Steuerbarkeit erläutert und für das vorliegende System nachgewiesen. Zuletzt wird das Doppelpendel mittels einer optimalen Zustandsregelung in der oberen, instabilen Gleichgewichtslage stabilisiert. Die Simulationsergebnisse werden dargestellt und diskutiert. 
+
+\section{Zustandsraumdarstellung}
+\label{sec:zustandsraumdarstellung}
+
+Die Herleitung der Zustandsraumdarstellung ist Gegenstand dieses Abschnitts. Die Vorteile einer Analyse eines Systems im Zustandsraum ist die gute Interpretierbarkeit der untersuchten physikalischen Zustände und eine einfache rechnergestützte Simulation~\cite{Lunze2010}. Der Signalflussplan des Zustandsraums mit den wesentlichen Größen kann Bild~\ref{fig:zustandsraum} entnommen werden. Es wird darauf hingewiesen, dass die Zeitabängigkeit der Zustände und der Eingangsgröße wieder dargestellt wird. Das Ziel ist es, die in Kapitel~\ref{ch:modellbildung} hergeleiteten, nichtlinearen Bewegungsgleichungen durch eine Linearisierung im Zustandsraum eines Mehrgrößensystems
+%
+\begin{align}
+\bm{\dot{x}}(t)  &=  \bm{A x}(t) + \bm{b}  u(t),  \text{ mit } \bm{x}(0) = \bm{x}_0,\label{eq:zustandsgleichung}\\
+\bm{y}(t)  &=  \bm{C x}(t) \label{eq:ausgangsgleichung}
+\end{align}
+\begin{figure}[!b] % signalflussplan zustandsraum
+	\begin{center}
+		%\begin{scaletikzpicturetowidth}{\textwidth}
+		\begin{tikzpicture}[node distance=1.5cm]%[thick, scale = 1, transform canvas={scale=1}] %[scale=\tikzscale]%				%[thick] % scale = 2, transform pose
+		\node[draw,rectangle] (int) {$ \int \text{\small{dt}}$};							% Intgralzeichen
+		\node[inner sep=0,minimum size=0,right of=int] (int-c-a) {}; 	% Unsichtbarer Knoten zwischen Int und C
+		\node[draw,rectangle,right of=int-c-a] (c) { {$\bm{C}$}};			% Beobachtungsmatrix
+		\node[draw,rectangle,below of=int] (a) {$\bm{A}$};						% Systemmatrix unter Int
+		\node[inner sep=0,minimum size=0,above of=int, node distance = 1cm] (x0) {};  		% Startwert unsichtbarer Knoten
+		%\node[inner sep=0,minimum size=0,above of=x0] (x0above) {$ \bm{x}(0) $};
+		\node[inner sep=0,minimum size=0,right of=c] (y) {} ;			% Ausgang
+		\node[draw, circle, inner sep = 2pt, minimum size =3pt, left of =int] (b-int) {};
+		\node[inner sep=0,minimum size=0,below of=b-int] (b-int-a) {};
+		\node[draw,rectangle,left of=b-int] (b) { {$\bm{b}$}};
+		\node[inner sep=0,minimum size=0,left  of=b] (u) {};
+		
+		% 1st pass: draw arrows
+		\draw[vecArrow] (int) to node [above] {$ \bm{x}(t) $} (c);
+		\draw[vecArrow] (int-c-a) |- (a);
+		\draw[vecArrow] (x0) to node [right,pos = 0.1] {$\bm{x}_0$} (int);
+		\draw[vecArrow] (c) to node [above] {$ \bm{y}(t) $} (y);
+		\draw[vecArrow] (a) -| (b-int);
+		\draw[vecArrow] (b-int) to node [above] {$ \bm{\dot{x}(t) } $} (int);
+		\draw[vecArrow] (b) to (b-int);
+		\draw[->] (u) to node [above] {$ u(t) $} (b);
+		
+		% 2nd pass: copy all from 1st pass, and replace vecArrow with innerWhite
+		\draw[innerWhite] (int) to (c);
+		\draw[innerWhite] (int-c-a) |- (a);
+		\draw[innerWhite] (x0) to (int);
+		\draw[innerWhite] (c) to (y);
+		\draw[innerWhite] (a) -| (b-int);
+		\draw[innerWhite] (b) to (b-int);
+		
+		% Note: If you have no branches, the 2nd pass is not needed
+		\end{tikzpicture}
+		%\end{scaletikzpicturetowidth}
+	\end{center}
+	\caption{Signalflussplan des Zustandsraums ohne Durchgangsanteil}
+	\label{fig:zustandsraum}
+\end{figure}
+
+mit einer Eingangsgröße und mehreren Ausgängen darzustellen. Die hier dargestellte Zustandsraumdarstellung entspricht nicht der allgemeinen Form, sondern ist bereits an das untersuchte inverse Doppelpendel mit verfahrbarem Wagen angepasst. Da das System nicht sprungfähig ist, wird der Durchgangsanteil $ \bm{D} = \bm{0}$ in den obigen Gleichungen nicht aufgeführt. Im vorliegenden gelten für die einzelnen Variablen die Bezeichnungen und Dimensionen:
+
+
+\begin{center}
+	\begin{tabular}{lcc}
+		Bezeichnung  		& Variable 		& Dimension	\\ \hline
+		Zustandsvektor 		& $ \bm{x}(t) $	& $ (n~\times~1) $	\\
+		Anfangszustand 		& $ \bm{x}_0 $	& $ (n~\times~1) $	\\		
+		Eingangsgröße 		&  $ u(t) $		& $ (1~\times~1) $	\\
+		Ausgangsvektor 		& $ \bm{y}(t) $	& $ (p~\times~1) $	\\
+		Systemmatrix 		& $ \bm{A} $	& $ (n~\times~n) $	\\
+		Steuervektor		& $ \bm{b} $	& $ (n~\times~1) $	\\
+		Beobachtungsmatrix 	& $ \bm{C} $	& $ (p~\times~n) $	\\
+	\end{tabular}
+\end{center}
+
+
+Für das Aufstellen des Systems ist zunächst eine geeignete Wahl des Zustandsvektors $ \bm{x}(t) $ notwendig. Nach~\cite{Lunze2014} repräsentieren Zustände die physikalischen Energiespeicher eines Systems. In Anlehnung an den Lagrange-Formalismus aus Kapitel~\ref{ch:modellbildung}, welche den Energieerhalt des inversen Doppelpendels beschreibt, stellen die Position sowie Geschwindigkeit des Wagens und analog der Winkel und die Winkelgeschwindigkeit der beiden Pendelstäbe Energiespeicher dar. Demzufolge sind 6 Zustände relevant und ein geeigneter Zustandsvektor lautet
+% 
+\begin{align}
+\bm{x}(t) = \Big[ x(t), \dot{x}(t), \varphi_1(t), \dot{\varphi}_1(t), \varphi_2(t), \dot{\varphi}_2(t) \Big]^{\mathrm{T}}.
+\label{eq:arbeitspunkt}
+\end{align}
+
+Die Zustandsgleichung~\eqref{eq:zustandsgleichung} beinhaltet die Zustände $ \bm{x} $ und deren zeitlichen Ableitungen $ \bm{\dot{x}} $. Ausgehend vom Startpunkt $ t = 0 $ und den Startwerten $ \bm{x}(0) = \bm{x}_0 $ wird das dynamische, zeitinvariante Verhalten des Systems beschrieben und modelliert. Die obigen Gleichungen stellen ein bereits linearisiertes System dar. Für die Wahl der Ausgangsgrößen eignen sich die messbaren Größen des mechatronischen Systems. Diese sind die Wagenposition $ x(t) $ und der innere Pendelwinkel $ \varphi_1(t) $, welche in~\eqref{eq:ausgangsgleichung} gebildet werden. Die hergeleiteten Bewegungsgleichungen liegen in nichtlinearer Form vor. Mithilfe einer Taylor-Approximation 1. Ordnung
+%
+\begin{align}
+	T_{(1,(\bm{x}_\mathrm{AP},u_0))} (\bm{x}(t), u(t)) = 
+	f(\bm{x}_\mathrm{AP}, u_0) 
+	&+ \frac{\partial f}{\partial \bm{x}(t)}  \bigg|_{(\bm{x}_\mathrm{AP}, u_0)} (\bm{x}(t) - \bm{x}_\mathrm{AP}) \nonumber \\
+	&+ \frac{\partial f}{\partial u(t)}\bigg|_{(\bm{x}_\mathrm{AP}, u_0)}	(u(t)-u_0)
+\label{eq:taylor}
+\end{align}  
+
+werden nichtlineare Funktionen durch Abbruch der Taylor-Reihe nach dem 1. Glied angenähert. Das Ergebnis ist eine lineare Approximation des nichtlinearen Verhaltens in der Nähe des Arbeitspunkts. Für die Regelung des inversen Doppelpendels um die obere, instabile Gleichgewichtslage ergibt sich der Arbeitspunkt 
+%
+\begin{align*}
+\bm{x}_\mathrm{AP} = \Big[x_0 = 0, \dot{x}_0 = 0, \varphi_1 = 0, \dot{\varphi}_1 = 0, \varphi_2 = 0,\dot{\varphi}_2 = 0 \Big]^\mathrm{T} \hspace{0.1cm} \text{ und } \hspace{0.1cm} u_0 = 0.
+\end{align*}
+
+
+Damit werden~\eqref{eq:ddphi1} und~\eqref{eq:ddphi2} linearisiert und liefern
+%
+\begin{align}
+\ddot{\varphi}_1(t) = \frac{1}{J_\mathrm{1,ges}} \Big( &d_2 (\dot{\varphi}_2(t) - \dot{\varphi}_1(t)) - d_1 \dot{\varphi}_1(t)
++(\tfrac{1}{2} m_1 + m_2 + m_3) l_1 u(t) \nonumber \\
+\hspace{1cm} &- \tfrac{1}{2} m_2 l_1 l_2 \ddot{\varphi}_2(t) 
++ (\tfrac{1}{2} m_1 + m_2 + m_3) l_1 g \varphi_1(t) \Big), \label{eq:ddphi1Lin} 
+\end{align}
+\begin{align}
+\ddot{\varphi}_2(t) &= \frac{1}{J_\mathrm{2,ges}} \Big( d_2 (\varphi_2(t)-\varphi_1(t)) 
+- \tfrac{1}{2} m_2 l_1 l_2 \ddot{\varphi}_1(t) +\tfrac{1}{2} m_2 l_2 u(t) + \tfrac{1}{2} m_2 l_2 g \varphi_2(t)
+\Big) \label{eq:ddphi2Lin}
+\end{align}
+
+mit
+%
+\begin{align}
+\label{eq:J1Ges}
+J_\mathrm{1,ges} = (\tfrac{1}{3} m_1 + m_2 +m_3) l_1^2 \hspace{0.25cm} \text{und}  \hspace{0.25cm}
+J_\mathrm{2,ges} = \tfrac{1}{3} m_2 l_2^2 	\nonumber.
+\end{align}
+
+Nach einer Entkopplung der Winkelbeschleunigungsterme in~\eqref{eq:ddphi1Lin} und~\eqref{eq:ddphi2Lin} ist das Aufstellen der Systemmatrix $ \bm{A} $, des Steuervektors $ \bm{b} $ und der Beobachtungsmatrix $ \bm{C} $ möglich. Es ergeben sich für die Matrizen folgende Formen
+%
+\begin{align*}
+\bm{A} = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & a_{43} & a_{44} & a_{45} & a_{46} \\
+0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & a_{63} & a_{64} & a_{65} & a_{66}  
+\end{bmatrix},
+\bm{B} =
+\begin{bmatrix}
+0 \\ 1 \\ 0 \\ b_4 \\ 0 \\b_6
+\end{bmatrix} \text{ und } \hspace{0.1cm}
+\bm{ C} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\ 
+\end{bmatrix}.
+\end{align*}
+
+Die einzelnen Einträge der Matrizen lauten
+%
+\begin{equation*}
+\setlength{\jot}{12pt}
+\begin{aligned}
+a_{43} &= \dfrac{3g(2 m_1 + 4 m_2 + 4 m_3)}{l_1 (4 m_1 + 3 m_2 +1 2 m_3)}, \\ 
+a_{44} &= \dfrac{- 3(4d_1l_2 + d_2(6l_1+4l_2))}{l_1^2l_2(4 m_1 + 3m_2 + 12 m_3)},\\ 
+a_{45} &= \dfrac{-9 g m_2}{l_1(4 m_1 + 3m_2 + 12 m_3)},\\
+a_{46} &= \dfrac{6d_2(3l_1+2l_2)}{l_1^2 l_2(4 m_1 + 3m_2 + 12 m_3)},
+\end{aligned}
+\end{equation*}
+
+\begin{equation*}
+\setlength{\jot}{12pt}
+\begin{aligned}
+a_{63} &= \dfrac{-9g( m_1 + 2 m_2 + 2 m_3)}{l_2(4 m_1 + 3m_2 + 12 m_3)}, \\
+a_{64} &= \dfrac{18d_1l_2m_2+ 6d_2(l_1(2m_1+6m_2+6m_3)+3l_2m_2)}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}, \\
+a_{65} &= \dfrac{6g( m_1 + 3 m_2 + 3 m_3)}{l_2 (4 m_1 + 3 m_2 +1 2 m_3)}, \\
+a_{66} &= \dfrac{-6d_2( l_1(2m_1+6m_2+6m_3+3l_2m_2))}{l_1 l_2^2 m_2(4 m_1 + 3m_2 + 12 m_3)}.
+\end{aligned}
+\end{equation*}
+
+und
+%
+\begin{equation*}
+\setlength{\jot}{12pt}
+\begin{aligned}
+b_{4} &= \dfrac{3(2m_1 + m_2 + 4 m_3)}{l_1(4 m_1 + 3m_2 + 12 m_3) }, \\
+b_{6} &= \dfrac{-3m_1}{l_2(4 m_1 + 3m_2 + 12 m_3)}.
+\end{aligned}
+\end{equation*}
+
+Damit ist die zeitkontinuierliche Zustandsraumdarstellung vollständig gebildet. Der Zustandsraum ist der Ausgangspunkt für Untersuchungen weiterer Systemeigenschaften. Für die Zustandsregelung ist die Steuerbarkeit des Doppelpendels relevant, welche im folgenden Abschnitt untersucht wird.
+
+
+\section{Steuerbarkeit}
+\label{sec:steuerbarkeit}
+
+Bevor die hier angewendete Optimalregelung erläutert wird, wird die grundsätzliche Eigenschaften der \textit{vollständigen Steuerbarkeit} eingeführt. Die in diesem Abschnitt dargestellten Zusammenhänge sind angelehnt an~\cite{Lunze2010}. 
+
+Es ist für eine beliebige Regelungsaufgabe zu klären, ob mithilfe der Eingangsgröße $ u(t) $ die Zustände von einem beliebigen Anfangszustand $ \bm{x}_0 $ in einen gewünschten Endzustand $ \bm{x}_\mathrm{e} $ überführt werden können. Ist diese Bedingung erfüllt, nennt man das System \textit{vollständig steuerbar}. Es gibt diverse Ansätze die Steuerbarkeit eines Systems zu überprüfen, wobei im Rahmen dieser Arbeit das Steuerbarkeitskriterium von \textit{Kalman} herangezogen wird. Der Vorteil dieses Kriteriums ist der einfache Nachweis. Es genügt eine Untersuchung der \mbox{$(n\times~n)$-Steuerbarkeitsmatrix} bestehend aus der Systemmatrix und dem Steuervektor:
+%
+\begin{align}
+\label{eq:steuerbarkeitsmatrix}
+\bm{S}_\mathrm{S} = (\bm{b} \hspace{0.25cm} \bm{Ab} \hspace{0.25cm} \bm{A^2b} \hspace{0.25cm} ... \hspace{0.25cm} \bm{A^{n-1}b} ).
+\end{align}
+
+Für die \textit{vollständige Steuerbarkeit} des Systems muss $ \bm{S}_\mathrm{S} $ den vollen Rang $ \mathrm{rang}(\bm{S}_\mathrm{S}) = n = \mathrm{dim}(\bm{x}) $ aufweisen. Eine quadratische Matrix besitzt genau dann vollen Rang, wenn die Determinante der Matrix ungleich null ist. Mit der in Abschnitt~\ref{sec:zustandsraumdarstellung} aufgestellten Systemmatrix  $ \bm{A} $ und dem Steuervektor $ \bm{b} $ wird die \textit{vollständige Steuerbarkeit} nachgewiesen:
+%
+\begin{align*}
+\text{det}(\bm{S}_\mathrm{S}) = \left|
+\begin{smallmatrix}
+0 & 1 & 0 & 0 &	0 &	0 \\
+1 & 0 &	0 &	0 &	0 &	0 \\
+0 &	5,70 & -12,22 & 553,55 & -4450,75 & 99131,28 \\
+5,70 & -12,22 & 553,55 &	4450,75 & 99131,28 & -1307247,75 \\
+0 & -0,86 & 37,45 & -1074,92 & 14488,56 & -293533,44 \\
+-0,86 & 37,45 & -1074,92 & 14488,56 & -293533,44 & 4293776,72
+\end{smallmatrix}
+\right| = \small{ -7.0768\cdot 10^{14} \neq 0}
+\end{align*}
+
+Folglich lässt sich das Doppelpendel mithilfe der Eingangsgröße $ \ddot{x} $ aus einem beliebigen Anfangszustand $ \bm{x}_0 $ in einen Endzustand $ \bm{x}_\mathrm{e} $ überführen. Das bedeutet, dass die Zustandsregelung in die obere Gleichgewichtslage möglich ist. 
+
+\section{Zustandsregelung mittels LQ-Regelung}
+\label{sec:lqr}
+
+In diesem Abschnitt wird die Zustandsregelung mithilfe der optimalen LQ-Regelung dargestellt. Im Gegensatz zur PID-Regelung wird bei der Zustandsregelung nicht die Ausgangsgröße zurückgeführt sondern die Systemzustände. Die allgemeine Zustandsrückführung bei einer skalaren Eingangsgröße lautet
+%
+\begin{equation}
+	u(t) = -\bm{k}^\mathrm{T}\bm{x(t)} + V w(t), 
+	\label{eq:zustandsrückführung}
+\end{equation}
+
+wobei $ \bm{k}^{\mathrm{T}} \in\mathds{R}^n $ der Rückführvektor ist und der zweite Summand für eine Führungsregelung benötigt wird. Es sind $ V $ ein Vorfilter und $ w(t) $ die Führungsgröße. Im Fall der Stabilisierung des Doppelpendels ist keine Führungsgröße vorhanden, stattdessen wird das Pendel aus einem ausgelenkten Zustand $ \bm{x}_0 $ in den Arbeitspunkt~\eqref{eq:arbeitspunkt} geregelt. Hierfür genügt es für die Untersuchung der Regelkreisdynamik den ersten Summanden der Zustandsrückführung~\eqref{eq:zustandsrückführung} zu betrachten. Mithilfe der Gleichung~\eqref{eq:zustandsrückführung} lässt sich der Signalflussplan, wie in Bild~\ref{fig:zustandsrückführung} zu sehen, ableiten. Unter Berücksichtigung der Eingangsgröße von~\eqref{eq:zustandsrückführung} ergibt sich das folgende System:
+%
+\begin{align}
+\begin{split}
+	\bm{\dot{x}}(t)  &=  \underbrace{(\bm{A}-\bm{b}\bm{k}^\mathrm{T})}_{
+		\textstyle
+		\begin{array}{c}
+		\bm{\tilde{A}}
+		\end{array}
+		}\bm{x}(t), \text{ mit } \bm{x}(\bm{0}) = \bm{x}_0, \\
+	\bm{y}(t)  &=  \bm{C x}(t). \label{eq:system2}
+\end{split}
+\end{align}
+
+\begin{figure}[!b] % signalflussplan zustandsraum
+	\begin{center}
+		\begin{tikzpicture}[node distance=1.3cm]
+		% nodes
+		\node[draw,rectangle] (int) {$ \int \text{\small{dt}}$};		% Intgralzeichen
+		\node[inner sep=0,minimum size=0,right of=int] (int-c-a) {}; 	% Unsichtbarer Knoten zwischen Int und C
+		\node[draw,rectangle,right of=int-c-a] (c) { {$\bm{C}$}};			% Beobachtungsmatrix
+		\node[draw,rectangle,below of=int] (a) {$\bm{A}$};						% Systemmatrix unter Int
+		\node[inner sep=0,minimum size=0,above of=int, node distance = 1cm] (x0) {};  		% Startwert unsichtbarer Knoten
+		%\node[inner sep=0,minimum size=0,above of=x0] (x0above) {$ \bm{x}(0) $};
+		\node[inner sep=0,minimum size=0,right of=c] (y) {} ;			% Ausgang
+		\node[draw, circle, inner sep = 2pt, minimum size =3pt, left of =int, node distance = 1.5cm] (b-int) {};
+		\node[inner sep=0,minimum size=0,below of=b-int] (b-int-a) {};
+		\node[draw,rectangle,left of=b-int] (b) { {$\bm{b}$}};
+		\node[draw, circle, inner sep = 2pt, minimum size =3pt,left  of=b] (u) {};
+		\node[draw,rectangle,below of =  a] (kt) {$ \bm{k}^{T}$};
+		\node[draw,rectangle,left of =  u] (V) {$ V $};
+		\node[inner sep=0,minimum size=0,left of=V] (w) {};
+		
+		% 1st pass: draw arrows
+		\draw[vecArrow] (int) to node [above] {$ \bm{x}(t) $} (c);
+		\draw[vecArrow] (int-c-a) |- (a);
+		\draw[vecArrow] (x0) to node [right,pos = 0.1] {$\bm{x}_0$} (int);
+		\draw[vecArrow] (c) to node [above] {$ \bm{y}(t) $} (y);
+		\draw[vecArrow] (a) -| (b-int);
+		\draw[vecArrow] (b-int) to node [above] {$ \bm{\dot{x}(t) } $} (int);
+		\draw[vecArrow] (b) to (b-int);
+		\draw[->] (u) to node [above] {$ u(t) $} (b);
+		\draw[vecArrow] (int-c-a) |- (kt);
+		\draw[->] (V) to node [below, pos = 1.3] {-} (u);
+		\draw[->] (w) to node [above, pos = 0.1] {$ w(t) $} (V);
+		\draw[->] (kt) -| (u);
+		
+		% 2nd pass: copy all from 1st pass, and replace vecArrow with innerWhite
+		\draw[innerWhite] (int) to (c);
+		\draw[innerWhite] (int-c-a) |- (a);
+		\draw[innerWhite] (x0) to (int);
+		\draw[innerWhite] (c) to (y);
+		\draw[innerWhite] (a) -| (b-int);
+		\draw[innerWhite] (b) to (b-int);
+		
+		% Note: If you have no branches, the 2nd pass is not needed
+		\end{tikzpicture}
+	\end{center}
+	\caption{Signalflussplan der Zustandsrückführung}
+	\label{fig:zustandsrückführung}
+\end{figure}
+
+Hierbei ist $ \bm{\tilde{A}} $ die Systemmatrix des geschlossenen Kreises mit Zustandsrückführung. Die Eigenwerte der Regelstrecke, welche über eine Untersuchung der Systemmatrix $ \bm{A} $ berechnet werden können, beschreiben die Dynamik der Regelstrecke. Es ist direkt ersichtlich, dass der Rückführvektor $ \bm{k}^\mathrm{T} $ einen Einfluss auf die Eigenwerte des geschlossenen Kreises hat. Somit ist es möglich, die geschlossene Systemdynamik über die Einträge des Rückführvektors zu beeinflussen. Zwei häufig verwendete Methoden der Reglerauslegung stellen die \textit{Polvorgabe} und die \textit{Linear-Quadratische-Regelung }(LQ-Regelung) dar. Die hier dargestellten Aufführungen beziehen sich auf~\cite{Lunze2010}.
+
+Bei der ersten Methode wird die Systemdynamik des geschlossenen Kreises über die Wahl bestimmter Pole der Übertragungsfunktion, welche das Ein- und Ausgangsverhalten des Systems beschreibt, vorgegeben. Hierbei werden die Pole in der komplexen Ebene platziert, wobei diese bestimmte Eigenschaften erfüllen sollten. Unter anderem muss die Reglerdynamik höher als die der Strecke sein. Das bedeutet, dass die vorgegebenen Pole betragsmäßig fünf bis sechs Mal so weit links in der komplexen Ebene als die der Regelstrecke liegen sollten. Jedoch wird durch eine härtere Auslegung des Reglers unerwünschtes Messrauschen zusätzlich verstärkt. 
+
+Bei der LQ-Regelung wird auf die Pole des geschlossenen Kreises auch Einfluss genommen, jedoch geschieht dies auf indirekte Art und Weise. Die LQ-Regelung gehört zur Gruppe der optimalen Regelungsverfahren. Über die Definition eines Gütefunktionals, welches die Stell- und Regelgrößen bewertet, kann die Regelungsaufgabe in ein Optimierungsproblem überführt werden. Die gleichzeitige Berücksichtigung der Stell- und Regelgrößen ist einen Vorteil der optimalen Regelung gegenüber der Polzuweisung. Besonders in Hinblick auf das reale Pendel mit geringem Verfahrweg ist die Beschränkung von $ \pm x_{\mathrm{max}} $ hilfreich, vgl. \cite{Behm2016}. Aus diesem Grund wird im Rahmen dieser Arbeit die LQ-Regelung für die Stabilisierung des Doppelpendels verwendet und im folgenden näher beleuchtet. 
+
+Das Gütefunktional eines zeitinvarianten Reglers mit unendlichem Zeithorizont lautet
+%
+\begin{equation}
+	J = \int^{\infty}_0 (\bm{x}^\mathrm{T}(t)\bm{Q}_{\mathrm{LQ}}\bm{x}(t) + u(t) \bm{R}_{\mathrm{LQ}} u(t)) \hspace{0.1cm} \text{d}t,
+	\label{eq:gütefunktion}
+\end{equation}
+
+wobei $ \bm{Q}_{\mathrm{LQ}} $ und $ \bm{R}_{\mathrm{LQ}} $ Wichtungsmatrizen darstellen. Die Einstellregeln der Wichtungsmatrizen werden später in diesem Abschnitt behandelt. Es wird für die Lösung des Optimierungsproblems vorausgesetzt, dass beide Matrizen positiv definit sind, sodass das Paar $ (\bm{A}, \tilde{\bm{Q}}_{\mathrm{LQ}}) $ vollständig beobachtbar ist. Die Matrix $ \tilde{\bm{Q}}_{\mathrm{LQ}} $
+ergibt sich aus der Zerlegung
+%
+\begin{equation*}
+	\bm{Q}_{\mathrm{LQ}} = \tilde{\bm{Q}}^\mathrm{T}_{\mathrm{LQ}} \tilde{\bm{Q}}_{\mathrm{LQ}}.
+\end{equation*}
+ 
+Damit die Gütefunktion einen endlichen Wert liefert, muss $ \lim\limits_{t \rightarrow \infty}{\bm{x}(t)} = \bm{0} $ gelten. Dies ist bei einer erfolgreichen Regelung in der oberen Gleichgewichtslage in Anlehnung an den Arbeitspunkt~\eqref{eq:arbeitspunkt}, der in den Nullpunkt des Systems führt, der Fall. Es lässt sich nun das Optimierungsproblem
+%
+\begin{equation*}
+	\min\limits_{\bm{k}^\mathrm{T}}{J}
+\end{equation*}
+
+mittels der Zustandsrückführung 
+%
+\begin{equation*}
+	u(t) = -\bm{k}^\mathrm{T}_\mathrm{opt}\bm{x}(t)
+\end{equation*}
+
+mit
+%
+\begin{equation}
+	\bm{k}^\mathrm{T}_\mathrm{opt} = \bm{R}_{\mathrm{LQ}}^{-1}\bm{b}^\mathrm{T} \bm{P}
+	\label{eq:kOpt}
+\end{equation}
+
+lösen. Hierbei ist $ \bm{P} $ die symmetrische, positiv definite Lösung der Matrix-Ricattigleichung
+%
+\begin{equation}
+\bm{A}^\mathrm{T} \bm{P} + \bm{P} \bm{A} - \bm{P} \bm{b} \bm{R}_{\mathrm{LQ}}^{-1}\bm{b}^\mathrm{T}\bm{P} +\bm{Q}_{\mathrm{LQ}}
+=  \bm{0}.
+\label{eq:matrixricatti}
+\end{equation}
+
+Eine genau Herleitung und Lösung der Matrix-Ricattigleichung wird an dieser Stelle nicht aufgeführt. 
+
+Nun wird die Reglerauslegung betrachtet, welche in erster Linie über die Wichtungsmatrizen $ \bm{Q}_{\mathrm{LQ}} \text{ und } \bm{R}_{\mathrm{LQ}} $ bewerkstelligt wird. Eine Methode für die Wahl der Wichtungseinträge ist in~\cite{Luo1995} dargestellt. Anstatt die Einträge iterativ zu bestimmen, werden nur die Diagonaleinträge der Matrizen mit positiven Werten besetzt, wodurch die Bedingung der positiven Definitheit erfüllt ist. Die Diagonaleinträge werden in Abhängigkeit der realen, maximal zulässigen Zustands- bzw. Eingangswerte gewählt und lauten
+%
+\begin{align}
+q_{ii} &= 1/x_{i,\text{max}}^2, \hspace{1cm} &q_{ij} = 0, \text{ für } i\neq j, \nonumber \\
+r_{ii} &= 1/u_{i,\text{max}}^2, \hspace{1cm} &r_{ij} = 0, \text{ für } i\neq j.
+\label{eq:lqrWichtungen}
+\end{align}
+
+Somit ist das zu minimierende Gütefunktional~\eqref{eq:gütefunktion} an die limitierenden Faktoren des untersuchten Systems geknüpft. In Anlehnung an das reale Doppelpendel ergeben sich die Wichtungseinträge, die in der Tabelle~\ref{tab:lqr} zu sehen sind. Über die Wahl der Wichtungseinträge von $ \bm{Q}_{\mathrm{LQ}} \text{ und } \bm{R}_{\mathrm{LQ}} $ lassen sich die Zustände und Stellgrößen bewerten. 
+
+Einerseits bedeuten hohe Einträge, dass die jeweiligen Zustände und Stellgrößen im Rahmen einer Minimierung von~\eqref{eq:gütefunktion} stark bestraft werden. Eine starke Bestrafung impliziert, dass die jeweiligen Größen gering gehalten werden. In diesem Zusammenhang ist vor allem der geringe Verfahrweg des Doppelpendels zu nennen. Eine Überschreitung des Verfahrwegs soll in jedem Fall unterbunden werden, weshalb dieser Wichtungseintrag nach~\eqref{eq:lqrWichtungen} im Vergleich zu den anderen Größen hoch ausfällt.
+\begin{table}[!b]
+	\centering
+	\caption{Einträge der Wichtungsmatrizen $ \bm{Q}_{\mathrm{LQ}} \text{ und } \bm{R}_{\mathrm{LQ}} $ der Zustandsregelung}
+	\label{tab:lqr}
+	\begin{tabu}{clll}
+		\tabucline[2pt]{-}
+		Variable & Wert \& Einheit & Beschreibung & Wichtungseintrag \\\tabucline[1pt]{-}
+		$ x_\mathrm{max} $ 		& \SI{0,2}{m}		& Verfahrweg in pos. und neg. Richtung & \SI{25}{m^{-2}}\\
+		$ \dot{x}_\mathrm{max} $& \SI{5}{m.s^{-1}}  & maximale Verfahrgeschwindigkeit 	& \SI{0,04}{s^2.m^{-2}} \\
+		$ \varphi_{1,\mathrm{max}} $& \ang{20} = \SI{0,349}{\radian}  & Winkelabweichung vom Arbeitspunkt &    \SI{8,207}{\radian^{-2}} \\
+		$ \dot{\varphi}_{1,\mathrm{max}} $& \SI{100}{\radian s^{-1}}  & maximale Winkelgeschwindigkeit & \SI{1e-4}{s^2\radian^{-2}}   \\
+		$ \varphi_{2,\mathrm{max}} $& \ang{20} = \SI{0,349}{\radian}  & Winkelabweichung vom Arbeitspunkt & \SI{8,207}{\radian^{-2}} \\
+		$ \dot{\varphi}_{2,\mathrm{max}} $& \SI{100}{\radian s^{-1}}  & Maximale Winkelgeschwindigkeit & \SI{1e-4}{s^2\radian^{-2}}   \\
+		$u_\mathrm{max} $& \SI{20}{m.s^{-2}} & Maximale Wagenbeschleunigung &  \SI{2,5e-3}{s^4.m^{-2}}  \\ \hline
+	\end{tabu}
+\end{table}
+Andererseits werden mit kleinen Wichtungseinträgen die Zustände und Stellgrößen weniger stark bestraft. Das heißt, es werden auch sehr hohe Werte für diese Größen akzeptiert. Hier stechen vor allem die Winkelgeschwindigkeiten der Pendelstäbe hervor. Mit einer geringen Bestrafung der Winkelgeschwindigkeiten werden schnelle Bewegungen des Doppelpendels akzeptiert, was hilfreich für die Stabilisierung des Doppelpendels ist.
+
+
+
+Damit kann die Zustandsregelung mittels LQR vollzogen werden und das Minimierungsproblems~\eqref{eq:gütefunktion} gelöst werden. Es ergibt sich der optimale Rückführvektor
+%
+\begin{equation*}
+	\begin{aligned}
+	\bm{k}_\mathrm{opt}^\mathrm{T} = \begin{bmatrix}
+		\SI{100}{s^{-2}} \\ 
+		\SI{70,16}{s^{-1}} \\
+		\SI{233,24}{m.rad^{-1}.s^{-2}} \\
+		\SI{-12,12}{m.rad^{-1}.s^{-1}}\\
+		\SI{-464,10}{m.rad^{-1}.s^{-2}}\\
+		\SI{-39,33}{m.rad^{-1}.s^{-1}}
+	\end{bmatrix}
+	\end{aligned}.
+\end{equation*} 
+
+
+
+
+
+Für die Regelung in die obere, instabile Gleichgewichtslage wird der Anfangszustand
+%
+\begin{equation*}
+	\bm{x}_0 = \Big[x_0 = 0, \dot{x}_0 = 0, \varphi_{1,0} = \ang{-4}, \dot{\varphi}_{1,0} = 0, \varphi_{2,0} = \ang{-5}, \dot{\varphi}_{2,0} = 0\Big]^\mathrm{T}
+\end{equation*}
+
+gewählt. Davon ausgehend wird das Doppelpendel sowie der Wagen in den Nullzustand geregelt. Das Simulationsergebnis ist in Bild~\ref{fig:lqr} dargestellt. Es ist zu sehen, dass bei der relativ kleinen Anfangsauslenkung von 4 bis \ang{5} bereits ein Großteil des maximalen Verfahrwegs von \SI{20}{cm} ausgenutzt wird. Eine weitere Entfernung der Startwinkel vom Arbeitspunkt führt zu Instabilität. Es ist anzumerken, dass die in der Simulation verwendeten Massenträgheiten der Pendel, welche einen erheblichen Einfluss auf die Stabilität des Systems haben, relativ gering sind. Dies ist auf die Tatsache zurückzuführen, dass die realen Pendelstäbe aus Aluminium, welches eine geringere Dichte als z.B. Eisen besitzt, bestehen. Werden Pendelstäbe aus Eisen mit den Massen $ m_1 = m_2 = \SI{0,1341}{kg} $ verwendet, lässt sich das Doppelpendel mit einer Anfangsauslenkung von über \ang{10} noch in die obere Gleichgewichtslage regeln. Das liegt an den damit verbundenen größeren Massenträgheitsmomenten der Pendel gemäß~\eqref{eq:massentraegheitsmoment}, die das System träger werden lassen. 
+
+Die hier durchgeführte Zustandsregelung setzt voraus, dass in jedem Zeitschritt die Zustände $ \bm{x} $ bekannt sind. In der Simulation lassen sich die Zustände über die Bewegungsgleichungen ermitteln, welche bei der Zustandsrückführung verwendet werden. In Realität liegt jedoch nur die Messung für den inneren Pendelwinkel $ \varphi_1(t) $ vor. Die Ermittlung des äußeren Pendelwinkels $ \varphi_2(t) $ kann mithilfe einer nichtlinearen Zustandsbeobachtung bewerkstelligt werden. Die nichtlineare Zustandsbeobachtung ist Gegenstand des folgenden Kapitels.
+
+\begin{figure}[!ht]
+	\centering
+	\input{plots/lqr.tex}
+	\caption{Zustandsregelung mittels LQR des Doppelpendels}
+	\label{fig:lqr}
+\end{figure}
+
+

@@ -1,0 +1,37 @@
+\section{Nichtlineare Bewegungsgleichungen des Doppelpendels}
+\label{sec:nichtlinearediffgleichungen}
+
+In diesem Abschnitt werden die nichtlinearen Bewegungsgleichungen vollständig dargestellt. Nach der Entkopplung von~\eqref{eq:ddphi1Entkoppelt} und~\eqref{eq:ddphi2Entkoppelt} ergibt sich:
+
+\begin{align}
+	\ddot{\varphi}_1 
+	= \Big[
+	&12 d_{2} l_{2} \dot{\varphi}_2 - 12 d_{2} l_{2} \dot{\varphi}_1 - 12 d_{1} l_{2} \dot{\varphi}_1 - 18 d_{2} l_{1} \dot{\varphi}_1 \cos\left(\varphi_1 - \varphi_2\right) \nonumber \\	
+	&+ 18 d_{2} l_{1} \dot{\varphi}_2 \cos\left(\varphi_1 - \varphi_2\right) + 6 l_{1} l_{2} m_{1} \ddot{x} \cos\left(\varphi_1\right) + 12 l_{1} l_{2} m_{2} \ddot{x} \cos\left(\varphi_1\right)\nonumber \\
+	&+ 12 l_{1} l_{2} m_{3} \ddot{x} \cos\left(\varphi_1\right) + 6 g l_{1} l_{2} m_{1} \sin\left(\varphi_1\right) + 12 g l_{1} l_{2} m_{2} \sin\left(\varphi_1\right) \nonumber\\
+	&+ 12 g l_{1} l_{2} m_{3} \sin\left(\varphi_1\right) - 6 l_{1} {l_{2}}^2 m_{2} {\dot{\varphi}_2}^2 \sin\left(\varphi_1 - \varphi_2\right)  \nonumber\\
+	&- 9 l_{1} l_{2} m_{2} \ddot{x} \cos\left(\varphi_1 - \varphi_2\right) \cos\left(\varphi_2\right) - 9 g l_{1} l_{2} m_{2} \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_2\right)\nonumber \\
+	&- 9 {l_{1}}^2 l_{2} m_{2} {\dot{\varphi}_1}^2 \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_1 - \varphi_2\right) \Big] \nonumber\\
+	&\Big/ \Big[	{l_{1}}^2 l_{2} \left( - 9 m_{2} {\cos\left(\varphi_1 - \varphi_2\right)}^2 + 4 m_{1} + 12 m_{2} + 12 m_{3}\right) \Big]
+	\label{eq:ddphi1nonlin}
+\end{align}
+
+
+\begin{align}
+\ddot{\varphi}_2 
+	= \Big[ &12 d_{2} l_{1} m_{1} \dot{\varphi}_1 + 36 d_{2} l_{1} m_{2} \dot{\varphi}_1 - 12 d_{2} l_{1} m_{1} \dot{\varphi}_2 + 36 d_{2} l_{1} m_{3} \dot{\varphi}_1 - 36 d_{2} l_{1} m_{2} \dot{\varphi}_2 \nonumber \\
+	&- 36 d_{2} l_{1} m_{3} \dot{\varphi}_2 + 18 d_{1} l_{2} m_{2} \dot{\varphi}_1 \cos\left(\varphi_1 - \varphi_2\right) + 18 d_{2} l_{2} m_{2} \dot{\varphi}_1 \cos\left(\varphi_1 - \varphi_2\right) \nonumber \\
+	&- 18 d_{2} l_{2} m_{2} \dot{\varphi}_2 \cos\left(\varphi_1 - \varphi_2\right) + 18 l_{1} l_{2} {m_{2}}^2 \ddot{x} \cos\left(\varphi_2\right) + 18 g l_{1} l_{2} {m_{2}}^2 \sin\left(\varphi_2\right) 
+	\nonumber \\
+	&+ 18 {l_{1}}^2 l_{2} {m_{2}}^2 {\dot{\varphi}_1}^2 \sin\left(\varphi_1 - \varphi_2\right) + 6 l_{1} l_{2} m_{1} m_{2} \ddot{x} \cos\left(\varphi_2\right) + 18 l_{1} l_{2} m_{2} m_{3} \ddot{x} \cos\left(\varphi_2\right) \nonumber \\	
+	&+ 6 g l_{1} l_{2} m_{1} m_{2} \sin\left(\varphi_2\right) + 18 g l_{1} l_{2} m_{2} m_{3} \sin\left(\varphi_2\right) + 6 {l_{1}}^2 l_{2} m_{1} m_{2} {\dot{\varphi}_1}^2 \sin\left(\varphi_1 - \varphi_2\right) \nonumber \\
+	&- 18 l_{1} l_{2} {m_{2}}^2 \ddot{x} \cos\left(\varphi_1 - \varphi_2\right) \cos\left(\varphi_1\right) - 18 g l_{1} l_{2} {m_{2}}^2 \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_1\right) \nonumber \\
+	&+ 18 {l_{1}}^2 l_{2} m_{2} m_{3} {\dot{\varphi}_1}^2 \sin\left(\varphi_1 - \varphi_2\right) + 9 l_{1} {l_{2}}^2 {m_{2}}^2 {\dot{\varphi}_2}^2 \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_1 - \varphi_2\right) \nonumber \\
+	&- 9 l_{1} l_{2} m_{1} m_{2} \ddot{x} \cos\left(\varphi_1 - \varphi_2\right) \cos\left(\varphi_1\right) - 18 l_{1} l_{2} m_{2} m_{3} \ddot{x} \cos\left(\varphi_1 - \varphi_2\right) \cos\left(\varphi_1\right) \nonumber\\
+	&- 9 g l_{1} l_{2} m_{1} m_{2} \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_1\right) - 18 g l_{1} l_{2} m_{2} m_{3} \cos\left(\varphi_1 - \varphi_2\right) \sin\left(\varphi_1\right)
+	\Big] \nonumber \\
+	&\Big/ \Big[{l_{1}}^2 l_{2} \left( - 9 m_{2} {\cos\left(\varphi_1 - \varphi_2\right)}^2 + 4 m_{1} + 12 m_{2} + 12 m_{3}\right)
+	\Big]
+	\label{eq:ddphi2nonlin}
+\end{align}
+

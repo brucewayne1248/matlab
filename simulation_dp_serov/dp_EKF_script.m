@@ -117,6 +117,7 @@ R_2 = 1/20;
 %% EKF
 Pk_0 = eye(4);
 Rk = 1;
+Qk = eye(4);
 %% Optimierung für Q11 = Q22; Q33 = Q44
 % pot_min = -5; pot_max = 1; steps = pot_max - pot_min + 1;
 % q12 = logspace(pot_min,pot_max,steps); q34 = q12;
@@ -130,29 +131,29 @@ Rk = 1;
 %% Optimierung für alle Diagonalelemente von Q 
 pot_min = -4; pot_max = 1; steps = pot_max - pot_min + 1;
 qii = logspace(pot_min,pot_max,steps);
-Qk = zeros(4,4,steps,steps,steps,steps);
-for k = 1:length(qii)
-    for kk = 1:length(qii);
-        for kkk = 1:length(qii);
-            for kkkk = 1:length(qii);
-                Qk(1,1,k,kk,kkk,kkkk) = qii(k); 
-                Qk(2,2,k,kk,kkk,kkkk) = qii(kk); 
-                Qk(3,3,k,kk,kkk,kkkk) = qii(kkk); 
-                Qk(4,4,k,kk,kkk,kkkk) = qii(kkkk); 
-            end
-        end
-    end
-end
+% Qk = zeros(4,4,steps,steps,steps,steps);
+% for k = 1:length(qii)
+%     for kk = 1:length(qii);
+%         for kkk = 1:length(qii);
+%             for kkkk = 1:length(qii);
+%                 Qk(1,1,k,kk,kkk,kkkk) = qii(k); 
+%                 Qk(2,2,k,kk,kkk,kkkk) = qii(kk); 
+%                 Qk(3,3,k,kk,kkk,kkkk) = qii(kkk); 
+%                 Qk(4,4,k,kk,kkk,kkkk) = qii(kkkk); 
+%             end
+%         end
+%     end
+% end
 %% Find optimal weights for Qk and Rk
-open_system('dp_EKF');
-paramNameValStruct.SimulationMode = 'normal';
-paramNameValStruct.AbsTol         = '1e-5';
-paramNameValStruct.SaveState      = 'on';
-paramNameValStruct.StateSaveName  = 'xout';
-paramNameValStruct.SaveOutput     = 'on';
-paramNameValStruct.OutputSaveName = 'yout';
-paramNameValStruct.SaveFormat = 'Dataset';
-diff_min = Inf;
+% open_system('dp_EKF');
+% paramNameValStruct.SimulationMode = 'normal';
+% paramNameValStruct.AbsTol         = '1e-5';
+% paramNameValStruct.SaveState      = 'on';
+% paramNameValStruct.StateSaveName  = 'xout';
+% paramNameValStruct.SaveOutput     = 'on';
+% paramNameValStruct.OutputSaveName = 'yout';
+% paramNameValStruct.SaveFormat = 'Dataset';
+% diff_min = Inf;
 %% Q11 = Q22, Q33 = Q44;
 % for i = 1:length(q12)
 %     for ii = 1:length(q34)
@@ -178,38 +179,38 @@ diff_min = Inf;
 %     end
 % end
 %% Qii variable 
-for i = 1:length(qii)
-    for ii = 1:length(qii)
-        for iii = 1:length(qii)
-            for iiii = 1:length(qii)
-                set_param('dp_EKF/EKF/Qk', 'Gain', 'Qk(:,:,i,ii,iii,iiii)');
-                simOut = sim('dp_EKF',paramNameValStruct);
-                outputs = simOut.get('yout');
-                phi2_time = (outputs.get('phi2').Values);
-                phi2 = phi2_time.Data;
-                phi2_est_time = (outputs.get('phi2_est').Values);
-                phi2_est = phi2_est_time.Data;
-                dphi2_time = (outputs.get('dphi2').Values);
-                dphi2 = phi2_time.Data;
-                dphi2_est_time = (outputs.get('dphi2_est').Values);
-                dphi2_est = dphi2_est_time.Data;
-%                 criterion for choosing best fit
-                diff = sum(sqrt((phi2-phi2_est).^2)) + sum(sqrt((dphi2-dphi2_est).^2));  
-%                 updating variables to best fit
-                if (diff<diff_min)
-                    diff_min = diff;
-                    Qk_min = Qk(:,:,i,ii,iii,iiii);
-                    i_min = i; ii_min = ii; iii_min = iii; iiii_min = iiii;
-                end
-            end
-        end
-    end
-end
+% for i = 1:length(qii)
+%     for ii = 1:length(qii)
+%         for iii = 1:length(qii)
+%             for iiii = 1:length(qii)
+%                 set_param('dp_EKF/EKF/Qk', 'Gain', 'Qk(:,:,i,ii,iii,iiii)');
+%                 simOut = sim('dp_EKF',paramNameValStruct);
+%                 outputs = simOut.get('yout');
+%                 phi2_time = (outputs.get('phi2').Values);
+%                 phi2 = phi2_time.Data;
+%                 phi2_est_time = (outputs.get('phi2_est').Values);
+%                 phi2_est = phi2_est_time.Data;
+%                 dphi2_time = (outputs.get('dphi2').Values);
+%                 dphi2 = phi2_time.Data;
+%                 dphi2_est_time = (outputs.get('dphi2_est').Values);
+%                 dphi2_est = dphi2_est_time.Data;
+% %                 criterion for choosing best fit
+%                 diff = sum(sqrt((phi2-phi2_est).^2)) + sum(sqrt((dphi2-dphi2_est).^2));  
+% %                 updating variables to best fit
+%                 if (diff<diff_min)
+%                     diff_min = diff;
+%                     Qk_min = Qk(:,:,i,ii,iii,iiii);
+%                     i_min = i; ii_min = ii; iii_min = iii; iiii_min = iiii;
+%                 end
+%             end
+%         end
+%     end
+% end
 
 %% Set params according to best fit and plot phi2 
 % set_param('dp_EKF/EKF/Qk', 'Gain', 'Qk(:,:,i_min,ii_min)');
-set_param('dp_EKF/EKF/Qk', 'Gain', 'Qk(:,:,i_min,ii_min,iii_min, iiii_min)');
-simOut = sim('dp_EKF',paramNameValStruct);
+% set_param('dp_EKF/EKF/Qk', 'Gain', 'Qk(:,:,i_min,ii_min,iii_min, iiii_min)');
+% simOut = sim('dp_EKF',paramNameValStruct);
 % outputs = simOut.get('yout');
 % phi2_time = (outputs.get('phi2').Values);
 % phi2 = phi2_time.Data;

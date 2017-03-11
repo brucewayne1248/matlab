@@ -1,0 +1,42 @@
+CC     = "C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcc64.exe"
+LD     = "C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclnk64.exe"
+LIBCMD = "C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\bin\lcclib64.exe"
+CFLAGS = -dll -noregistrylookup  -c -Zp8 -DLCC_WIN64 -DMATLAB_MEX_FILE -DMX_COMPAT_32 -nodeclspec 
+LDFLAGS = -s -dll -L"C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\lib64" -entry LibMain -map sfun.map 
+LIBFLAGS = 
+
+OBJECTS = \
+	"dp_EKF_ausschwing_sfun.obj"\
+	"c2_dp_EKF_ausschwing.obj"\
+	"c5_dp_EKF_ausschwing.obj"\
+	"dp_EKF_ausschwing_sfun_registry.obj"\
+	"lccstub.obj"\
+	"dp_EKF_ausschwing_sfun.def"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\sf_runtime.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmwblas.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmx.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmex.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmat.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libfixedpoint.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libut.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmwmathutil.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libemlrt.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsl_log_load_blocks.lib"\
+	"C:\Program Files\MATLAB\R2014b\extern\lib\win64\microsoft\libmwsimulink.lib"\
+	"C:\Program Files\MATLAB\R2014b\lib\win64\libmwipp.lib"\
+
+INCLUDE_PATH= -I"C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\include64"  -I"C:\Program Files\MATLAB\R2014b\extern\include"  -I"C:\Program Files\MATLAB\R2014b\simulink\include"  -I"C:\Program Files\MATLAB\R2014b\stateflow\c\mex\include"  -I"C:\Program Files\MATLAB\R2014b\rtw\c\src"  -I"D:\Documents\Studienarbeit imes\matlab\simulation_dp_serov\test_EKF\slprj\_sfprj\dp_EKF_ausschwing\_self\sfun\src" 
+ 
+
+dp_EKF_ausschwing_sfun.mexw64 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o dp_EKF_ausschwing_sfun.mexw64 @dp_EKF_ausschwing_sfun.lmko
+dp_EKF_ausschwing_sfun.obj :	"dp_EKF_ausschwing_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "dp_EKF_ausschwing_sfun.c"
+c2_dp_EKF_ausschwing.obj :	"c2_dp_EKF_ausschwing.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c2_dp_EKF_ausschwing.c"
+c5_dp_EKF_ausschwing.obj :	"c5_dp_EKF_ausschwing.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c5_dp_EKF_ausschwing.c"
+dp_EKF_ausschwing_sfun_registry.obj :	"dp_EKF_ausschwing_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "dp_EKF_ausschwing_sfun_registry.c"
+lccstub.obj :	"C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "C:\Program Files\MATLAB\R2014b\sys\lcc64\lcc64\mex\lccstub.c"
