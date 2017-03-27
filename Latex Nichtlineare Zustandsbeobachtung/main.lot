@@ -1,13 +1,17 @@
 \select@language {ngerman}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Modellierung des Doppelpendels}{1}{chapter.1}
-\contentsline {table}{\numberline {\relax 1.1}{\ignorespaces Gemessene und gesch\"atzte Werte der Systemparameter\relax }}{6}{table.caption.6}
+\contentsline {xchapter}{Einleitung}{1}{chapter.1}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Zustandsregelung des inversen Doppelpendels}{7}{chapter.2}
-\contentsline {table}{\numberline {\relax 2.1}{\ignorespaces Eintr\"age der Wichtungsmatrizen $ \bm {Q}_{\mathrm {LQ}} \text { und } \bm {R}_{\mathrm {LQ}} $ der Zustandsregelung\relax }}{14}{table.caption.9}
+\contentsline {xchapter}{Modellierung des Doppelpendels}{2}{chapter.2}
+\contentsline {table}{\numberline {\relax 2.1}{\ignorespaces Gemessene und gesch\"atzte Werte der Systemparameter\relax }}{7}{table.caption.7}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Nichtlineare Zustandsbeobachtung}{17}{chapter.3}
+\contentsline {xchapter}{Zustandsregelung des inversen Doppelpendels}{8}{chapter.3}
+\contentsline {table}{\numberline {\relax 3.1}{\ignorespaces Eintr\"age der Wichtungsmatrizen $ \bm {Q}_{\mathrm {LQ}} \text { und } \bm {R}_{\mathrm {LQ}} $ der Zustandsregelung\relax }}{15}{table.caption.10}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Bildbasierte Beobachtervalidierung}{33}{chapter.4}
+\contentsline {xchapter}{Nichtlineare Zustandsbeobachtung}{18}{chapter.4}
 \addvspace {10\p@ }
-\contentsline {xchapter}{Literaturverzeichnis}{43}{chapter*.21}
+\contentsline {xchapter}{Bildbasierte Beobachtervalidierung}{34}{chapter.5}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Zusammenfassung und Ausblick}{46}{chapter.6}
+\addvspace {10\p@ }
+\contentsline {xchapter}{Literaturverzeichnis}{50}{chapter*.25}

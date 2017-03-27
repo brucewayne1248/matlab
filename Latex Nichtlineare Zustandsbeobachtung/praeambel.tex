@@ -368,19 +368,23 @@
 %\makeindex
 \usepackage{nomencl}
 % \let\abbrev\nomenclature
-\renewcommand{\nomname}{Abkürzungsverzeichnis}
-\setlength{\nomlabelwidth}{.25\hsize}
+\renewcommand{\nomname}{Symbolverzeichnis}
+\setlength{\nomlabelwidth}{.2\hsize}
 \renewcommand{\nomlabel}[1]{#1 \hfill}
 \setlength{\nomitemsep}{-\parsep}
 
 \renewcommand{\nomgroup}[1]{%
-	\ifthenelse{\equal{#1}{L}}{\item[\textbf{Lateinische Buchstaben}]}
-	{%
-		\ifthenelse{\equal{#1}{G}}{\item[\textbf{Griechische Buchstaben}]}
+	\ifthenelse{\equal{#1}{A}}{\item[\textbf{Doppelpendel}]}
+	{%	
+		\vspace{4.5cm}
+		\ifthenelse{\equal{#1}{B}}{\item[\textbf{Zustandsregelung}]}
 		{%
-			\ifthenelse{\equal{#1}{A}}{\item[\textbf{Abkürzungen}]}
+%			\vspace{0.5cm}
+			\vspace{-2cm}
+			\ifthenelse{\equal{#1}{C}}{\item[\textbf{Nichtlineare Zustandsbeobachtung}]}
 			{
-				\ifthenelse{\equal{#1}{K}}{\item[\textbf{Koordinatensysteme}]}{}
+				\vspace{4.2cm}
+				\ifthenelse{\equal{#1}{D}}{\item[\textbf{Beobachtervalidierung}]}{}
 			}
 		}
 	}
@@ -412,9 +416,9 @@
 %extra inhaltsverzeichnisse möglich
 \usepackage[nohints]{minitoc}     
 \renewcommand{\mtctitle}{Anhangsverzeichnis} 				% Name ändern            
-\renewcommand{\mtifont}{\large\bfseries\sffamily}		% Titel font ändern
-\renewcommand{\mtcSfont}{\rm}												% Section einträge normal
-\mtcsetrules{minitoc}{off}													% Linien ausmachen
+\renewcommand{\mtifont}{\large\bfseries\sffamily}			% Titel font ändern
+\renewcommand{\mtcSfont}{\rm}								% Section einträge normal
+\mtcsetrules{minitoc}{off}									% Linien ausmachen
 
 %---------------------------------------------------------------
 % SVGs einfügen

@@ -41,7 +41,7 @@ errMin = Inf;
                 phi1EstRad = []; dphi1EstRad = []; phi2EstRad = []; dphi2EstRad = []; K = [];
                 init = 1;
                 for k = 1:length(phi1MeasRad)
-                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0, para_sys, T_s, ddxDes(k), phi1MeasRad(k), init);
+                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0_ekf, para_sys, T_s, ddxDes(k), phi1MeasRad(k), init);
                     init = 0;
                     phi1EstRad(k) = states(1);
                     dphi1EstRad(k) = states(2);

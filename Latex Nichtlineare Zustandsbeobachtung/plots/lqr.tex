@@ -4,7 +4,9 @@
 %  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
 %where you can also make suggestions and rate matlab2tikz.
 %
-\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{blue}{rgb}{0.00000,0.313725,0.607843}%
+\definecolor{orange}{rgb}{0.90588235,0.48235,0.160784}%
+\definecolor{green}{rgb}{0.784313,0.82745,0.090196}%
 %
 \begin{tikzpicture}
 
@@ -27,7 +29,7 @@ xmajorgrids,
 ymajorgrids,
 grid style={dotted}
 ]
-\addplot [color=mycolor1, line width=1.4pt, forget plot]
+\addplot [color=orange, line width=1.4pt, forget plot]
   table[row sep=crcr]{%
 0	0\\
 0.01	-0.1\\
@@ -351,7 +353,7 @@ xtick = {0,0.5,1,1.5,2,2.5,3},
 ymin=-15,
 ymax=15,
 ylabel style={font=\color{white!15!black}},
-ylabel={Pendelwinekl [Grad]},
+ylabel={Pendelwinekl [\si{\degree}]},
 axis background/.style={fill=white},
 xmajorgrids,
 ymajorgrids,
@@ -663,7 +665,7 @@ legend style={at={(1,1)},anchor=north east}
 2.99	0.0098796954010805\\
 3	0.00966988739179905\\
 };
-\addlegendentry{$ \varphi_1(t) $}
+\addlegendentry{$ \varphi_1 $}
 
 \addplot [color=green, line width=1.4pt]
   table[row sep=crcr]{%
@@ -969,7 +971,7 @@ legend style={at={(1,1)},anchor=north east}
 2.99	0.0100192335994124\\
 3	0.00983009366078525\\
 };
-\addlegendentry{$ \varphi_2(t) $}
+\addlegendentry{$ \varphi_2 $}
 
 \addplot [color=black, dashed, forget plot]
   table[row sep=crcr]{%

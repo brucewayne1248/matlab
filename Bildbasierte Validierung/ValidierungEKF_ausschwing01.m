@@ -29,16 +29,18 @@ Rk = 0.01;
 % Qk = Qk_min;
 Qk = eye(4);
 %% calculating phi2 with loops for Qk weightings
-q = logspace(-7,-2,6);
+q = logspace(-4,-1,5);
 errMin = Inf;
 
-% for j = 1:length(q)
-%     for jj = 1:length(q)
-%         for jjj = 1:length(q)
-%             for jjjj = 1:length(q)
-%                 Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
+for j = 1:length(q)
+    for jj = 1:length(q)
+        for jjj = 1:length(q)
+            for jjjj = 1:length(q)
+                Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
                 
-                Qk = QkMin;
+%                 Qk = diag([1e-6 1e-1 1e-3 1e-6]);
+
+%                 Qk = QkMin;
                 phi1EstRad = zeros(1,length(phi1MeasRad)); 
                 dphi1EstRad = zeros(1,length(phi1MeasRad));
                 phi2EstRad = zeros(1,length(phi1MeasRad)); 
@@ -54,21 +56,26 @@ errMin = Inf;
                     dphi2EstRad(k) = states(4);
                 end
                 
-                phi1EstDeg = []; dphi1EstDeg = []; phi2EstDeg = []; dphi2EstDeg = []; 
+%                 phi1EstDeg = zeros(1,length(phi1MeasRad)); 
+%                 dphi1EstDeg = zeros(1,length(phi1MeasRad));
+%                 phi2EstDeg = zeros(1,length(phi1MeasRad)); 
+%                 dphi2EstDeg = zeros(1,length(phi1MeasRad)); 
                 phi1EstDeg = r2d*phi1EstRad;
                 dphi1EstDeg = r2d*dphi1EstRad;
                 phi2EstDeg = r2d*phi2EstRad;
                 dphi2EstDeg = r2d*dphi2EstRad;
                 % Fehler zwischen Messung und EKF
                 err = sqrt(sum((phi2EstDeg-phi2VideoDeg).^2));
-%                 if (err <= errMin)
-%                     errMin = err;
-%                     QkMin = Qk;
-%                 end
-%             end
-%         end
-%     end
-% end
+                if (err <= errMin)
+                    errMin = err;
+                    QkMin = Qk;
+                end
+                
+                
+            end
+        end
+    end
+end
 %% differentiating and filtering phi2Video
 dphi2VideoDeg = diff(phi2VideoDeg)/dt;  % diff 
 dphi2VideoDegMag = abs(fft(dphi2VideoDeg));
@@ -94,24 +101,24 @@ figure(4),
 subplot(2,1,1),
 plot(tVideo, phi1EstDeg),hold on
 plot(tVideo, phi1MeasDeg),legend('phi1\_est', 'phi1\_Meas')
-xlabel('t in Sek.')
-ylabel('Grad')
+xlabel('Zeit [s]')
+ylabel('Winkel [Grad]')
 title('Ausschwingen: Winkel')
 hold off
 
 subplot(2,1,2),
 plot(tVideo, phi2EstDeg),hold on
 plot(tVideo, phi2VideoDeg), legend('phi2\_est', 'phi2\_video')
-xlabel('t in Sek.')
-ylabel('Grad')
+xlabel('Zeit [s]')
+ylabel('Winkel [Grad]')
 hold off
 
 figure(5),
 subplot(2,1,1),
 plot(tVideo,dphi1EstDeg),hold on
 plot(tVideo,dphi1MeasDeg),legend('dphi1\_est', 'dphi1\_Meas')
-xlabel('t in Sek.')
-ylabel('Grad/s')
+xlabel('Zeit [s]')
+ylabel('Winkelgeschw. [Grad/s]')
 title('Ausschwingen: Winkelgeschwindigkeiten')
 hold off
 
@@ -123,8 +130,8 @@ subplot(2,1,2),
 plot(tVideo,dphi2EstDeg),hold on
 % fnplt(dphi2VideoDegFunc)
 plot(tVideo,dphi2VideoDegFiltLP), legend('dphi2\_est', 'dphi2\_video')
-xlabel('t in Sek.')
-ylabel('Grad/s')
+xlabel('Zeit [s]')
+ylabel('Winkelgeschw. [Grad/s]')
 hold off
 
 %% 

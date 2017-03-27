@@ -3,9 +3,9 @@
 
 
 
-Die Grundlage für die nichtlineare Zustandsbeobachtung des inversen Doppelpendels bilden die dynamischen Bewegungsgleichungen des Systems, welche in diesem Kapitel hergeleitet werden. Die Differentialgleichungen werden mithilfe des Lagrange-Formalismus ermittelt. Dafür wird zunächst eine mechanische Modellierung des Systems vergenommen.
-\newline \newline
-Der generelle Aufbau des inversen Doppelpendels mit den relevanten, physikalischen Größen kann Bild~\ref{fig:DPskizze} entnommen werden. Das mechatronische System besteht aus einem Wagen auf einer Linearführung, zwei miteinander gekoppelte Stäben sowie einem Motor, welches das Drehmoment $ M_{\mathrm{Motor}} $ zum Ansteuern des Wagens liefert. Durch die Umsetzung des Motormoments resultiert eine Antriebskraft $ F_\mathrm{a} $ auf den Wagen sowie eine entgegengesetzte Reibkraft der Linearführung $ F_\mathrm{r} $. Beide Pendelstäbe sind rotatorisch miteinander gelagert, sodass sie Bewegungen nur in der $ x $-$ y $-Ebene durchführen können. Für die Modellierung werden die Winkelpositionen $ \varphi $, die Längen $ \ell $, die Gewichte $ m $, die Dämpfungskonstanten $ d $ sowie die Massenträgheitsmomente $ J^\mathrm{S} $ der Pendel benötigt.
+Die Grundlage für die nichtlineare Zustandsbeobachtung des inversen Doppelpendels bilden die dynamischen Bewegungsgleichungen des Systems, welche in diesem Kapitel hergeleitet werden. Die Differentialgleichungen werden mithilfe des Lagrange-Formalismus ermittelt. Dafür wird zunächst eine mechanische Modellierung des Systems vergenommen. \\\\
+%
+Der generelle Aufbau des inversen Doppelpendels mit den relevanten, physikalischen Größen kann Bild~\ref{fig:DPskizze} entnommen werden. Das mechatronische System besteht aus einem Wagen auf einer Linearführung, zwei miteinander gekoppelten Stäben sowie einem Motor, welcher das Drehmoment $ M_{\mathrm{Motor}} $ zum Ansteuern des Wagens liefert. Durch die Umsetzung des Motormoments resultiert eine Antriebskraft $ F_\mathrm{a} $ auf den Wagen sowie eine entgegengesetzte Reibkraft der Linearführung $ F_\mathrm{r} $. Beide Pendelstäbe sind rotatorisch miteinander gelagert, sodass sie Bewegungen nur in der $ x $-$ y $-Ebene durchführen können. Für die Modellierung werden die Winkellagen $ \varphi_i $, die Längen $ \ell_i $, die Gewichte $ m_i $, die Dämpfungskonstanten $ d_i $ sowie die Massenträgheitsmomente um den Schwerpunkt $ J^\mathrm{S}_i $ der Pendel benötigt.
 Für die Anwendung des Lagrange-Formalismus~
 %
 \begin{equation}
@@ -13,20 +13,14 @@ Für die Anwendung des Lagrange-Formalismus~
 	\frac{	\mathrm{d}}{\mathrm{d}t} \frac{\partial L}{\partial \dot{\bm{q}}} - \frac{\partial L }{\partial \bm{q}} = \bm{Q}_\mathrm{n.k.}
 \end{equation}
 
-ist eine energetische Betrachtung des Systems nötig. In~\eqref{eq:lagrange} repräsentieren $ \bm{q} $ die generalisierten Koordinaten, $ \dot{\bm{q}} $ ihre zeitlichen Ableitungen und $ \bm{Q}_\mathrm{n.k.} $ auftretende nicht konservative Kräfte. Im vorliegenden Fall werden die generalisierten Koordinaten $ x(t) $, $ \varphi_1(t)$ und $ \varphi_2(t) $ verwendet, da für diese Variablen die entsprechenden Bewegungsgleichungen hergeleitet werden. Diese Größen hängen von der Zeit ab, jedoch wird aus Gründen der Übersichtlichkeit die Zeitabhängigkeit in diesem Kapitel vorausgesetzt und nicht explizit aufgeführt. Die Lagrange-Funktion~
+ist eine energetische Betrachtung des Systems nötig. In~\eqref{eq:lagrange} repräsentieren $ \bm{q} $ die generalisierten Koordinaten, $ \dot{\bm{q}} $ ihre zeitlichen Ableitungen und $ \bm{Q}_\mathrm{n.k.} $ auftretende nicht konservative Kräfte. Im vorliegenden Fall werden die generalisierten Koordinaten $ x(t) $, $ \varphi_1(t)$ und $ \varphi_2(t) $ verwendet, da diese Variablen den Freiheitsgraden des Systems entsprechen. Diese Größen hängen von der Zeit ab, jedoch wird aus Gründen der Übersichtlichkeit die Zeitabhängigkeit in diesem Kapitel vorausgesetzt und im Folgenden nicht explizit aufgeführt. Die Lagrange-Funktion~
 %
 \begin{equation}
 	L = T- U
 	\label{eq:lagrangeFunktion}
 \end{equation}
 
-setzt sich aus der kinetischen Energie $T$ des Systems und der potentiellen Energie $L$ zusammen. Die kinetische Energie 
-\begin{equation}
-	\label{eq:energieKin}
-	T = \frac{1}{2} \sum_{i = 0}^{3} m_{i} v_{i}^{2} 
-	+ \frac{1}{2} \sum_{i = 1}^{2} J_{i}^{S} \varphi_{i}^2  
-\end{equation}
-
+setzt sich aus der kinetischen Energie $T$ und der potentiellen Energie $L$ des Systems zusammen. Die kinetische Energie 
 \begin{figure}[!t]
 	\centering{
 		\resizebox{125mm}{!}{\input{skizzen/dp.pdf_tex}}
@@ -34,6 +28,11 @@ setzt sich aus der kinetischen Energie $T$ des Systems und der potentiellen Ener
 		\label{fig:DPskizze}
 	}
 \end{figure}
+\begin{equation}
+	\label{eq:energieKin}
+	T = \frac{1}{2} \sum_{i = 0}^{3} m_{i} v_{i}^{2} 
+	+ \frac{1}{2} \sum_{i = 1}^{2} J_{i}^{S} \varphi_{i}^2  
+\end{equation}
 
 besteht aus der translatorischen Bewegungsenergie der Schwerpunkte und der Rotationsenergie der Pendelstäbe. Die Trägheiten der Pendel werden über das Massenträgheitsmoment eines dünnen Stabes um den Schwerpunkt mit 
 \begin{equation}
@@ -102,7 +101,7 @@ U = g\sum_{i  = 0}^{3}  m_{i}  y_{i}
 beschränken. Das Nullniveau des Potentials wird auf die Höhe des Wagens  $ y_0 $ gelegt. Somit lautet die potentielle Energie 
 \begin{equation}
 \label{eq:energiePotTotal}
-U = g \big( (\tfrac{1}{2} m_1 + m_2 + m_3 ) \ell_1 \cos(\varphi_1) + \tfrac{1}{2} m_2 \ell_2 \cos(\varphi_2) \big) \text{.}
+U = g \Big( (\tfrac{1}{2} m_1 + m_2 + m_3 ) \ell_1 \cos(\varphi_1) + \tfrac{1}{2} m_2 \ell_2 \cos(\varphi_2) \Big) \text{.}
 \end{equation}
 
 Mithilfe von~\eqref{eq:energieKinTotal} und~\eqref{eq:energiePotTotal} werden die Lagrange-Gleichungen 2. Art 
@@ -113,21 +112,27 @@ Mithilfe von~\eqref{eq:energieKinTotal} und~\eqref{eq:energiePotTotal} werden di
 	\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial L }{\partial \dot{\varphi}_2} - \frac{\partial L }{\partial \varphi_2} &= -d_\mathrm{2} (\dot{\varphi}_2 - \dot{\varphi}_1 ) \text{.} \label{eq:lagrangePhi2}
 \end{align}
 
-aufgestellt. Die nicht-konservativen Kräfte sind Kräfte, die sich nicht aus einem generalisierten Potential $ P(\bm{q},\bm{\dot{q}}) $ ableiten lassen können. Nicht-konservative Kräfte treten beim Energieaustausch des Systems mit der Umgebung auf. Im vorliegenden Fall sind die Antriebskraft des Motors, die Reibung zwischen der Linearführung und dem Wagen sowie die Dämpfungsterme der Pendellager Kräfte nicht-konservativer Natur. In \cite{Behm2016} werden zwei Möglichkeiten zur Regelung und Steuerung des mechatronischen Systems aufgezeigt. Zum einen kann der Wagen momentengesteuert betrieben werden. Hierbei wird ein Wunschmoment $ M_\mathrm{soll} $ an den Motor übertragen. Bei der Umsetzung des Moments hat die Reibung der Linearführung und jedoch einen großen Einfluss auf die letztendlich resultierende Beschleunigung des Wagens. Um eine realitätsnahe Modellierung des Systems zu gewährleisten, wird eine Berücksichtigung der Reibung vorausgesetzt, wenn das Pendel momentengesteuert betrieben wird. Zum anderen ist es möglich, eine Sollgeschwindigkkeit $ v_\mathrm{soll} $ vorzugeben. Dies hat den Vorteil, dass die Reibung des Systems vernachlässigt werden kann. Außerdem wird in \cite{Behm2016} aufgezeigt, dass bei der Regelung des realen, inversen Einfachpendels mit Drehzahlvorgabe deutlich bessere Regelungsergebnisse erzielt werden. In diesem Zusammenhang wird die Vermutung aufgestellt, dass aufgrund der hohen Reibung der Linearführung und des geringen Gewichts der realen Pendelstäbe eine Rückwirkung der Pendelbewegung auf die Wagenposition nicht vorliegt. Diese Annahme wird verifiziert, indem die relative Auslenkung des Wagens während eines Ausschwingvorgangs des Doppelpendels gemessen wird. In Bild~\ref{fig:rueckwirkungpendelaufwagen} ist zu sehen, dass die maximale Auslenkung wenige Mikrometer beträgt, wodurch der Einfluss der Pendelbewegung auf die Wagenposition im Folgenden vernachlässigt werden kann. Aus den genannten Gründen wird die Wagenbeschleunigung $ \ddot{x} $ als Eingangsgröße des Systems gewählt. 
+aufgestellt. Die nicht-konservativen Kräfte auf der rechten Seite der Gleichungen sind Kräfte, die sich nicht aus einem generalisierten Potential $ P(\bm{q},\bm{\dot{q}}) $ ableiten lassen können. Nicht-konservative Kräfte treten beim Energieaustausch des Systems mit der Umgebung auf. Im vorliegenden Fall sind die Antriebskraft des Motors, die Reibung zwischen der Linearführung und dem Wagen sowie die Dämpfungsterme der Pendellager Kräfte nicht-konservativer Natur. \\\\
+%
+In \cite{Behm2016} werden zwei Möglichkeiten zur Regelung und Steuerung des mechatronischen Systems aufgezeigt. Zum einen kann der Wagen momentengesteuert betrieben werden. Hierbei wird ein Wunschmoment $ M_\mathrm{soll} $ an den Motor übertragen. Bei der Umsetzung des Moments hat die Reibung zwischen dem Wagen und der Linearführung jedoch einen großen Einfluss auf die letztendlich resultierende Beschleunigung des Wagens. Um eine realitätsnahe Modellierung des Systems zu gewährleisten, wird eine Berücksichtigung der Reibung vorausgesetzt, wenn das Pendel momentengesteuert betrieben wird. 
 
+Zum anderen ist es möglich, das Doppelpendel mittels Drehzahlvorgabe anzusteuern. Dabei setzt der Motor eine vorgegebene Sollgeschwindigkkeit $ v_\mathrm{soll} $ um. Dies hat den Vorteil, dass die Reibung des Systems vernachlässigt werden kann. Außerdem wird in \cite{Behm2016} aufgezeigt, dass bei der Regelung des realen, inversen Einfachpendels mit Drehzahlvorgabe deutlich bessere Regelungsergebnisse erzielt werden. In diesem Zusammenhang wird die Vermutung aufgestellt, dass aufgrund der hohen Reibung der Linearführung und des geringen Gewichts der realen Pendelstäbe keine Rückwirkung der Pendelbewegung auf die Wagenposition vorliegt. Diese Annahme wird verifiziert, indem die relative Auslenkung des Wagens während eines Ausschwingvorgangs des Doppelpendels gemessen wird. In Bild~\ref{fig:rueckwirkungpendelaufwagen} ist zu sehen, dass die maximale Auslenkung wenige Mikrometer beträgt, wodurch der Einfluss der Pendelbewegung auf die Wagenposition im Folgenden vernachlässigt werden kann. 
+
+Aus den genannten Gründen wird die Wagenbeschleunigung $ \ddot{x} $ als Eingangsgröße des Systems gewählt. 
+%
 \begin{figure}[!b]
 	\centering
 	\input{plots/rueckwirkungpendelaufwagen.tex}
 	\caption{Relative Wagenposition beim Ausschwingvorgang des Doppelpendels}
 	\label{fig:rueckwirkungpendelaufwagen}
 \end{figure}
-
+%
 Für die Ansteuerung des Motors, wird die Sollgeschwindigkeit durch eine einfache Integration der vorgegebenen Beschleunigung ermittelt. Dadurch ist die explizite Lösung von~\eqref{eq:lagrangeX}, die die Bewegungsgleichung des Wagens liefert, nicht mehr notwendig. Nach einer Bildung der Ableitungen der Lagrange-Funktion und Umformen von~\eqref{eq:lagrangePhi1} und~\eqref{eq:lagrangePhi2} lassen sich die Bewegungsgleichungen des inversen Doppelpendels aufstellen:
-
+%
 \begin{align}
 	\ddot{x} = u \label{eq:ddx}
 \end{align}
-%\vspace{-0.7cm}
+\vspace{-0.7cm}
 \begin{align}
 	\begin{split}
 	\ddot{\varphi}_1 = &\frac{1}{J_1^\mathrm{S} + (\tfrac{1}{4} m_1 + m_2 + m_3) \ell_1^2 } \Big( d_\mathrm{2} (\dot{\varphi}_2 - \dot{\varphi}_1) - d_\mathrm{1} \dot{\varphi}_1  + (\tfrac{1}{2} m_1 + m_2 + m_3) \ell_1 \cos(\varphi_1) \ddot{x} \\
@@ -167,7 +172,7 @@ werden für die Ermittlung der Pendelwinkelbeschleunigungen verwendet. Eine volls
 		$ m_1 $ & \SI{0,0313}{\kg} & Masse des inneren Pendelstabs \\
 		$ m_2 $ & \SI{0,0313}{\kg} & Masse des äußeren Pendelstabs \\
 		$ m_3 $ & \SI{0,0308}{\kg} & Masse des Gelenks \\
-		$ d_1, d_2 $ & \SI{0,001}{\kg\square\meter\per\second} & Dämpfungskonstante der Pendelstäbe \\
+		$ d_1, d_2 $ & \SI{0,001}{\kg\square\meter\per\second} & Dämpfungskonstanten der Pendelstäbe \\
 		$ g $ & \SI{9,81}{\meter\per\square\second} &  Erdbeschleunigung \\\hline
 	\end{tabu}
 \end{table}

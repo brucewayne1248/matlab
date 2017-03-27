@@ -1,0 +1,72 @@
+\nomenclatureentry{a11$ \ell_1 $@[{$ \ell_1 $}]\begingroup Länge des inneren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a12$ \ell_2 $@[{$ \ell_2 $}]\begingroup Länge des äußeren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a17$ M_{\mathrm{Motor}} $ @[{$ M_{\mathrm{Motor}} $ }]\begingroup Antriebsmoment des Motors\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a05$ F_{\mathrm{a}} $@[{$ F_{\mathrm{a}} $}]\begingroup Antriebskraft des Wagens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a06$ F_{\mathrm{r}} $@[{$ F_{\mathrm{r}} $}]\begingroup Reibkraft zwischen Wagen und Linearführung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a23$ x $@[{$ x $}]\begingroup Wagenposition\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a$ \varphi_1 $@[{$ \varphi_1 $}]\begingroup Winkel des inneren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a01$ \varphi_2 $@[{$ \varphi_2 $}]\begingroup Winkel des äußeren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a14$ m_1 $@[{$ m_1 $}]\begingroup Masse des inneren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a15$ m_2 $@[{$ m_2 $}]\begingroup Masse des äußeren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a16$ m_3 $@[{$ m_3 $}]\begingroup Masse des Gelenks\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a13$ m_0 $@[{$ m_0 $}]\begingroup Masse des Wagens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a10$ L $@[{$ L $}]\begingroup Lagrange-Funktion\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a18$ \bm{q} $@[{$ \bm{q} $}]\begingroup Vektor der generalisierten Koordinaten\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a19$ \bm{Q}_{\mathrm{n.k.}} $@[{$ \bm{Q}_{\mathrm{n.k.}} $}]\begingroup Nichtkonservative Kräfte\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a08$ J^\mathrm{S}_1 $@[{$ J^\mathrm{S}_1 $}]\begingroup Massenträgheitsmoment des inneren Pendels um den Schwerpunkt\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a09$ J^\mathrm{S}_2 $@[{$ J^\mathrm{S}_2 $}]\begingroup Massenträgheitsmoment des äußeren Pendels um den Schwerpunkt\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a20$ T $@[{$ T $}]\begingroup Kinetische Energie\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a21$ U $@[{$ U $}]\begingroup Potentielle Energie\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a22$ v $@[{$ v $}]\begingroup Schwerpunktsgeschwindigkeit\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a07$ g $@[{$ g $}]\begingroup Erdbeschleunigung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a03$ d_1 $@[{$ d_1 $}]\begingroup Dämpfungskonstante des inneren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{a04$ d_2 $@[{$ d_2 $}]\begingroup Dämpfungskonstante des äußeren Pendels\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b13$ \bm{x}(t) $@[{$ \bm{x}(t) $}]\begingroup Zustandsvektor\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b10$ u(t) $@[{$ u(t) $}]\begingroup Eingangsgröße\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b15$ y(t) $@[{$ y(t) $}]\begingroup Ausgangsvektor\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b$ \bm{A} $@[{$ \bm{A} $}]\begingroup Systemmatrix\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b02$ \bm{b} $@[{$ \bm{b} $}]\begingroup Steuervektor\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b03$ \bm{C} $@[{$ \bm{C} $}]\begingroup Beobachtungsmatrix\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b14$ \bm{x}_0 $@[{$ \bm{x}_0 $}]\begingroup Anfangszustand\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b09$ \bm{S}_\mathrm{S} $@[{$ \bm{S}_\mathrm{S} $}]\begingroup Steuerbarkeitsmatrix\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b05$ \bm{k}^\mathrm{T} $@[{$ \bm{k}^\mathrm{T} $}]\begingroup Rückführvektor\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b11$ V $@[{$ V $}]\begingroup Vorfilter der Führungsgröße\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b12$ w(t) $@[{$ w(t) $}]\begingroup Führungsgröße\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b01$ \tilde{\bm{A}} $@[{$ \tilde{\bm{A}} $}]\begingroup Systemmatrix des geschlossenen Kreises\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b04$ J $@[{$ J $}]\begingroup Gütefunktional\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b07$ \bm{Q}_{\mathrm{LQ}} $@[{$ \bm{Q}_{\mathrm{LQ}} $}]\begingroup Wichtungsmatrix des Zustandsvektors\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b08$ R_{\mathrm{LQ}} $@[{$ R_{\mathrm{LQ}} $}]\begingroup Wichtungsfaktor der Eingangsgröße\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{b06$ \bm{P} $@[{$ \bm{P} $}]\begingroup Lösung der Matrix-Ricattigleichung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c12$ \hat{\bm{x}} $@[{$ \hat{\bm{x}} $}]\begingroup Geschätzter Zustandsvektor\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c08$ \bm{S}_\mathrm{B} $@[{$ \bm{S}_\mathrm{B} $}]\begingroup Lineare Beobachtbarkeitsmatrix\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c09$ \bm{S}_{\mathrm{B},\mathrm{nl}}$@[{$ \bm{S}_{\mathrm{B},\mathrm{nl}}$}]\begingroup Nichtlineare Beobachtbarkeitsmatrix\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c11$ \bm{w}_k $@[{$ \bm{w}_k $}]\begingroup Vektor des Prozessrauschens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c10$ \bm{v}_k $@[{$ \bm{v}_k $}]\begingroup Vektor des Messrauschens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c06$ \bm{Q}_{\mathrm{EKF}} $@[{$ \bm{Q}_{\mathrm{EKF}} $}]\begingroup Matrix des Prozessrauschens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c07$ \bm{R}_{\mathrm{EKF}} $@[{$ \bm{R}_{\mathrm{EKF}} $}]\begingroup Matrix des Messrauschens\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c05$ \bm{P}_k$@[{$ \bm{P}_k$}]\begingroup Matrix der Fehlerkovarianz\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c04$ \bm{P}_0$@[{$ \bm{P}_0$}]\begingroup Initiale Fehlerkovarianz\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c03$ \bm{K}_k$@[{$ \bm{K}_k$}]\begingroup Kalmanverstärkung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c02$ e $@[{$ e $}]\begingroup Fehler der Zustandsschätzung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c13$ \ddot{x}(t) $@[{$ \ddot{x}(t) $}]\begingroup Wagenbeschleunigung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c14$ \ddot{x}_{\mathrm{max}} $@[{$ \ddot{x}_{\mathrm{max}} $}]\begingroup Amplitude der Wagenbeschleunigung\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c01$ \omega $@[{$ \omega $}]\begingroup Kreisfrequenz\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{c15$ \Delta\ddot{x} $@[{$ \Delta\ddot{x} $}]\begingroup Phasenversatz\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d10$ \bm{c}_\mathrm{r} $@[{$ \bm{c}_\mathrm{r} $}]\begingroup Schwerpunkt des roten Farbmarkers\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d11$ \bm{c}_\mathrm{g} $@[{$ \bm{c}_\mathrm{g} $}]\begingroup Schwerpunkt des grünen Farbmarkers\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d12$ \bm{c}_\mathrm{b} $@[{$ \bm{c}_\mathrm{b} $}]\begingroup Schwerpunkt des blauen Farbmarkers\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d03$ \varphi_{1,\mathrm{B}} $@[{$ \varphi_{1,\mathrm{B}} $}]\begingroup Bildbasierter innerer Pendelwinkel\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d04$ \varphi_{2,\mathrm{B}} $@[{$ \varphi_{2,\mathrm{B}} $}]\begingroup Bildbasierter äußerer Pendelwinkel\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d01$ \alpha_1 $@[{$ \alpha_1 $}]\begingroup innerer Pendelwinkel im Bildkoordinatensystem\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d02$ \alpha_2 $@[{$ \alpha_2 $}]\begingroup äußerer Pendelwinkel im Bildkoordinatensystem\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d15$ \mathrm{KS}_\mathrm{B} $@[{$ \mathrm{KS}_\mathrm{B} $}]\begingroup Bildkoordinatensystem\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d06$ \bm{B} $@[{$ \bm{B} $}]\begingroup RGB-Einzelbild\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d07$ \bm{B}^\mathrm{r} $@[{$ \bm{B}^\mathrm{r} $}]\begingroup Einzelbild des roten Farbkanals\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d08$ \bm{B}^\mathrm{g} $@[{$ \bm{B}^\mathrm{g} $}]\begingroup Einzelbild des grünen Farbkanals\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d09$ \bm{B}^\mathrm{b} $@[{$ \bm{B}^\mathrm{b} $}]\begingroup Einzelbild des blauen Farbkanals\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d13$ \bm{G}^\mathrm{r} $@[{$ \bm{G}^\mathrm{r} $}]\begingroup Einzelbild in Graustufen\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d14$ I $@[{$ I $}]\begingroup Intensitätsschwellwert\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d16$ \bm{SW} $@[{$ \bm{SW} $}]\begingroup Binärmaske eines Einzelbilds\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d05$ A $@[{$ A $}]\begingroup Fläche eines Bildobjekts\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d17$ u_\mathrm{S} $@[{$ u_\mathrm{S} $}]\begingroup Schwerpunktkoordinate der $ u $-Achse\nomeqref {\relax 0}|nompageref}{vi}
+\nomenclatureentry{d18$ v_\mathrm{S} $@[{$ v_\mathrm{S} $}]\begingroup Schwerpunktkoordinate der $ v $-Achse\nomeqref {\relax 0}|nompageref}{vi}

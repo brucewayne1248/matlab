@@ -1,3 +1,0 @@
-load('validierungphi1.mat')
-
-tVideo = tVideo(1:

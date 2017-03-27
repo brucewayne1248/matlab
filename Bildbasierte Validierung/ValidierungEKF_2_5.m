@@ -26,6 +26,9 @@ Rk = 0.01;
 Qk =  1e-6*eye(4);
 % Qk = diag([1e-9 1e-7 1e-5 1e-8]); % optimales Q für phi2
 Qk = diag([1e-5 0.01 1e-3 0.1]);
+QkMin = Qk;
+% Qk = diag([1e-6 0.1 1e-3 1e-6]);
+
 %% differentiating and filtering phi2Video
 Fs = 1/T_s;
 dt = T_s;

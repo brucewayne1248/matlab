@@ -37,7 +37,7 @@ errMin = Inf;
 %             for jjjj = 1:length(q)
 %                 Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
                 
-                Qk = QkMin;
+%                 Qk = QkMin;
                 phi1EstRad = zeros(1,length(phi1MeasRad)); 
                 dphi1EstRad = zeros(1,length(phi1MeasRad));
                 phi2EstRad = zeros(1,length(phi1MeasRad)); 

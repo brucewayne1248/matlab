@@ -15,7 +15,7 @@ d2r = pi/180;
 r2d = 180/pi;
 x_0=0; dx_0=0; phi1_0=180*d2r; dphi1_0=0; phi2_0=180*d2r; dphi2_0=0;
 x0 = [phi1_0; dphi1_0; phi2_0; dphi2_0];
-x0_ekf = [210*d2r; 1; 150*d2r; -3];
+x0_ekf = [230*d2r; 10; 100*d2r; -10];
 phi1MeasRad = d2r*phi1MeasDeg;
 para_sys = [g l_1 l_2 m_1 m_2 m_3 d_p1 d_p2];
 
@@ -23,9 +23,10 @@ para_sys = [g l_1 l_2 m_1 m_2 m_3 d_p1 d_p2];
 Pk_0 = eye(4);
 Rk = 0.01;
 % Qk_min = 0.01*diag([0.0001 1 0.1 10]); % aus Simulation
-Qk =  1e-6*eye(4);
+% Qk =  1e-6*eye(4);
+
 %% calculating phi2 with loops for Qk weightings
-q = logspace(-9,-7,3);
+q = logspace(-6,-0,7);
 Fs = 1/T_s;
 dt = T_s;
 errMin = Inf;
@@ -35,10 +36,15 @@ errMin = Inf;
 %         for jjj = 1:length(q)
 %             for jjjj = 1:length(q)
 %                 Qk = diag([q(j) q(jj) q(jjj) q(jjjj)]);
-                phi1EstRad = []; dphi1EstRad = []; phi2EstRad = []; dphi2EstRad = []; K = [];
+                   
+                Qk = diag([1e-6 1e-1 1e-3 1e-6]);
+                phi1EstRad = zeros(1,length(phi1MeasDeg)); 
+                dphi1EstRad = zeros(1,length(phi1MeasDeg)); 
+                phi2EstRad = zeros(1,length(phi1MeasDeg)); 
+                dphi2EstRad = zeros(1,length(phi1MeasDeg)); K = [];
                 init = 1;
                 for k = 1:length(phi1MeasRad)   % calculating states
-                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0, para_sys, T_s, ddxDes(k), phi1MeasRad(k), init);
+                    [states, K] = extended_kalman_filter(Pk_0, Qk, Rk, x0_ekf, para_sys, T_s, ddxDes(k), phi1MeasRad(k), init);
                     init = 0;
                     phi1EstRad(k) = states(1);
                     dphi1EstRad(k) = states(2);
@@ -46,7 +52,10 @@ errMin = Inf;
                     dphi2EstRad(k) = states(4);
                 end
                 
-                phi1EstDeg = []; dphi1EstDeg = []; phi2EstDeg = []; dphi2EstDeg = []; 
+%                 phi1EstDeg = zeros(1,length(phi1MeasDeg)); 
+%                 dphi1EstDeg = zeros(1,length(phi1MeasDeg)); 
+%                 phi2EstDeg = zeros(1,length(phi1MeasDeg)); 
+%                 dphi2EstDeg = zeros(1,length(phi1MeasDeg)); 
                 phi1EstDeg = r2d*phi1EstRad;
                 dphi1EstDeg = r2d*dphi1EstRad;
                 phi2EstDeg = r2d*phi2EstRad;
@@ -54,11 +63,11 @@ errMin = Inf;
                 
                 % Fehler zwischen Messung und EKF
                 err = sqrt(sum((phi2EstDeg-phi2VideoDeg).^2));
-%                 if (err < errMin)
-%                     errMin = err;
-%                     QkMin = Qk;
-%                 end
-%                 
+                if (err < errMin)
+                    errMin = err;
+                    QkMin = Qk;
+                end
+                 
 %             end
 %         end
 %     end

@@ -3,7 +3,7 @@ clear all; close all;
 v = VideoReader('D:\Documents\Studienarbeit imes\Aufnahmen\trapez_erregung5_1002.MP4');
 frameRate = v.FrameRate;
 %counter
-% v.CurrentTime = 4;
+v.CurrentTime = 4;
 k = 0;
 
 while hasFrame(v)
@@ -70,48 +70,48 @@ while hasFrame(v)
     
     %% debugging: zeigt binär bild
     
-    binTotal = binRed + binGreen + binBlue;
-    
-    %     red
-    figure(4), imshow(binTotal), hold on%, impixelinfo, hold on
-    for object = 1:length(statsRed)
-        bbRed = statsRed(object).BoundingBox;
-        cRed = statsRed(object).Centroid;
-        areaRed = statsRed(object).Area;
-        rectangle('Position',bbRed,'EdgeColor','r','LineWidth',2)
-        plot(cRed(1),cRed(2), '-m+')
-        a=text(cRed(1)+20,cRed(2), strcat('rot: u_s: ', num2str(round(100*cRed(1))/100), '    v_s: ', num2str(round(100*cRed(2))/100)));
-        set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
-        b=text(80,40, strcat('phi_1: ', num2str(round2(phi1VideoDeg(k),2)), '  phi_2: ', num2str(round2(phi2VideoDeg(k),2))));
-        set(b, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
-    end
-    %     green
-    plot(binGreen)
-    for object = 1:length(statsGreen)
-        bbGreen = statsGreen(object).BoundingBox;
-        cGreen = statsGreen(object).Centroid;
-        areaGreen = statsGreen(object).Area;
-        rectangle('Position',bbGreen,'EdgeColor','r','LineWidth',2)
-        plot(cGreen(1),cGreen(2), '-m+')
-        a=text(cGreen(1)+20,cGreen(2), strcat('grün: u_s: ', num2str(round(100*cGreen(1))/100), '    v_s: ', num2str(round(100*cGreen(2))/100)));
-        set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
-    end
-    % %     blue
-    plot(binBlue) %, impixelinfo %, hold on
-    %loop for blue objects
-    for object = 1:length(statsBlue)
-        bbBlue = statsBlue(object).BoundingBox;
-        cBlue = statsBlue(object).Centroid;
-        areaBlue = statsBlue(object).Area;
-        rectangle('Position',bbBlue,'EdgeColor','r','LineWidth',2)
-        plot(cBlue(1),cBlue(2), '-m+')
-        a=text(cBlue(1)+20,cBlue(2), strcat('blau u_s: ', num2str(round(100*cBlue(1))/100), '    v_s: ', num2str(round(100*cBlue(2))/100)));
-        set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
-    end
-    hold off
+%     binTotal = binRed + binGreen + binBlue;
+%     
+%         red
+%     figure(4), imshow(binTotal), hold on%, impixelinfo, hold on
+%     for object = 1:length(statsRed)
+%         bbRed = statsRed(object).BoundingBox;
+%         cRed = statsRed(object).Centroid;
+%         areaRed = statsRed(object).Area;
+%         rectangle('Position',bbRed,'EdgeColor','r','LineWidth',2)
+%         plot(cRed(1),cRed(2), '-m+')
+%         a=text(cRed(1)+20,cRed(2), strcat('rot: u_s: ', num2str(round(100*cRed(1))/100), '    v_s: ', num2str(round(100*cRed(2))/100)));
+%         set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
+%         b=text(80,40, strcat('phi_1: ', num2str(round2(phi1VideoDeg(k),2)), '  phi_2: ', num2str(round2(phi2VideoDeg(k),2))));
+%         set(b, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
+%     end
+%         green
+%     plot(binGreen)
+%     for object = 1:length(statsGreen)
+%         bbGreen = statsGreen(object).BoundingBox;
+%         cGreen = statsGreen(object).Centroid;
+%         areaGreen = statsGreen(object).Area;
+%         rectangle('Position',bbGreen,'EdgeColor','r','LineWidth',2)
+%         plot(cGreen(1),cGreen(2), '-m+')
+%         a=text(cGreen(1)+20,cGreen(2), strcat('grün: u_s: ', num2str(round(100*cGreen(1))/100), '    v_s: ', num2str(round(100*cGreen(2))/100)));
+%         set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
+%     end
+%     %     blue
+%     plot(binBlue) %, impixelinfo %, hold on
+%     loop for blue objects
+%     for object = 1:length(statsBlue)
+%         bbBlue = statsBlue(object).BoundingBox;
+%         cBlue = statsBlue(object).Centroid;
+%         areaBlue = statsBlue(object).Area;
+%         rectangle('Position',bbBlue,'EdgeColor','r','LineWidth',2)
+%         plot(cBlue(1),cBlue(2), '-m+')
+%         a=text(cBlue(1)+20,cBlue(2), strcat('blau u_s: ', num2str(round(100*cBlue(1))/100), '    v_s: ', num2str(round(100*cBlue(2))/100)));
+%         set(a, 'FontName', 'Arial', 'FontWeight', 'bold', 'Fontsize', 30, 'Color', 'yellow');
+%     end
+%     hold off
 
     %% Pause wird für das Anzeigen der bilder benötigt. Für winkelberechnung ohne anzeigen von Bildern auskommentieren
-    pause(0.05)     
+%     pause(0.05)     
 end
 
 %% save the calculated angles

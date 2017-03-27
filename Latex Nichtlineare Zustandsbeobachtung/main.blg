@@ -1,39 +1,20 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
 A level-1 auxiliary file: cover.aux
+A level-1 auxiliary file: einleitung.aux
+A level-1 auxiliary file: standdertechnik.aux
 A level-1 auxiliary file: modellierung.aux
 A level-1 auxiliary file: zustandsregelung.aux
-A level-1 auxiliary file: zustandsbeobachtung.aux
+A level-1 auxiliary file: zustandsbeobachtung2.aux
+A level-1 auxiliary file: bildbasiertevalidierung.aux
+A level-1 auxiliary file: zusammenfassung.aux
 A level-1 auxiliary file: anhang_bewegungsgleichungen.aux
 The style file: alphadin.bst
 Database file #1: literaturserov.bib
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2132 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-Too many commas in name 1 of "Tobias Ortmaier, Christian Hansen, Steffen Bosselmann, Lutz Rissing, Mathias Rechel, Daniel Klaas" for entry Ortmaier2015
-while executing---line 2205 of file alphadin.bst
-(There were 15 error messages)
+Warning--empty booktitle in Hettich2014
+Warning--empty pages in Hettich2014
+Warning--empty pages in Merwe2004
+Warning--empty number in Olejnik2013
+Warning--empty note in Olejnik2013
+Warning--empty pages in Samani2010
+Warning--empty pages in Wan
+(There were 7 warnings)

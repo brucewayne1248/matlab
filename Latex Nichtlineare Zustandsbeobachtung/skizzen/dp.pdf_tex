@@ -52,24 +52,23 @@
     \put(0,0){\includegraphics[width=\unitlength,page=1]{dp.pdf}}%
     \put(0.31989275,0.63127031){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
     \put(0.31752049,0.64787549){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
-    \put(0.29770582,0.57031284){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{ $\varphi_2$}}}}%
-    \put(0.44395992,0.36177306){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$\varphi_1$}}}}%
-    \put(0.10424376,0.2142354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$x$}}}}%
-    \put(0.05581776,0.28373958){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$y$}}}}%
-    \put(0.28888904,0.00278495){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$x_2$}}}}%
-    \put(0.35610051,0.00278483){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$x_3$}}}}%
-    \put(0.43206619,0.00278495){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$x_1$}}}}%
-    \put(0.5221523,0.00278495){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$x_0$}}}}%
-    \put(0.18869207,0.18991479){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$y_0$}}}}%
-    \put(0.1909286,0.30187002){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$y_1$}}}}%
-    \put(0.19204687,0.37857014){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$y_3$}}}}%
-    \put(0.18840166,0.48815311){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$y_2$}}}}%
-    \put(0.65341222,0.23354029){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$F_\mathrm{r}$}}}}%
-    \put(0.39484589,0.23130382){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$F_\mathrm{a}$}}}}%
-    \put(0.67312411,0.28349155){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$\ell_1, m_1, d_1, J_1^{\mathrm{S}}$}}}}%
-    \put(0.94688304,0.3946559){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$g$}}}}%
-    \put(0.51984197,0.45685165){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$\ell_2, m_2, d_2, J_2^{\mathrm{S}}$}}}}%
+    \put(0.29770582,0.56531284){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_1$}}%
+    \put(0.44395992,0.36177306){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_2$}}%
+    \put(0.10424376,0.2142354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x$}}%
+    \put(0.05581776,0.28373958){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y$}}%
+    \put(0.29888904,-0.01){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x_2$}}%
+    \put(0.36610051,-0.01){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x_3$}}%
+    \put(0.44206619,-0.01){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x_1$}}%
+    \put(0.5221523,-0.01){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x_0$}}%
+    \put(0.18869207,0.17991479){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y_0$}}%
+    \put(0.1909286,0.29187002){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y_1$}}%
+    \put(0.19204687,0.36857014){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y_3$}}%
+    \put(0.19040166,0.47815311){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y_2$}}%
+    \put(0.65440063,0.19823714){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$F_\mathrm{r}$}}%
+    \put(0.68312411,0.27349155){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\ell_1, m_1, d_1, J_1^{\mathrm{S}}$}}%
+    \put(0.94688304,0.3946559){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$g$}}%
+    \put(0.51984197,0.44685165){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\ell_2, m_2, d_2, J_2^{\mathrm{S}}$}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{dp.pdf}}%
-    \put(-0.00098017,0.08343859){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\scalebox{.45}{$M_{\mathrm{Motor}}$}}}}%
+    \put(-0.00098017,0.08343859){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$M_{\mathrm{Motor}}$}}%
   \end{picture}%
 \endgroup%

@@ -1,0 +1,80 @@
+%Doppelpendel
+\nomenclature[a11]{$ \ell_1 $}{Länge des inneren Pendels}
+\nomenclature[a12]{$ \ell_2 $}{Länge des äußeren Pendels}
+\nomenclature[a17]{$ M_{\mathrm{Motor}} $ }{Antriebsmoment des Motors}
+\nomenclature[a05]{$ F_{\mathrm{a}} $}{Antriebskraft des Wagens}
+\nomenclature[a06]{$ F_{\mathrm{r}} $}{Reibkraft zwischen Wagen und Linearführung}
+\nomenclature[a23]{$ x $}{Wagenposition}
+\nomenclature[a]{$ \varphi_1 $}{Winkel des inneren Pendels}
+\nomenclature[a01]{$ \varphi_2 $}{Winkel des äußeren Pendels}
+\nomenclature[a14]{$ m_1 $}{Masse des inneren Pendels}
+\nomenclature[a15]{$ m_2 $}{Masse des äußeren Pendels}
+\nomenclature[a16]{$ m_3 $}{Masse des Gelenks}
+\nomenclature[a13]{$ m_0 $}{Masse des Wagens}
+\nomenclature[a10]{$ L $}{Lagrange-Funktion}
+\nomenclature[a18]{$ \bm{q} $}{Vektor der generalisierten Koordinaten}
+\nomenclature[a19]{$ \bm{Q}_{\mathrm{n.k.}} $}{Nichtkonservative Kräfte}
+\nomenclature[a08]{$ J^\mathrm{S}_1 $}{Massenträgheitsmoment des inneren Pendels um den Schwerpunkt}
+\nomenclature[a09]{$ J^\mathrm{S}_2 $}{Massenträgheitsmoment des äußeren Pendels um den Schwerpunkt}
+\nomenclature[a20]{$ T $}{Kinetische Energie}
+\nomenclature[a21]{$ U $}{Potentielle Energie}
+\nomenclature[a22]{$ v $}{Schwerpunktsgeschwindigkeit}
+\nomenclature[a07]{$ g $}{Erdbeschleunigung}
+\nomenclature[a03]{$ d_1 $}{Dämpfungskonstante des inneren Pendels}
+\nomenclature[a04]{$ d_2 $}{Dämpfungskonstante des äußeren Pendels}
+
+%Zustandsregelung
+\nomenclature[b13]{$ \bm{x}(t) $}{Zustandsvektor}
+\nomenclature[b10]{$ u(t) $}{Eingangsgröße}
+\nomenclature[b15]{$ y(t) $}{Ausgangsvektor}
+\nomenclature[b]{$ \bm{A} $}{Systemmatrix}
+\nomenclature[b02]{$ \bm{b} $}{Steuervektor}
+\nomenclature[b03]{$ \bm{C} $}{Beobachtungsmatrix}
+\nomenclature[b14]{$ \bm{x}_0 $}{Anfangszustand}
+\nomenclature[b09]{$ \bm{S}_\mathrm{S} $}{Steuerbarkeitsmatrix}
+\nomenclature[b05]{$ \bm{k}^\mathrm{T} $}{Rückführvektor}
+\nomenclature[b11]{$ V $}{Vorfilter der Führungsgröße}
+\nomenclature[b12]{$ w(t) $}{Führungsgröße}
+\nomenclature[b01]{$ \tilde{\bm{A}} $}{Systemmatrix des geschlossenen Kreises}
+\nomenclature[b04]{$ J $}{Gütefunktional}
+\nomenclature[b07]{$ \bm{Q}_{\mathrm{LQ}} $}{Wichtungsmatrix des Zustandsvektors}
+\nomenclature[b08]{$ R_{\mathrm{LQ}} $}{Wichtungsfaktor der Eingangsgröße}
+\nomenclature[b06]{$ \bm{P} $}{Lösung der Matrix-Ricattigleichung}
+
+%Nichtlineare Zustandsbeobachtung
+\nomenclature[c12]{$ \hat{\bm{x}} $}{Geschätzter Zustandsvektor}
+\nomenclature[c08]{$ \bm{S}_\mathrm{B} $}{Lineare Beobachtbarkeitsmatrix}
+\nomenclature[c09]{$ \bm{S}_{\mathrm{B},\mathrm{nl}}$}{Nichtlineare Beobachtbarkeitsmatrix}
+\nomenclature[c11]{$ \bm{w}_k $}{Vektor des Prozessrauschens}
+\nomenclature[c10]{$ \bm{v}_k $}{Vektor des Messrauschens}
+\nomenclature[c06]{$ \bm{Q}_{\mathrm{EKF}} $}{Matrix des Prozessrauschens}
+\nomenclature[c07]{$ \bm{R}_{\mathrm{EKF}} $}{Matrix des Messrauschens}
+\nomenclature[c05]{$ \bm{P}_k$}{Matrix der Fehlerkovarianz}
+\nomenclature[c04]{$ \bm{P}_0$}{Initiale Fehlerkovarianz}
+\nomenclature[c03]{$ \bm{K}_k$}{Kalmanverstärkung}
+\nomenclature[c02]{$ e $}{Fehler der Zustandsschätzung}
+\nomenclature[c13]{$ \ddot{x}(t) $}{Wagenbeschleunigung}
+\nomenclature[c14]{$ \ddot{x}_{\mathrm{max}} $}{Amplitude der Wagenbeschleunigung}
+\nomenclature[c01]{$ \omega $}{Kreisfrequenz}
+\nomenclature[c15]{$ \Delta\ddot{x} $}{Phasenversatz}
+
+%Beobachtervalidierung
+\nomenclature[d10]{$ \bm{c}_\mathrm{r} $}{Schwerpunkt des roten Farbmarkers}
+\nomenclature[d11]{$ \bm{c}_\mathrm{g} $}{Schwerpunkt des grünen Farbmarkers}
+\nomenclature[d12]{$ \bm{c}_\mathrm{b} $}{Schwerpunkt des blauen Farbmarkers}
+\nomenclature[d03]{$ \varphi_{1,\mathrm{B}} $}{Bildbasierter innerer Pendelwinkel}
+\nomenclature[d04]{$ \varphi_{2,\mathrm{B}} $}{Bildbasierter äußerer Pendelwinkel}
+\nomenclature[d01]{$ \alpha_1 $}{innerer Pendelwinkel im Bildkoordinatensystem}
+\nomenclature[d02]{$ \alpha_2 $}{äußerer Pendelwinkel im Bildkoordinatensystem}
+\nomenclature[d15]{$ \mathrm{KS}_\mathrm{B} $}{Bildkoordinatensystem}
+\nomenclature[d06]{$ \bm{B} $}{RGB-Einzelbild}
+\nomenclature[d07]{$ \bm{B}^\mathrm{r} $}{Einzelbild des roten Farbkanals}
+\nomenclature[d08]{$ \bm{B}^\mathrm{g} $}{Einzelbild des grünen Farbkanals}
+\nomenclature[d09]{$ \bm{B}^\mathrm{b} $}{Einzelbild des blauen Farbkanals}
+\nomenclature[d13]{$ \bm{G}^\mathrm{r} $}{Einzelbild in Graustufen}
+\nomenclature[d14]{$ I $}{Intensitätsschwellwert}
+\nomenclature[d16]{$ \bm{SW} $}{Binärmaske eines Einzelbilds}
+\nomenclature[d05]{$ A $}{Fläche eines Bildobjekts}
+\nomenclature[d17]{$ u_\mathrm{S} $}{Schwerpunktkoordinate der $ u $-Achse}
+\nomenclature[d18]{$ v_\mathrm{S} $}{Schwerpunktkoordinate der $ v $-Achse}
+

@@ -64,7 +64,15 @@ postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
 
 \NewDocumentCommand{\angsi}{omom}{%			% für °/s
 	\ang[#1]{#2}\si[#3]{#4}%
-}		
+}
+
+\usepackage{setspace}
+\usepackage{afterpage}						% leere seite
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\newpage}		
 \usepackage{algorithmicx}					% für algorithmen
 \usepackage{algpseudocode}					% für algorithmen
 \usepackage{algorithm}						% für algorithmen
@@ -91,6 +99,7 @@ postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
 
 % Seitenspiegel neu berechnen
 \typearea[current]{last}
+
 %\typearea{last}
 \begin{document}                            % Dokumentenanfang
 \dominitoc
@@ -104,19 +113,34 @@ postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
     \clearpage
     \pdfbookmark[0]{\contentsname}{toc}
     %\setcounter{page}{1}
+    \begin{spacing}{1}
     \tableofcontents                        % Inhaltsverzeichnis
+    \end{spacing}
+    \cleardoublepage
+    % \phantomsection
+    \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
-    \listoftables
-    \printnomenclature                      % Formelverzeichnis einbinden
+%    \listoftables
+
+    \cleardoublepage
+	\addcontentsline{toc}{chapter}{Symbolverzeichnis}
+	\printnomenclature                      % Formelverzeichnis einbinden
+    \input{variablen}                       % Mathematische Variablen
+
+    
+    
+
     \mainmatter                             % der eigentliche Tex
 %		\input{abkuerzungen}                    % Abkürzungen im Text, z.B. CI = Cochleaimplantat
-%		\input{variablen}                       % Mathematische Variablen
-%    \include{einleitung}										% die einzelnen Kapitel einbinden
+
+
+	\include{einleitung}										% die einzelnen Kapitel einbinden
+	\include{standdertechnik}
 	\include{modellierung}
 	\include{zustandsregelung}
-	\include{zustandsbeobachtung}
+	\include{zustandsbeobachtung2}
 	\include{bildbasiertevalidierung}
-	%\include{zusammenfassung}
+	\include{zusammenfassung}
     %\nocite{*}                             % alle Literaturquellen einbinden, sonst werden nur die zitierten
                                             % Quellen im Literaturverzeichnis angezeigt (ist Geschmackssache).
                                             % eher nicht verwenden, außer man hat einen guten Grund
@@ -129,7 +153,7 @@ postaction = {draw,line width=1pt, white,shorten >= 4.5pt}]
     \newpage                                
     \ihead{\normalfont Anhang}              % Kopfzeile auf Anhang setzen
 %    
-    \minitoc                                % Anhangsverzeichnis plotten
+%    \minitoc                                % Anhangsverzeichnis plotten
     %% --- Ab hier der Anhang einfügen
 
     \include{anhang_bewegungsgleichungen}            % Anhang

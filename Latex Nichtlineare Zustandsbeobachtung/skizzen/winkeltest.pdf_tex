@@ -66,7 +66,7 @@
     \put(0,0){\includegraphics[width=\unitlength,page=4]{winkeltest.pdf}}%
     \put(0.10052927,0.50486609){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$u$}}}%
     \put(0.0267276,0.42784951){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$v$}}}%
-    \put(0.02338692,0.4985721){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$KS_\mathrm{B}$}}}%
+    \put(0.02338692,0.4985721){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathrm{KS}_\mathrm{B}$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{winkeltest.pdf}}%
   \end{picture}%
 \endgroup%
