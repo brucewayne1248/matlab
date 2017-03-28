@@ -52,8 +52,8 @@
     \put(0,0){\includegraphics[width=\unitlength,page=1]{dp.pdf}}%
     \put(0.31989275,0.63127031){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
     \put(0.31752049,0.64787549){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
-    \put(0.29770582,0.56531284){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_1$}}%
-    \put(0.44395992,0.36177306){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_2$}}%
+    \put(0.29770582,0.56531284){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_2$}}%
+    \put(0.44395992,0.36177306){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$\varphi_1$}}%
     \put(0.10424376,0.2142354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x$}}%
     \put(0.05581776,0.28373958){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$y$}}%
     \put(0.29888904,-0.01){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\tiny$x_2$}}%

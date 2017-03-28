@@ -33,7 +33,7 @@ Die Winkel $ \alpha_1 $ und $ \alpha_2 $ werden als Hilfsgrößen für die Winkelbe
 	\Delta u_1 = u_\mathrm{b} - u_\mathrm{g}~ \text{ und } 	~\Delta v_1 = v_\mathrm{b} - v_\mathrm{g}
 \end{align} 
 
-vom grünen zum blauen Farbmarker gebildet.Die Funktion $ \mathrm{arctan2}(x,y) $ mit dem Wertebereich $ [-\pi\text{, }\pi] $ wird verwendet, um den Winkel $ \alpha_1 $ zu bestimmen:
+vom grünen zum blauen Farbmarker gebildet. Die Funktion $ \mathrm{arctan2}(x,y) $ mit dem Wertebereich $ [-\pi\text{, }\pi] $ wird verwendet, um den Winkel $ \alpha_1 $ zu bestimmen:
 %
 \begin{align}
 	\alpha_1 = \mathrm{arctan2}(\Delta v_1, \Delta u_1).
@@ -66,7 +66,7 @@ gilt. Im Anschluss wird Differenz zwischen den Intensitäten des Farbkanals und d
 \end{align}
 
 
-berechnet. Dies hat zur Folge, dass die Pixel des Farbkanals $ \bm{B}^\mathrm{r} $ mit einer hohen Farbintensität in auch hohe Werte in $ \Delta \bm{B}^\mathrm{r}_{ij} $ aufweisen. Der Vergleich zwischen einem unverarbeiteten RGB-Einzelbild und dem Ergebnis der Anwendung von~\eqref{eq:imsubtract} ist in Bild~\ref{fig:imsubtractbild} zu sehen. Bei dem hier gezeigten Bild handelt es sich um eine typische Aufnahme des Doppelpendels, die bei der bildbasierten Winkelmessung entsteht. Der rote Farbmarker am Ende des äußeren Pendelstabs ist in der unteren Abbildung als hellgrauer Punkt zu sehen. Der Rest des Bilds weist dunkelgraue Töne auf. 
+berechnet. Dies hat zur Folge, dass die Pixel des Farbkanals $ \bm{B}^\mathrm{r} $ mit einer hohen Farbintensität auch hohe Werte in $ \Delta \bm{B}^\mathrm{r}_{ij} $ aufweisen. Der Vergleich zwischen einem unverarbeiteten RGB-Einzelbild und dem Ergebnis der Anwendung von~\eqref{eq:imsubtract} ist in Bild~\ref{fig:imsubtractbild} zu sehen. Bei dem hier gezeigten Bild handelt es sich um eine typische Aufnahme des Doppelpendels, die bei der bildbasierten Winkelmessung entsteht. Der rote Farbmarker am Ende des äußeren Pendelstabs ist in der unteren Abbildung als hellgrauer Punkt zu sehen. Der Rest des Bilds weist dunkelgraue Töne auf. 
 
 \begin{figure}[!b]
 	\centerline{%
@@ -97,7 +97,7 @@ Auf das Graustufenbild wird ein nichtlineares $ (3\times 3)$-Medianfilter angewe
 	A = \sum_{i = 1}^{h} \left(\sum_{j=1}^{b} \bm{SW}_{ij}\right)
 \end{align}
 
-ermittelt. Trotz geschickter Wahl des Schwellwerts $ I $ bei der Bildung der binären Maske in~\eqref{eq:maskbin} können Pixel, die nicht zum Farbmarker gehören, fälschlicherweise in dem Binärbild auftauchen. Aus diesem Grund werden alle Objekte, die eine Mindestfläche $ A_{\mathrm{min}} $ unterschreiten, nicht beachtet. In den Binärmasken taucht nun genau ein zusammenhängendes Objekt auf, welches dem farblichen Marker entspricht. Die Schwerpunktkoordinaten $ u_\mathrm{S} $ und $ v_\mathrm{S} $ im Bildkoordinatensystem $ KS_\mathrm{B} $ eines detektierten Markers in der Binärmaske ergeben sich damit zu
+ermittelt. Trotz geschickter Wahl des Schwellwerts $ I $ bei der Bildung der binären Maske in~\eqref{eq:maskbin} können Pixel, die nicht zum Farbmarker gehören, fälschlicherweise in dem Binärbild auftauchen. Aus diesem Grund werden alle Objekte, die eine Mindestfläche $ A_{\mathrm{min}} $ unterschreiten, nicht beachtet. In den Binärmasken taucht nun genau ein zusammenhängendes Objekt auf, welches dem farblichen Marker entspricht. Die Schwerpunktkoordinaten $ u_\mathrm{S} $ und $ v_\mathrm{S} $ im Bildkoordinatensystem $ \mathrm{KS}_\mathrm{B} $ eines detektierten Markers in der Binärmaske ergeben sich damit zu
 %
 \begin{align}
 	u_\mathrm{S} &= \frac{1}{A} \sum_{i=1}^{h} \left(  i \sum_{j=1}^{b}\bm{SW}_{\mathrm{ij}}\right), \label{eq:us} \\
@@ -113,7 +113,7 @@ Die Schwerpunkte $ \bm{c}_\mathrm{r} $, $ \bm{c}_\mathrm{g} $ und $ \bm{c}_\math
 	\centerline{%
 		\includegraphics[width=0.7\textwidth]{bindptest.png}%
 	}%
-	\caption[Einzelbild des Doppelpendels vor und nach der Bildverarbeitung]{Einzelbild des Doppelpendels: RGB-Rohbild (oben), Binärmasken der drei Farbkanäle mit berechneten Winkeln $ \varphi_{1,\mathrm{B}} $ und $ \varphi_{2,\mathrm{B}} $ (unten)}
+	\caption[Einzelbild des Doppelpendels vor und nach der Bildverarbeitung]{Einzelbild des Doppelpendels: RGB-Rohbild (oben), Binärmasken der drei \mbox{Farbkanäle} mit berechneten Winkeln $ \varphi_{1,\mathrm{B}} $ und $ \varphi_{2,\mathrm{B}} $ (unten)}
 	\label{fig:winkelmontage}
 \end{figure}
 

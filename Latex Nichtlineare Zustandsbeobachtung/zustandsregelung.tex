@@ -251,7 +251,7 @@ wobei $ \bm{k} \in\mathds{R}^n $ der Rückführvektor ist und der zweite Summand f
 		\draw[vecArrow] (x0) to node [right,pos = 0.1] {$\bm{x}_0$} (int);
 		\draw[vecArrow] (c) to node [above] {$ \bm{y}(t) $} (y);
 		\draw[vecArrow] (a) -| (b-int);
-		\draw[vecArrow] (b-int) to node [above] {$ \bm{\dot{x}(t) } $} (int);
+		\draw[vecArrow] (b-int) to node [above] {$ \bm{\dot{x}}(t) $} (int);
 		\draw[vecArrow] (b) to (b-int);
 		\draw[->] (u) to node [above] {$ u(t) $} (b);
 		\draw[vecArrow] (int-c-a) |- (kt);
@@ -276,7 +276,7 @@ wobei $ \bm{k} \in\mathds{R}^n $ der Rückführvektor ist und der zweite Summand f
 
 Hierbei ist $ \bm{\tilde{A}} $ die Systemmatrix des geschlossenen Kreises mit Zustandsrückführung. 
 %Die Eigenwerte des offenen Kreises, welche über eine Untersuchung der Systemmatrix $ \bm{A} $ berechnet werden können, beschreiben die Dynamik der Regelstrecke. 
-Es ist direkt ersichtlich, dass der Rückführvektor $ \bm{k}^\mathrm{T} $ einen Einfluss auf die Eigenwerte des geschlossenen Kreises hat. Somit ist es möglich, die geschlossene Systemdynamik über die Einträge des Rückführvektors zu beeinflussen. Zwei häufig verwendete Methoden der Reglerauslegung stellen die \textit{Polvorgabe} und die LQ-Regelung dar. Die hier dargestellten Aufführungen beziehen sich auf Kapitel 7 in~\cite{Lunze2010}.
+Es ist direkt ersichtlich, dass der Rückführvektor $ \bm{k} $ einen Einfluss auf die Eigenwerte des geschlossenen Kreises hat. Somit ist es möglich, die geschlossene Systemdynamik über die Einträge des Rückführvektors zu beeinflussen. Zwei häufig verwendete Methoden der Reglerauslegung stellen die \textit{Polvorgabe} und die LQ-Regelung dar. Die hier dargestellten Aufführungen beziehen sich auf Kapitel 7 in~\cite{Lunze2010}.
 
 Bei der ersten Methode wird die Systemdynamik des geschlossenen Kreises über die Wahl bestimmter Pole der Übertragungsfunktion, welche das Ein- und Ausgangsverhalten des Systems beschreibt, vorgegeben. Hierbei werden die Pole in der komplexen Ebene platziert, wobei diese bestimmte Eigenschaften erfüllen sollten. Unter anderem muss die Reglerdynamik höher als die der Strecke sein. Dafür werden die vorgegebenen Pole betragsmäßig fünf bis sechs Mal größer als die der Regelstrecke ausgelegt und in der komplexen Ebene links platziert. Jedoch wird durch eine härtere Auslegung des Reglers unerwünschtes Messrauschen zusätzlich verstärkt. 
 
@@ -339,7 +339,7 @@ Bei Anwendung von~\eqref{eq:lqrWichtungen} erfolgt eine Normierung der Wichtunge
 Einerseits bedeuten hohe Wichtungen, dass die jeweiligen Zustände und Stellgrößen im Rahmen einer Minimierung von~\eqref{eq:gütefunktion} stark bestraft werden. Eine starke Bestrafung impliziert, dass die jeweiligen Größen bei der Regelung gering gehalten werden. In diesem Zusammenhang ist vor allem der geringe Verfahrweg des Doppelpendels zu nennen. Eine Überschreitung des Verfahrwegs soll in jedem Fall unterbunden werden, weshalb dieser Wichtungseintrag nach~\eqref{eq:lqrWichtungen} im Vergleich zu den anderen Größen hoch ausfällt.
 \begin{table}[!b]
 	\centering
-	\caption{Einträge der Wichtungsmatrizen $ \bm{Q}_{\mathrm{LQ}} \text{ und } \bm{R}_{\mathrm{LQ}} $ der Zustandsregelung}
+	\caption{Einträge der Wichtungsmatrizen $ \bm{Q}_{\mathrm{LQ}} \text{ und } R_{\mathrm{LQ}} $ der Zustandsregelung}
 	\label{tab:lqr}
 	\begin{tabu}{clll}
 		\tabucline[2pt]{-}
@@ -360,7 +360,7 @@ Damit kann die Zustandsregelung mittels der LQ-Regelung vollzogen werden. Das Mi
 %
 \begin{equation*}
 	\begin{aligned}
-	\bm{k}_\mathrm{opt}^\mathrm{T} = \begin{bmatrix}
+	\bm{k}_\mathrm{opt} = \begin{bmatrix}
 		\SI{100}{s^{-2}} \\ 
 		\SI{70,16}{s^{-1}} \\
 		\SI{233,24}{m.rad^{-1}.s^{-2}} \\

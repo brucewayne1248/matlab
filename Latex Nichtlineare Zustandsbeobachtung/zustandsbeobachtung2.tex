@@ -56,7 +56,7 @@ Kann ein \mbox{Anfangszustand $ \bm{x}_0 $} aus dem bekannten Verlauf der Eingan
 \end{aligned}
 \end{equation}
 
-muss den vollen Rang $ \mathrm{rang}\left(\bm{S_\mathrm{B}}\right) =  \mathrm{dim}(\bm{x}) = n$ besitzen. Da es sich bei $ \bm{S}_\mathrm{B} $ um eine nicht quadratische Matrix handelt wird hier anstelle der Determinante der Rang der Matrix ermittelt. Mit der in Abschnitt~\ref{sec:zustandsraumdarstellung} ermittelten Systemmatrix $ \bm{A} $ und der Beobachtungsmatrix $  \bm{C}$ ergibt sich: $ 	\mathrm{rang}(\bm{S}_\mathrm{B}) = \mathrm{dim}(\bm{x}) = 6 $, womit die \textit{vollständige Beobachtbarkeit} nachgewiesen ist. Das bedeutet, dass in dem linearisierten Zustandsraum in der Nähe der oberen, instabilen Gleichgewichtslage eine Rekonstruktion des äußeren Pendelwinkels $ \varphi_2(t) $ möglich ist.
+muss den vollen Rang $ \mathrm{rang}\left(\bm{S}_\mathrm{B}\right) =  \mathrm{dim}(\bm{x}) = n$ besitzen. Da es sich bei $ \bm{S}_\mathrm{B} $ um eine nicht quadratische Matrix handelt wird hier anstelle der Determinante der Rang der Matrix ermittelt. Mit der in Abschnitt~\ref{sec:zustandsraumdarstellung} ermittelten Systemmatrix $ \bm{A} $ und der Beobachtungsmatrix $  \bm{C}$ ergibt sich: $ 	\mathrm{rang}(\bm{S}_\mathrm{B}) = \mathrm{dim}(\bm{x}) = 6 $, womit die \textit{vollständige Beobachtbarkeit} nachgewiesen ist. Das bedeutet, dass in dem linearisierten Zustandsraum in der Nähe der oberen, instabilen Gleichgewichtslage eine Rekonstruktion des äußeren Pendelwinkels $ \varphi_2(t) $ möglich ist.
 
 \section{Nichtlineare Beobachtbarkeit des Doppelpendels}
 \label{sec:nichtlineareBeobachtbarkeit}
@@ -86,9 +86,9 @@ Zeitintervall $ [t_0,t_1<\infty) $ für alle $ u \in D_{\bm{x}} $ eindeutig besti
 Für den rechnerischen Nachweis der nichtlinearen Beobachtbarkeit werden $ n-1 $ zeitliche Ableitungen des Systemausgans $ y $ der Art
 %
 \begin{align*}
-	\dot{y} &= \frac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial g}{\partial u}\dot{u} &= &h_1(\bm{x},u,\dot{u}), \\
-	\ddot{y} &= \frac{h_1}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial h_1}{\partial u}\dot{u} + \frac{\partial h_1}{\partial \dot{u}}\ddot{u} &= &h_2(\bm{x},u,\dot{u},\ddot{u}), \\
-	\dddot{y}  &= \frac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x,u})+\frac{\partial h_2}{\partial u}\dot{u}+\frac{\partial h_2}{\partial \dot{u}}\ddot{u}+\frac{\partial h_2}{\partial \ddot{u}}\dddot{u} &=&h_3(\bm{x},u, \dot{u},\ddot{u},\dddot{u}),\\
+	\dot{y} &= \frac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x},u)+\frac{\partial g}{\partial u}\dot{u} &= &h_1(\bm{x},u,\dot{u}), \\
+	\ddot{y} &= \frac{h_1}{\partial \bm{x}}\bm{f}(\bm{x},u)+\frac{\partial h_1}{\partial u}\dot{u} + \frac{\partial h_1}{\partial \dot{u}}\ddot{u} &= &h_2(\bm{x},u,\dot{u},\ddot{u}), \\
+	\dddot{y}  &= \frac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x},u)+\frac{\partial h_2}{\partial u}\dot{u}+\frac{\partial h_2}{\partial \dot{u}}\ddot{u}+\frac{\partial h_2}{\partial \ddot{u}}\dddot{u} &=&h_3(\bm{x},u, \dot{u},\ddot{u},\dddot{u}),\\
 	\hspace{2cm} \vdots \hspace{-3.5cm}\\
 	y^{(n-1)} &= \frac{\partial h_{n-1}}{\partial \bm{x}}\bm{f}(\bm{x},u)+\sum_{i=1}^{n-1}\frac{\partial h_{n-2}}{\partial u^{(i-1)}}u^{(i)} &= &h_{n-1}\left(\bm{x},u,\dot{u},...,u^{(n-1)}\right)
 \end{align*}
@@ -190,9 +190,9 @@ Mit~\eqref{eq:nichtlinearegesamtsystem} wird die Abbildung
 	=
 	\begin{bmatrix*}[c]
 		g(\bm{x},u) = \varphi_1 \vspace{0.2cm}\\
-		\dfrac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x,u})+\underbrace{\dfrac{\partial g}{\partial u}\dot{u}}_{=0} = h_1(\bm{x}) = \dot{\varphi}_1 \vspace{0.2cm}\\
-		\dfrac{h_1}{\partial \bm{x}}\bm{f}(\bm{x,u})+\underbrace{\dfrac{\partial h_1}{\partial u}\dot{u}}_{=0} + \underbrace{\dfrac{\partial h_1}{\partial \dot{u}}\ddot{u}}_{=0} = h_2(\bm{x},u) = \ddot{\varphi}_1\left(\bm{x}, u\right) \vspace{0.3cm}\\ 
-		\dfrac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x,u})+\dfrac{\partial h_2}{\partial u}\dot{u}+\underbrace{\frac{\partial h_2}{\partial \dot{u}}\ddot{u}}_{=0}+\underbrace{\frac{\partial h_2}{\partial \ddot{u}}\dddot{u}}_{=0} = h_3(\bm{x},u, \dot{u})
+		\dfrac{\partial g}{\partial \bm{x}}\bm{f}(\bm{x},u)+\underbrace{\dfrac{\partial g}{\partial u}\dot{u}}_{=0} = h_1(\bm{x}) = \dot{\varphi}_1 \vspace{0.2cm}\\
+		\dfrac{h_1}{\partial \bm{x}}\bm{f}(\bm{x},u)+\underbrace{\dfrac{\partial h_1}{\partial u}\dot{u}}_{=0} + \underbrace{\dfrac{\partial h_1}{\partial \dot{u}}\ddot{u}}_{=0} = h_2(\bm{x},u) = \ddot{\varphi}_1\left(\bm{x}, u\right) \vspace{0.3cm}\\ 
+		\dfrac{\partial h_2}{\partial \bm{x}}\bm{f}(\bm{x},u)+\dfrac{\partial h_2}{\partial u}\dot{u}+\underbrace{\frac{\partial h_2}{\partial \dot{u}}\ddot{u}}_{=0}+\underbrace{\frac{\partial h_2}{\partial \ddot{u}}\dddot{u}}_{=0} = h_3(\bm{x},u, \dot{u})
 	\end{bmatrix*} \nonumber\\\nonumber\\
 	&= \bm{q}(\bm{x}, u, \dot{u}). 
 	\label{eq:q}
@@ -286,7 +286,7 @@ welche im folgenden Abschnitt vorgestellt wird, bei Anwendung des EKF minimiert.
 Der EKF-Algorithmus basiert auf zwei sich wiederholenden Schritten: einer \textit{a priori} Zustandsprädiktion und einer \textit{a posteriori} Zustandskorrektur. Später in diesem Abschnitt werden die Schritte im Detail erklärt. Zunächst werden~\eqref{eq:ekfzustandsgleichung} und~\eqref{eq:ekfmessgleichung} verwendet, um die Zustände und die Messung ohne das Rauschen zu approximieren, vgl.~\cite{Welch2006}:
 %
 \begin{align}
-\bm{\hat{x}}_{k+1}^{\text{--}} &= \bm{f}(\bm{\hat{x}_{k},u_{k},\bm{0}})
+\bm{\hat{x}}_{k+1}^{\text{--}} &= \bm{f}(\bm{\hat{x}}_{k},u_{k},\bm{0})
 \label{eq:xtilde}
 \end{align}
 und
@@ -312,11 +312,11 @@ wobei folgende Notation gilt:
 	&\bullet \bm{A}_k \text{ ist die Jacobi-Matrix von $ \bm{f} $ in Bezug zu $ \bm{x}_k $} \text{ mit } \\
 	&\hspace{1cm}\bm{A}_{k} = \dfrac{\partial \bm{f}}{\partial \bm{x}_k}\bigg|_{(\bm{\hat{x}_{k}},u_{k},\bm{0})}\\
 	&\bullet \bm{C}_k \text{ ist die Jacobi-Matrix von $ \bm{g} $ in Bezug zu $ \bm{x}_k $} \text{ mit} \\
-	&\hspace{1cm}\bm{C}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{x}_k}\bigg|_{(\bm{\tilde{x}_{k}},\bm{0})}\\
+	&\hspace{1cm}\bm{C}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{x}_k}\bigg|_{(\bm{\hat{x}}_{k}^{\text{--}},\bm{0})}\\
 	&\bullet \bm{W}_k \text{ ist die Jacobi-Matrix von $ \bm{f} $ in Bezug zu $ \bm{w}_k $} \text{ mit} \\
 	&\hspace{1cm}\bm{W}_{k} = \dfrac{\partial \bm{f}}{\partial \bm{w}_k}\bigg|_{(\bm{\hat{x}_{k}},u_{k},\bm{0})}\\
 	&\bullet \bm{V}_k \text{ ist die Jacobi-Matrix von $ \bm{g} $ in Bezug zu $ \bm{w}_k $} \text{ mit} \\
-	&\hspace{1cm}\bm{V}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{w}_k}\bigg|_{(\bm{\tilde{x}_{k}},\bm{0})}
+	&\hspace{1cm}\bm{V}_{k} = \dfrac{\partial \bm{g}}{\partial \bm{w}_k}\bigg|_{(\bm{\hat{x}}_{k}^{\text{--}},\bm{0})}
 \end{align*}
 
 Die Matrizen $ \bm{A}_k $ und $ \bm{C}_k $ stellen die lineare Approximation des Systems im Arbeitspunkt dar. $ \bm{W}_k $ und $ \bm{V}_k $ repräsentieren das Prozess- und Messrauschen, wobei für die Matrizen die in Abschnitt~\ref{subsec:grundlagenekf} aufgeführten Bedingungen gelten. Das besondere dieser Jacobi-Matrizen gegenüber linearer Beobachter ist, dass sie in jedem Zeitschritt in Abhängigkeit des vorliegenden Zustands $ \bm{x}_k $ neu berechnet werden und so nichtlineare Systeme auf dem gesamten Arbeitsraum beobachtet werden können. Mithilfe der angegeben Matrizen und Vektoren können nun die eingangs erwähnten Schritte der Prädiktion und Korrektur formuliert werden. 
@@ -565,11 +565,11 @@ Nach Anwendung des Algorithmus~\ref{alg:optimierungQEKF} ergibt sich für das Pro
 &\bm{Q}_{\mathrm{EKF},\mathrm{opt}} = \mathrm{diag}\left( \left[ \SI{1d-4}{\radian^2},~~~ \SI{1}{rad^2.s^{-2}},~~~ \SI{0,1}{rad^2},~~~ \SI{1d-6}{rad^2.s^{-2}} \right]^\mathrm{T}\right), \\
 &R_{\mathrm{EKF}} = \SI{1}{\radian^2}.
 \end{align*}
-Aufgrund der hier gewählten Wagenbeschleunigung $ \ddot{x}(t) $ schwingt der innere Pendelstab um die stabile, untere Ruhelage. Der äußere Pendelstab hingegen rotiert mehrere Male um die Gelenkachse. Das ist aus dem Wertebereich des Winkelverlaufs ersichtlich, der Werte von über $ \pm\ang{360} $ annimmt. Der geschätzte innere Pendelwinkel $ \hat{\varphi}_1 $ folgt der Messung $ \varphi_1 $ bereits nach \SI{0,1}{\second}. Bis der rekonstruierte Winkelverlauf  des äußeren Pendelstabs $ \hat{\varphi}_2 $ der Referenz $ \varphi_2 $ folgt, vergehen etwa \SI{0,8}{s}. Die Einschwingzeit des Zustands, welcher gemessen wird, ist demnach wesentlich geringer als bei dem zu rekonstruierenden Zustand. Aufgrund des Wertebereichs von mehreren Hundert Grad ist die geringe Abweichung zwischen dem Referenzverlauf und der Rekonstruktion der Zustände nicht in den Graphen erkennbar, kann jedoch rechnerisch bestimmt werden. Damit die zunächst hohe Abweichung der Winkelverläufe bedingt durch die absichtlich falsche Initialisierung des EKF ausgeschlossen wird, wird die maximale Differenz der Winkelverläufe nach Ablauf von einer Sekunde berechnet. Die Abweichung beträgt $ \Delta\varphi_{ 1,{\mathrm{max}}} = \ang{0,27} $ für den inneren Pendelwinkel und $ \Delta\varphi_{2,{\mathrm{max}}} = \ang{2,7} $ für den äußeren. Das EKF ist demnach in der Lage, die Messung $ \varphi_1 $ besser zu schätzen als den prinzipiell unbekannten äußeren Pendelwinkel $ \varphi_2 $.
+Das Messrauschen $ R_{\mathrm{EKF}} $ ist nicht fett gedruckt, weil es in dem vorliegenden Anwendungsfall ein Skalar ist. Aufgrund der hier gewählten Wagenbeschleunigung $ \ddot{x}(t) $ schwingt der innere Pendelstab um die stabile, untere Ruhelage. Der äußere Pendelstab hingegen rotiert mehrere Male um die Gelenkachse. Das ist aus dem Wertebereich des Winkelverlaufs ersichtlich, der Werte von über $ \pm\ang{360} $ annimmt. Der geschätzte innere Pendelwinkel $ \hat{\varphi}_1 $ folgt der Messung $ \varphi_1 $ bereits nach \SI{0,1}{\second}. Bis der rekonstruierte Winkelverlauf  des äußeren Pendelstabs $ \hat{\varphi}_2 $ der Referenz $ \varphi_2 $ folgt, vergehen etwa \SI{0,8}{s}. Die Einschwingzeit des Zustands, welcher gemessen wird, ist demnach wesentlich geringer als bei dem zu rekonstruierenden Zustand. Aufgrund des Wertebereichs von mehreren Hundert Grad ist die geringe Abweichung zwischen dem Referenzverlauf und der Rekonstruktion der Zustände nicht in den Graphen erkennbar, kann jedoch rechnerisch bestimmt werden. Damit die zunächst hohe Abweichung der Winkelverläufe bedingt durch die absichtlich falsche Initialisierung des EKF ausgeschlossen wird, wird die maximale Differenz der Winkelverläufe nach Ablauf von einer Sekunde berechnet. Die Abweichung beträgt $ \Delta\varphi_{ 1,{\mathrm{max}}} = \ang{0,27} $ für den inneren Pendelwinkel und $ \Delta\varphi_{2,{\mathrm{max}}} = \ang{2,7} $ für den äußeren. Das EKF ist demnach in der Lage, die Messung $ \varphi_1 $ besser zu schätzen als den prinzipiell unbekannten äußeren Pendelwinkel $ \varphi_2 $.
 
 
 
-In Bild~\ref{fig:simuanregungdphi} wird die Zustandsschätzung der Pendelwinkelgeschwindigkeiten abgebildet. Die Winkelgeschwindigkeit des inneren Pendels $ \dot{\varphi}_1 $ resultiert aus der ungefilterten Bildung des Vorwärtsdifferenzenquotienten der rauschbehafteten Messung $ \varphi_1 $. Hierbei wird das Rauschen Ableiten des Winkelverlaufs zusätzlich verstärkt. Die Schätzung $ \hat{\dot{\varphi}}_1 $ rekonstruiert den Winkelgeschwindigkeitsverlauf, wobei sie entlang des Mittelwerts des verrauschten Signals $ \dot{\varphi}_1 $ verläuft. Die Winkelgeschwindigkeitsschätzung des äußeren Pendels $ \hat{\dot{\varphi}}_2 $ benötigt nach der unkorrekten Initialisierung etwa \SI{0,8}{s}, bis sie dem tatsächlichen Verlauf folgt.
+In Bild~\ref{fig:simuanregungdphi} wird die Zustandsschätzung der Pendelwinkelgeschwindigkeiten abgebildet. Die Winkelgeschwindigkeit des inneren Pendels $ \dot{\varphi}_1 $ resultiert aus der ungefilterten Bildung des Vorwärtsdifferenzenquotienten der rauschbehafteten Messung $ \varphi_1 $. Hierbei wird das Rauschen Ableiten des Winkelverlaufs zusätzlich verstärkt. Die Schätzung $ \hat{\dot{\varphi}}_1 $ rekonstruiert den Winkelgeschwindigkeitsverlauf, wobei sie entlang des Mittelwerts des verrauschten Signals $ \dot{\varphi}_1 $ verläuft. Die Winkelgeschwindigkeitsschätzung des äußeren Pendels $ \dot{\hat{\varphi}}_2 $ benötigt nach der unkorrekten Initialisierung etwa \SI{0,8}{s}, bis sie dem tatsächlichen Verlauf folgt.
 
 \begin{figure}[!htb]
 	\centering
